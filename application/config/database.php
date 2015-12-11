@@ -81,7 +81,7 @@ $db['default'] = array(
     'database' => 'comp3421',
     'dbdriver' => 'mysqli',
     'dbprefix' => 'comp3421_',
-    'pconnect' => TRUE,
+    'pconnect' => FALSE,
     'db_debug' => (ENVIRONMENT !== 'production'),
     'cache_on' => FALSE,
     'cachedir' => '',
