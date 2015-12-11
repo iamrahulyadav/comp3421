@@ -12,7 +12,6 @@ class Main extends CI_Controller
 
     public function index()
     {
-        $this->load->helper('url');
-        echo site_url('test/test');
+        $this->load->view('main', array('user' => $this->auth->user()));
     }
 }
