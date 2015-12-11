@@ -24,6 +24,7 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 .idea/tasks.xml
 .idea/dictionaries
 .idea/shelf
+.idea/modules.xml
 
 # Sensitive or high-churn files:
 .idea/dataSources.ids
