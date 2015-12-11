@@ -81,11 +81,11 @@ class DBMember extends CI_Model
         $this->load->database();
 
         if (isset($old)) {
-            $user = $this->db->select('password')->get_where('members', array('email' => $this->email))->row();
-            if (!isset($user)) {
+            $pw = $this->db->select('password')->get_where('members', array('email' => $this->email))->row('password');
+            if (!isset($pw)) {
                 return FALSE;
             }
-            if (strcmp($old, $user->password) !== 0) {
+            if (strcmp($old, $pw) !== 0) {
                 return FALSE;
             }
         }

@@ -39,7 +39,7 @@ class Auth_model extends CI_Model
     public function logIn($email, $password)
     {
         $this->load->database();
-        $user = $this->db->get_where('members', array('email' => $email))->row('DBMember');
+        $user = $this->db->get_where('members', array('email' => $email))->row(0, 'DBMember');
 
         if (isset($user)) {
             // clear text password ;)
