@@ -67,7 +67,7 @@ class DBMember extends CI_Model
      */
     public function display_name()
     {
-        return (isset($this->title) ? $this->title . ' ' : '') . $this->last_name . ', ' . $this->first_name;
+        return (isset($this->title) ? ucfirst($this->title) . ' ' : '') . $this->last_name . ', ' . $this->first_name;
     }
 
     /**
