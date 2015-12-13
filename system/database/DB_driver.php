@@ -1617,6 +1617,21 @@ abstract class CI_DB_driver
     // --------------------------------------------------------------------
 
     /**
+     * Error
+     *
+     * Returns an array containing code and message of the last
+     * database error that has occurred.
+     *
+     * @return    array
+     */
+    public function error()
+    {
+        return array('code' => NULL, 'message' => NULL);
+    }
+
+    // --------------------------------------------------------------------
+
+    /**
      * Display an error message
      *
      * @param    string    the error message
