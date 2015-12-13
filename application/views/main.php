@@ -15,11 +15,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <body>
 <h1>Registration and Attendance Managing Application</h1>
 
-<p><?php if (isset($user)) {
-        echo 'Welcome ' . $user->display_name();
-        echo ' (<a href="' . site_url('/auth/logout') . '">Log out</a>)';
-    }else{
-        echo '<a href="' . site_url('/auth/login') . '">Log in</a>';
+<p>Welcome<?php if (isset($user)) {
+        echo ' ' . $user->display_name() . '!';
+        if ($user->is_admin)
+            echo ' [admin]';
+        echo ' (<a href="' . site_url('auth/logout') . '">Log out</a>)';
+    } else {
+        echo '! (<a href="' . site_url('auth/login') . '">Log in</a>)';
     } ?></p>
+<ul>
+    <?php foreach ($urls as $title => $href) {
+        echo "<li><a href=\"$href\" title=\"$title\">$title</a></li>";
+    } ?>
+</ul>
 </body>
 </html>
