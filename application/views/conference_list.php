@@ -7,45 +7,45 @@
 <body>
 <?php echo $menu ?>
 <h1><?php echo htmlspecialchars($title) ?></h1>
-<?php
+    <?php
 
-if ($this->auth->isLoggedIn()
-    && $this->auth->user()->is_admin
-) {
-    echo "<button>create</button>";
-}
-echo "<table>";
-echo '<th>';
-echo '<td>No.</td>';
-echo '<td>Date</td>';
-echo '<td>Time</td>';
-echo '<td>Topic</td>';
-echo '<td>Speaker</td>';
-echo '<td>Venue</td>';
-echo '<td>View Information</td>';
-if ($this->auth->isLoggedIn()
-    && $this->auth->user()->is_admin
-) {
-    echo '<td>Edit</td>';
-    echo '<td>Delete</td>';
-}
-echo '</th>';
-for ($i = 0; $i < count($data); $i++) {
-
-    echo '<tr>';
-    echo "<td>{$i}</td>";
-    echo "<td>{$data[$i]['date']}</td>";
-    echo "<td>{$data[$i]['start_time']} - {$data[$i]['end_time']}</td>";
-    echo "<td>{$data[$i]['topic']}</td>";
-    echo "<td>{$data[$i]['speaker']}<button>view speaker's information</button></td>";
-    echo "<td>{$data[$i]['location']}<button>view location in map</button></td>";
-    echo "<td><button>view information</button></td>";
-    if ($this->auth->isLoggedIn()
-        && $this->auth->user()->is_admin
-    ) {
-        echo "<td><button>edit</button></td>";
-        echo "<td><button>delete</button></td>";
+    if($this->auth->isLoggedIn
+        &&$this->auth->user->$is_admin){
+        echo "<button>create</button>";
     }
+    echo "<table>";
+echo '<tr>';
+echo '<th>No.</th>';
+echo '<th>Date</th>';
+echo '<th>Time</th>';
+echo '<th>Topic</th>';
+echo '<th>Speaker</th>';
+echo '<th>Venue</th>';
+echo '<th>View Information</th>';
+if($this->auth->isLoggedIn
+    &&$this->auth->user->$is_admin) {
+    echo '<th>Edit</th>';
+    echo '<th>Delete</th>';
 }
+echo '</tr>';
+    for($i = 0;$i < count($data);$i++){
+        $startDate = date("Y-m-d",strtotime($data[$i]['start_time']));
+        $endDate = date("Y-m-d",strtotime($data[$i]['end_time']));
+        $startTime = date("H:i",strtotime($data[$i]['start_time']));
+        $endTime = date("H:i",strtotime($data[$i]['end_time']));
+        echo '<tr>';
+        echo "<td>{$i}</td>";
+        echo "<td>{$startDate} - {$endDate}</td>";
+        echo "<td>{$startTime} - {$endTime}</td>";
+        echo "<td>{$data[$i]['topic']}</td>";
+        echo "<td>{$data[$i]['speaker']}<button>view speaker's information</button></td>";
+        echo "<td>{$data[$i]['location']}<button>view location in map</button></td>";
+        echo "<td><button>view information</button></td>";
+        if($this->auth->isLoggedIn
+            &&$this->auth->user->$is_admin) {
+            echo "<td><button>edit</button></td>";
+            echo "<td><button>delete</button></td>";
+        }
+    }
 echo "</table>";
-?>
+    ?>
