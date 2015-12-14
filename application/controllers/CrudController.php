@@ -78,11 +78,11 @@ abstract class CrudController extends CI_Controller
 
             $this->output->append_output(
                 "<script>
-if (confirm('Create Success!\\nClick OK to add more or Cancel to go back to the listing.'))
-    window.location = $create;
-else
-    window.location = $list;
-</script>"
+                if (confirm('Create Success!\\nClick OK to add more or Cancel to go back to the listing.'))
+                    window.location = $create;
+                else
+                    window.location = $list;
+                </script>"
             );
         } else {
             $this->db->display_error();
