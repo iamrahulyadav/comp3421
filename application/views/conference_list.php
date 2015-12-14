@@ -9,8 +9,8 @@
 <h1><?php echo htmlspecialchars($title) ?></h1>
     <?php
 
-    if($this->auth->isLoggedIn
-        &&$this->auth->user->$is_admin){
+if($this->auth->isLoggedIn()
+    &&$this->auth->user()->is_admin) {
         echo "<button>create</button>";
     }
     echo "<table>";
@@ -22,8 +22,8 @@ echo '<th>Topic</th>';
 echo '<th>Speaker</th>';
 echo '<th>Venue</th>';
 echo '<th>View Information</th>';
-if($this->auth->isLoggedIn
-    &&$this->auth->user->$is_admin) {
+if($this->auth->isLoggedIn()
+    &&$this->auth->user()->is_admin) {
     echo '<th>Edit</th>';
     echo '<th>Delete</th>';
 }
@@ -41,8 +41,8 @@ echo '</tr>';
         echo "<td>{$data[$i]['speaker']}<button>view speaker's information</button></td>";
         echo "<td>{$data[$i]['location']}<button>view location in map</button></td>";
         echo "<td><button>view information</button></td>";
-        if($this->auth->isLoggedIn
-            &&$this->auth->user->$is_admin) {
+        if($this->auth->isLoggedIn()
+            &&$this->auth->user()->is_admin) {
             echo "<td><button>edit</button></td>";
             echo "<td><button>delete</button></td>";
         }
