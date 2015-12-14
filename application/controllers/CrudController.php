@@ -38,7 +38,9 @@ abstract class CrudController extends CI_Controller
             'menu'  => $this->load->view('menu', NULL, TRUE)
         );
 
-        $data['data'] = $this->db->get($this->table);
+        $r = $this->db->get($this->table);
+
+        $data['data'] = $r->result_array();
 
         $this->load->view($this->view[__FUNCTION__], $data);
     }
@@ -51,7 +53,8 @@ abstract class CrudController extends CI_Controller
             'menu'  => $this->load->view('menu', NULL, TRUE)
         );
 
-        $data['data'] = $this->db->where('id', $id)->get($this->table);
+        $r = $this->db->where('id', $id)->get($this->table);
+        $data['data'] = reset($r->result_array());
 
         $this->load->view($this->view[__FUNCTION__], $data);
     }
@@ -99,7 +102,8 @@ abstract class CrudController extends CI_Controller
             'menu'  => $this->load->view('menu', NULL, TRUE)
         );
 
-        $data['data'] = $this->db->where('id', $id)->get($this->table);
+        $r = $this->db->where('id', $id)->get($this->table);
+        $data['data'] = reset($r->result_array());
 
         $this->load->view($this->view[__FUNCTION__], $data);
     }
