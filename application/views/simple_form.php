@@ -5,6 +5,7 @@
     <title>Registration and Attendance Managing Application</title>
 </head>
 <body>
+<?php echo isset($menu) ? $menu : '' ?>
 <h1><?php echo htmlspecialchars($title) ?></h1>
 
 <form method="post" target="async">
