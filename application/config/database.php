@@ -70,12 +70,34 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | The $query_builder variables lets you determine whether or not to load
 | the query builder class.
 */
-$active_group = 'default';
+$active_group = 'local';
 $query_builder = TRUE;
 
 $db['default'] = array(
     'dsn'          => '',
     'hostname'     => '192.168.0.100',
+    'username'     => 'comp3421',
+    'password'     => 'comp3421',
+    'database'     => 'comp3421',
+    'dbdriver'     => 'mysqli',
+    'dbprefix'     => 'comp3421_',
+    'pconnect'     => FALSE,
+    'db_debug'     => FALSE && (ENVIRONMENT !== 'production'),
+    'cache_on'     => FALSE,
+    'cachedir'     => '',
+    'char_set'     => 'utf8',
+    'dbcollat'     => 'utf8_general_ci',
+    'swap_pre'     => '',
+    'encrypt'      => FALSE,
+    'compress'     => FALSE,
+    'stricton'     => FALSE,
+    'failover'     => array(),
+    'save_queries' => TRUE
+);
+
+$db['local'] = array(
+    'dsn'          => '',
+    'hostname'     => 'lkho.tk',
     'username'     => 'comp3421',
     'password'     => 'comp3421',
     'database'     => 'comp3421',

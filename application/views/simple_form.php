@@ -14,7 +14,8 @@
         foreach ($fields as $key => $v) {
             echo '<tr>';
             echo "<td>{$v[0]}:</td>";
-            echo "<td><input name=\"$key\" type=\"{$v[1]}\"" . (!isset($first) ? ' required autofocus' : '') . ' /></td>';
+            echo "<td><input name=\"$key\" type=\"{$v[1]}\"" . (!isset($first) ?
+                    ' required autofocus' : '') . ' /></td>';
             echo '</tr>';
             $first = TRUE;
         }
