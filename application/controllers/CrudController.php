@@ -20,8 +20,10 @@ abstract class CrudController extends CI_Controller
 
     public function _remap($action, $args)
     {
-        $action = $action . '_' . $this->input->method();
-        if (method_exists($this, $action)) {
+        $action1 = $action . '_' . $this->input->method();
+        if (method_exists($this, $action1)) {
+            return call_user_func_array(array($this, $action1), $args);
+        } else if (method_exists($this, $action)) {
             return call_user_func_array(array($this, $action), $args);
         } else {
             $this->output->set_status_header(405);
@@ -30,7 +32,7 @@ abstract class CrudController extends CI_Controller
         }
     }
 
-    public function index_get()
+    public function index()
     {
         check_access(TRUE);
         $data = array(
@@ -38,7 +40,9 @@ abstract class CrudController extends CI_Controller
             'menu'  => $this->load->view('menu', NULL, TRUE)
         );
 
-        $data['data'] = $this->db->get($this->table);
+        $r = $this->db->get($this->table);
+
+        $data['data'] = $r->result_array();
 
         $this->load->view($this->view[__FUNCTION__], $data);
     }
@@ -51,7 +55,8 @@ abstract class CrudController extends CI_Controller
             'menu'  => $this->load->view('menu', NULL, TRUE)
         );
 
-        $data['data'] = $this->db->where('id', $id)->get($this->table);
+        $r = $this->db->where('id', $id)->get($this->table);
+        $data['data'] = reset($r->result_array());
 
         $this->load->view($this->view[__FUNCTION__], $data);
     }
@@ -99,7 +104,8 @@ abstract class CrudController extends CI_Controller
             'menu'  => $this->load->view('menu', NULL, TRUE)
         );
 
-        $data['data'] = $this->db->where('id', $id)->get($this->table);
+        $r = $this->db->where('id', $id)->get($this->table);
+        $data['data'] = reset($r->result_array());
 
         $this->load->view($this->view[__FUNCTION__], $data);
     }
