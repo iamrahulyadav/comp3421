@@ -8,6 +8,6 @@
 <?php echo $menu ?>
 <h1><?php echo htmlspecialchars($title) ?></h1>
 <table>
-<button>view speaker's information</button>
-<p>Conference Notes</p>
+<button>view exhibition's information</button>
+<p>exhibition</p>
 </table>

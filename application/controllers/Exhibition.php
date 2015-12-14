@@ -11,9 +11,9 @@ class Exhibition extends CrudController
     public $table = 'exhibition';
     public $title = 'Exhibitions';
     public $view = array(
-        'index'  => 'ex_list',
-        'item'   => 'ex_item',
-        'create' => 'ex_create',
-        'edit'   => 'ex_edit'
+        'index'  => 'exhibition_list',
+        'item'   => 'exhibition_item',
+        'create' => 'exhibition_create',
+        'edit'   => 'exhibition_edit'
     );
 }
