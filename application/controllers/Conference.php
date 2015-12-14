@@ -12,6 +12,7 @@ class Conference extends CrudController
     public $title = 'Conference Programs';
     public $view = array(
         'index_get' => 'conference_list',
+        'item'      => 'conference_item',
         'create'    => 'conference_create',
         'edit'      => 'conference_edit'
     );

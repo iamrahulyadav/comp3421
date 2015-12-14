@@ -72,9 +72,9 @@ abstract class CrudController extends CI_Controller
         check_access(TRUE, TRUE);
 
         if ($this->db->insert($this->table, $this->input->post()) !== FALSE) {
-            $create = site_url(uri_string());
+            $create = json_encode(site_url(uri_string()));
             $seg = explode('/', uri_string());
-            $list = site_url(array_slice($seg, 0, -1));
+            $list = json_encode(site_url(array_slice($seg, 0, -1)));
 
             $this->output->append_output(
                 "<script>
@@ -85,22 +85,56 @@ abstract class CrudController extends CI_Controller
                 </script>"
             );
         } else {
+            $this->output->set_status_header(500);
             $this->db->display_error();
         }
     }
 
     public function edit($id)
     {
+        check_access(TRUE, TRUE);
 
+        $data = array(
+            'title' => $this->title,
+            'menu'  => $this->load->view('menu', NULL, TRUE)
+        );
+
+        $data['data'] = $this->db->where('id', $id)->get($this->table);
+
+        $this->load->view($this->view[__FUNCTION__], $data);
     }
 
     public function edit_post($id)
     {
+        check_access(TRUE, TRUE);
 
+        if ($this->db->where('id', $id)->update($this->table, $this->input->post()) !== FALSE) {
+            $seg = explode('/', uri_string());
+            $list = json_encode(site_url(array_slice($seg, 0, -1)));
+
+            $this->output->append_output(
+                "<script>window.location = $list;</script>"
+            );
+        } else {
+            $this->output->set_status_header(500);
+            $this->db->display_error();
+        }
     }
 
     public function item_delete($id)
     {
+        check_access(TRUE, TRUE);
 
+        if ($this->db->where('id', $id)->delete($this->table) !== FALSE) {
+            $seg = explode('/', uri_string());
+            $list = json_encode(site_url(array_slice($seg, 0, -1)));
+
+            $this->output->append_output(
+                "<script>window.location = $list;</script>"
+            );
+        } else {
+            $this->output->set_status_header(500);
+            $this->db->display_error();
+        }
     }
 }
