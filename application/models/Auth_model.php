@@ -26,7 +26,7 @@ class Auth_model extends CI_Model
     /**
      * @return bool
      */
-    public function loggedIn()
+    public function isLoggedIn()
     {
         return isset($_SESSION['user']);
     }

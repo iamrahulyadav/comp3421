@@ -27,7 +27,7 @@ function check_access($loggedIn, $admin = FALSE)
     if ($loggedIn) {
         /** @var CI_Controller $ci */
         $ci = get_instance();
-        if (!$ci->auth->loggedIn()) {
+        if (!$ci->auth->isLoggedIn()) {
             redirect('auth/login');
         }
         if ($admin && !$ci->auth->user()->is_admin) {
