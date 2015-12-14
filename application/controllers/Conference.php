@@ -10,31 +10,9 @@ class Conference extends CrudController
 {
     public $table = 'conference';
     public $title = 'Conference Programs';
-    public $view = array('get' => '', 'post', 'put', 'delete');
-
-    public function index_get()
-    {
-        check_access(TRUE);
-        $data = array(
-            'title' => $this->title,
-            'menu'  => $this->load->view('menu', NULL, TRUE)
-        );
-
-        $this->db->get($this->table);
-
-
-        $data = array(
-            array('id' => 123, 'title' => "gffs"),
-            array('id' => 123, 'title' => "gffs"),
-            array('id' => 123, 'title' => "gffs"),
-            array('id' => 123, 'title' => "gffs"),
-            array('id' => 123, 'title' => "gffs"),
-            array('id' => 123, 'title' => "gffs"),
-            array('id' => 123, 'title' => "gffs"),
-            array('id' => 123, 'title' => "gffs"),
-            array('id' => 123, 'title' => "gffs"),
-        );
-
-        $this->load->view($this->view[$this->input->method()], $data);
-    }
+    public $view = array(
+        'index_get' => 'conference_list',
+        'create'    => 'conference_create',
+        'edit'      => 'conference_edit'
+    );
 }
