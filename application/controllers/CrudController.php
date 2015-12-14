@@ -56,7 +56,8 @@ abstract class CrudController extends CI_Controller
         );
 
         $r = $this->db->where('id', $id)->get($this->table);
-        $data['data'] = reset($r->result_array());
+        $r = $r->result_array();
+        $data['data'] = reset($r);
 
         $this->load->view($this->view[__FUNCTION__], $data);
     }
@@ -105,7 +106,8 @@ abstract class CrudController extends CI_Controller
         );
 
         $r = $this->db->where('id', $id)->get($this->table);
-        $data['data'] = reset($r->result_array());
+        $r = $r->result_array();
+        $data['data'] = reset($r);
 
         $this->load->view($this->view[__FUNCTION__], $data);
     }
@@ -127,7 +129,7 @@ abstract class CrudController extends CI_Controller
         }
     }
 
-    public function item_delete($id)
+    public function delete($id)
     {
         check_access(TRUE, TRUE);
 
