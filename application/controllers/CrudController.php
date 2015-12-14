@@ -20,8 +20,10 @@ abstract class CrudController extends CI_Controller
 
     public function _remap($action, $args)
     {
-        $action = $action . '_' . $this->input->method();
-        if (method_exists($this, $action)) {
+        $action1 = $action . '_' . $this->input->method();
+        if (method_exists($this, $action1)) {
+            return call_user_func_array(array($this, $action1), $args);
+        } else if (method_exists($this, $action)) {
             return call_user_func_array(array($this, $action), $args);
         } else {
             $this->output->set_status_header(405);
@@ -30,7 +32,7 @@ abstract class CrudController extends CI_Controller
         }
     }
 
-    public function index_get()
+    public function index()
     {
         check_access(TRUE);
         $data = array(
