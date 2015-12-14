@@ -38,8 +38,8 @@ for ($i = 0; $i < count($data); $i++) {
     $no=$i+1;
     echo '<tr>';
     echo "<td>{$no}</td>";
-    echo "<td>{$data[$i]['date']}</td>";
-    echo "<td>{$data[$i]['start_time']} - {$data[$i]['end_time']}</td>";
+    echo "<td>{$startDate} - {$endDate}</td>";
+    echo "<td>{$startTime} - {$endTime}</td>";
     echo "<td>{$data[$i]['topic']}</td>";
     echo "<td>{$data[$i]['exhibitor']}<button>view exhibitor's information</button></td>";
     echo "<td>{$data[$i]['location']}<button>view location in map</button></td>";
