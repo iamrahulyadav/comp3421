@@ -12,7 +12,7 @@
 if ($this->auth->isLoggedIn()
     && $this->auth->user()->is_admin
 ) {
-    echo "<button>create</button>";
+    echo "<a href='" . site_url('conference/create') . "'><button>create</button></a>";
 }
 echo "<table>";
 echo '<tr>';
@@ -51,7 +51,7 @@ for ($i = 0; $i < count($data); $i++) {
         $u = site_url('conference/edit/' . $data[$i]['id']);
         echo "<td><a href='$u'><button>edit</button></a></td>";
         $u = site_url('conference/delete/' . $data[$i]['id']);
-        echo "<td><a href='$u'><button>delete</button></a></td>";
+        echo "<td><a href=\"javascript:if(confirm('Are you sure to delete?'))window.location='$u'\"><button>delete</button></a></td>";
     }
 }
 echo "</table>";
