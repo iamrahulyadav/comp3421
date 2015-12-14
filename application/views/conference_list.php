@@ -38,8 +38,8 @@ echo '</tr>';
         echo "<td>{$startDate} - {$endDate}</td>";
         echo "<td>{$startTime} - {$endTime}</td>";
         echo "<td>{$data[$i]['topic']}</td>";
-        echo "<td>{$data[$i]['speaker']}<button>view speaker's information</button></td>";
-        echo "<td>{$data[$i]['location']}<button>view location in map</button></td>";
+        echo "<td>{$data[$i]['speaker']}</td>";
+        echo "<td>{$data[$i]['location']}</td>";
         echo "<td><button>view information</button></td>";
         if($this->auth->isLoggedIn()
             &&$this->auth->user()->is_admin) {
