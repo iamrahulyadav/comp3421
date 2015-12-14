@@ -9,7 +9,7 @@
 
 <p>Welcome<?php
     $urls = array();
-    if ($this->auth->loggedIn()) {
+    if ($this->auth->isLoggedIn()) {
         $urls['View Conferences'] = 'conference';
         $urls['View Exhibitions'] = 'exhibition';
         $urls['View Forum'] = 'forum';
@@ -26,7 +26,7 @@
     } else {
     }
 
-    if ($this->auth->loggedIn()) {
+    if ($this->auth->isLoggedIn()) {
         echo ' ' . $this->auth->user()->display_name() . '!';
         if ($this->auth->user()->is_admin)
             echo ' [admin]';
