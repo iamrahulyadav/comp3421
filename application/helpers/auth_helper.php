@@ -17,7 +17,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 // ------------------------------------------------------------------------
 
-function check_access($loggedIn, $admin)
+/**
+ * @param bool $loggedIn
+ * @param bool $admin
+ */
+function check_access($loggedIn, $admin = FALSE)
 {
     $loggedIn = $loggedIn || $admin;
     if ($loggedIn) {

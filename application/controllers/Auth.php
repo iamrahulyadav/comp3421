@@ -40,6 +40,7 @@ class Auth extends CI_Controller
 
         }
 
+        $data['menu'] = $this->load->view('menu', NULL, TRUE);
         $this->load->view('simple_form', $data);
     }
 
@@ -57,6 +58,7 @@ class Auth extends CI_Controller
             'title'  => 'Register',
             'button' => 'Register',
             'fields' => array(
+                'id'             => array('Registration ID', 'text'),
                 'email'          => array('Email', 'email'),
                 'password'       => array('Password', 'password'),
                 'title'          => array('Title (Dr, Prof, Mr, Ms, Mrs)', 'text'),
@@ -112,6 +114,7 @@ class Auth extends CI_Controller
             return;
         }
 
+        $data['menu'] = $this->load->view('menu', NULL, TRUE);
         $this->load->view('simple_form', $data);
     }
 }
