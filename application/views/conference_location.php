@@ -15,7 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         }
     </style>
     <meta charset="UTF-8">
-    <title>Chess Game</title>
+    <title>Conference location</title>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('jquery/jquery-ui.css') ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('jquery/jquery-ui.structure.css') ?>">
     <script src="<?php echo base_url('jquery/jquery.js') ?>"></script>
