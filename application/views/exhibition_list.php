@@ -19,9 +19,11 @@ echo '<th>';
 echo '<td>No.</td>';
 echo '<td>Date</td>';
 echo '<td>Time</td>';
-echo '<td>Topic</td>';
-echo '<td>Speaker</td>';
-echo '<td>Venue</td>';
+echo '<td>Type</td>';
+echo '<td>Name</td>';
+echo '<td>Location</td>';
+echo '<td>Booth</td>';
+echo '<td>Company</td>';
 echo '<td>View Information</td>';
 if ($this->auth->isLoggedIn()
     && $this->auth->user()->is_admin
@@ -40,9 +42,11 @@ for ($i = 0; $i < count($data); $i++) {
     echo "<td>{$no}</td>";
     echo "<td>{$startDate} - {$endDate}</td>";
     echo "<td>{$startTime} - {$endTime}</td>";
-    echo "<td>{$data[$i]['topic']}</td>";
-    echo "<td>{$data[$i]['exhibitor']}<button>view exhibitor's information</button></td>";
+    echo "<td>{$data[$i]['type']}</td>";
+    echo "<td>{$data[$i]['name']}</td>";
     echo "<td>{$data[$i]['location']}<button>view location in map</button></td>";
+    echo "<td>{$data[$i]['Booth']}</td>";
+    echo "<td>{$data[$i]['Company']}</td>";
     echo "<td><button>view information</button></td>";
     if ($this->auth->isLoggedIn()
         && $this->auth->user()->is_admin
