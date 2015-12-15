@@ -33,4 +33,13 @@ class Conference extends CrudController
             'attr' => array('min' => '-180', 'max' => '180'),
         ),
     );
+
+    public function get_location($id)
+    {
+        $this->load->database();
+        $r = $this->db->select(array('location_lat', 'location_long'))->from('conference')->where('id', $id)->get();
+        $result = $r->result_array();
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($result[0]);
+    }
 }

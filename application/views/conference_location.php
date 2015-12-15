@@ -15,15 +15,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         }
     </style>
     <meta charset="UTF-8">
-    <title>Chess Game</title>
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url('jquery/style.css') ?>">
+    <title>Conference location</title>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('jquery/jquery-ui.css') ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('jquery/jquery-ui.structure.css') ?>">
     <script src="<?php echo base_url('jquery/jquery.js') ?>"></script>
     <script src="<?php echo base_url('jquery/jquery-ui.js') ?>"></script>
 </head>
 <body id="registration">
-<h1>Registration</h1>
+<h1>Conference location</h1>
 
 <div>
     Geographical location
@@ -32,34 +31,32 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div id="map"></div>
 </div>
 <script type="text/javascript">
-    $(document).ready(function () {
-        var map;
-        var elevator;
-        var myOptions = {
-            zoom: 1,
-            center: new google.maps.LatLng(0, 0),
-            mapTypeId: 'terrain'
-        };
-        map = new google.maps.Map($('#map_canvas')[0], myOptions);
+    var map;
+    function initMap() {
+        var myPos = {lat: 0, lng: 0};
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: myPos,
+            zoom: 1
+        });
 
-//
-//        $.ajax({
-//            method: "get",
-//            dataType: "json",
-//            url: "get_location.php",
-//            success: function (data) {
-//                for (var i = 0; i < data.length; i++) {
-//                    var temp_lat = data[i].lat;
-//                    var temp_long = data[i].long;
-//                    var latlng = new google.maps.LatLng(temp_lat, temp_long);
-//                    new google.maps.Marker({
-//                        position: latlng,
-//                        map: map
-//                    });
-//                }
-//            }
-//        });
-    });
+
+        $.ajax({
+            method: "get",
+            dataType: "json",
+            url: "<?php echo site_url('map/get_location')?>",
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    var temp_lat = data[i].location_lat;
+                    var temp_long = data[i].location_long;
+                    var latlng = new google.maps.LatLng(temp_lat, temp_long);
+                    new google.maps.Marker({
+                        position: latlng,
+                        map: map
+                    });
+                }
+            }
+        });
+    }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzzmr04bM7hfgehfBvpTC7vFLEiugg6KE&callback=initMap" async
         defer></script>
