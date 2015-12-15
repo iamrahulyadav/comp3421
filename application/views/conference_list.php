@@ -17,9 +17,10 @@ if ($this->auth->user()->is_admin) {
         <th>No.</th>
         <th>Date</th>
         <th>Time</th>
-        <th>Topic</th>
-        <th>Speaker</th>
-        <th>Venue</th>
+        <th>Type</th>
+        <th>Company</th>
+        <th>Location</th>
+        <th>Booth</th>
         <th>View Information</th>
         <?php
         if ($this->auth->user()->is_admin) { ?>
@@ -38,9 +39,10 @@ if ($this->auth->user()->is_admin) {
         echo "<td>{$no}</td>";
         echo "<td>{$startDate} - {$endDate}</td>";
         echo "<td>{$startTime} - {$endTime}</td>";
-        echo "<td>{$data[$i]['topic']}</td>";
-        echo "<td>{$data[$i]['speaker']}</td>";
+        echo "<td>{$data[$i]['type']}</td>";
+        echo "<td>{$data[$i]['company']}</td>";
         echo "<td>{$data[$i]['location']}</td>";
+        echo "<td>{$data[$i]['booth']}</td>";
         $u = str_replace('{id}', $data[$i]['id'], $item_url);
         echo "<td><a href='$item_url'><button>view information</button></a></td>";
         if ($this->auth->user()->is_admin) {
