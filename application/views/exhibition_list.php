@@ -41,14 +41,19 @@ for ($i = 0; $i < count($data); $i++) {
     echo "<td>{$startDate} - {$endDate}</td>";
     echo "<td>{$startTime} - {$endTime}</td>";
     echo "<td>{$data[$i]['topic']}</td>";
-    echo "<td>{$data[$i]['exhibitor']}<button>view exhibitor's information</button></td>";
-    echo "<td>{$data[$i]['location']}<button>view location in map</button></td>";
+    echo "<td>{$data[$i]['location']}</td>";
+    echo "<td>{$data[$i]['booth']}</td>";
+    echo "<td>{$data[$i]['company']}</td>";
     echo "<td><button>view information</button></td>";
+    $u = site_url('conference/item/' . $data[$i]['id']);
+    echo "<td><a href='$u'><button>view information</button></a></td>";
     if ($this->auth->isLoggedIn()
         && $this->auth->user()->is_admin
     ) {
-        echo "<td><button>edit</button></td>";
-        echo "<td><button>delete</button></td>";
+        $u = site_url('conference/edit/' . $data[$i]['id']);
+        echo "<td><a href='$u'><button>edit</button></a></td>";
+        $u = site_url('conference/delete/' . $data[$i]['id']);
+        echo "<td><a href=\"javascript:if(confirm('Are you sure to delete?'))window.location='$u'\"><button>delete</button></a></td>";
     }
 }
 echo "</table>";
