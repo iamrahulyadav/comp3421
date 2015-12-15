@@ -31,13 +31,17 @@ if ($this->auth->isLoggedIn()
 }
 echo '</th>';
 for ($i = 0; $i < count($data); $i++) {
-
+    $startDate = date("Y-m-d",strtotime($data[$i]['start_time']));
+    $endDate = date("Y-m-d",strtotime($data[$i]['end_time']));
+    $startTime = date("H:i",strtotime($data[$i]['start_time']));
+    $endTime = date("H:i",strtotime($data[$i]['end_time']));
+    $no=$i+1;
     echo '<tr>';
-    echo "<td>{$i}</td>";
-    echo "<td>{$data[$i]['date']}</td>";
-    echo "<td>{$data[$i]['start_time']} - {$data[$i]['end_time']}</td>";
+    echo "<td>{$no}</td>";
+    echo "<td>{$startDate} - {$endDate}</td>";
+    echo "<td>{$startTime} - {$endTime}</td>";
     echo "<td>{$data[$i]['topic']}</td>";
-    echo "<td>{$data[$i]['speaker']}<button>view speaker's information</button></td>";
+    echo "<td>{$data[$i]['exhibitor']}<button>view exhibitor's information</button></td>";
     echo "<td>{$data[$i]['location']}<button>view location in map</button></td>";
     echo "<td><button>view information</button></td>";
     if ($this->auth->isLoggedIn()
