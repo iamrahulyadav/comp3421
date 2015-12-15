@@ -45,8 +45,8 @@ for ($i = 0; $i < count($data); $i++) {
     echo "<td>{$data[$i]['type']}</td>";
     echo "<td>{$data[$i]['name']}</td>";
     echo "<td>{$data[$i]['location']}<button>view location in map</button></td>";
-    echo "<td>{$data[$i]['Booth']}</td>";
-    echo "<td>{$data[$i]['Company']}</td>";
+    echo "<td>{$data[$i]['booth']}</td>";
+    echo "<td>{$data[$i]['company']}</td>";
     echo "<td><button>view information</button></td>";
     if ($this->auth->isLoggedIn()
         && $this->auth->user()->is_admin
