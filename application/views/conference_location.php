@@ -46,8 +46,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             url: "<?php echo site_url('map/get_location')?>",
             success: function (data) {
                 for (var i = 0; i < data.length; i++) {
-                    var temp_lat = data[i].lat;
-                    var temp_long = data[i].long;
+                    var temp_lat = data[i].location_lat;
+                    var temp_long = data[i].location_long;
                     var latlng = new google.maps.LatLng(temp_lat, temp_long);
                     new google.maps.Marker({
                         position: latlng,
