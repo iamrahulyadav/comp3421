@@ -65,10 +65,24 @@ class Auth extends CI_Controller
             'title'  => 'Register',
             'button' => 'Register',
             'fields' => array(
-                'id'             => array('name' => 'Registration ID', 'type' => 'text'),
-                'email'          => array('name' => 'Email', 'type' => 'email'),
+                'id'             => array(
+                    'name' => 'Registration ID',
+                    'type' => 'text',
+                    'attr' => array('required' => ''),
+                ),
+                'email'          => array('name' => 'Email', 'type' => 'email', 'attr' => array('required' => '')),
                 'password'       => array('name' => 'Password', 'type' => 'password'),
-                'title'          => array('name' => 'Title (Dr, Prof, Mr, Ms, Mrs)', 'type' => 'text'),
+                'title'          => array(
+                    'name'   => 'Title (Dr, Prof, Mr, Ms, Mrs)',
+                    'type'   => 'select',
+                    'values' => array(
+                        'Dr'   => 'Dr',
+                        'Prof' => 'Prof',
+                        'Mr'   => 'Mr',
+                        'Ms'   => 'Ms',
+                        'Mrs'  => 'Mrs',
+                    ),
+                ),
                 'first_name'     => array('name' => 'First Name', 'type' => 'text'),
                 'last_name'      => array('name' => 'Last Name', 'type' => 'text'),
                 'address'        => array('name' => 'Address', 'type' => 'textarea'),
@@ -87,8 +101,11 @@ class Auth extends CI_Controller
                 ),
                 'department'     => array('name' => 'Department', 'type' => 'text'),
                 'company'        => array('name' => 'Company', 'type' => 'text'),
-                'phone_number'   => array('name' => 'Phone Number', 'type' => 'text'),
-                'fax_number'     => array('name' => 'Fax Number', 'type' => 'text'),
+                'phone_number'   => array(
+                    'name' => 'Phone Number',
+                    'type' => 'tel',
+                ),
+                'fax_number'     => array('name' => 'Fax Number', 'type' => 'tel'),
                 'payment_status' => array(
                     'name'   => 'Payment Status',
                     'type'   => 'select',
