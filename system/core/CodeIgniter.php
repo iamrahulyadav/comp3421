@@ -335,7 +335,7 @@ require_once BASEPATH . 'core/Controller.php';
  *
  * Returns current CI instance object
  *
- * @return object
+ * @return CI_Controller
  */
 function &get_instance()
 {
