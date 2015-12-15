@@ -8,17 +8,61 @@
 <?php echo isset($menu) ? $menu : '' ?>
 <h1><?php echo htmlspecialchars($title) ?></h1>
 
-<form method="post" target="async">
+<form
+    method="<?php echo isset($form['method']) ? $form['method'] : 'post' ?>"
+    action="<?php echo isset($form['action']) ? $form['action'] : '' ?>"
+    target="async">
     <table>
         <?php
 
-        foreach ($fields as $key => $v) {
-            echo '<tr>';
-            echo "<td>{$v[0]}:</td>";
-            echo "<td><input name=\"$key\" type=\"{$v[1]}\"" . (!isset($first) ?
-                    ' required autofocus' : '') . ' /></td>';
-            echo '</tr>';
-            $first = TRUE;
+        foreach ($fields as $name => $f) {
+            echo '<tr><td>' . htmlspecialchars($f['name']) . '</td>';
+            echo '<td>';
+            if (empty($f['type'])) $f['type'] = 'text';
+            switch ($f['type']) {
+                case 'textarea':
+                    echo "<textarea name=\"$name\"";
+                    if (isset($f['attr'])) {
+                        foreach ($f['attr'] as $k => $v)
+                            echo " $k=\"$v\"";
+                    }
+                    echo "></textarea>";
+                    break;
+                case 'select':
+                    echo "<select name=\"$name\"";
+                    if (isset($f['attr'])) {
+                        foreach ($f['attr'] as $k => $v)
+                            echo " $k=\"$v\"";
+                    }
+                    echo ">";
+                    if (isset($f['values'])) {
+                        foreach ($f['values'] as $k => $v)
+                            echo "<option value=\"$k\">" . htmlspecialchars($v) . "</option>";
+                    }
+                    echo "</select>";
+                    break;
+                case 'radio':
+                    if (isset($f['values'])) {
+                        foreach ($f['values'] as $v) {
+                            echo "<input type=\"radio\" name=\"$name\" value=\"$v\"";
+                            if (isset($f['attr'])) {
+                                foreach ($f['attr'] as $ak => $av)
+                                    echo " $ak=\"$av\"";
+                            }
+                            echo " />";
+                        }
+                    }
+                    break;
+                default:
+                    echo "<input name=\"$name\" type=\"{$f['type']}\"";
+                    if (isset($f['attr'])) {
+                        foreach ($f['attr'] as $k => $v)
+                            echo " $k=\"$v\"";
+                    }
+                    echo " />";
+                    break;
+
+            }
         }
 
         ?>

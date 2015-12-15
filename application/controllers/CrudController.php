@@ -9,6 +9,7 @@ abstract class CrudController extends CI_Controller
 {
 
     public $table;
+    public $fields;
     public $title;
     public $view;
 
@@ -35,6 +36,7 @@ abstract class CrudController extends CI_Controller
     public function index()
     {
         check_access(TRUE);
+
         $data = array(
             'title'      => $this->title,
             'menu'       => $this->load->view('menu', NULL, TRUE),
@@ -54,6 +56,7 @@ abstract class CrudController extends CI_Controller
     public function item($id)
     {
         check_access(TRUE);
+
         $data = array(
             'title'      => $this->title,
             'menu'       => $this->load->view('menu', NULL, TRUE),
@@ -71,10 +74,16 @@ abstract class CrudController extends CI_Controller
     public function create()
     {
         check_access(TRUE, TRUE);
+
         $data = array(
-            'title'      => 'Add ' . $this->title,
-            'menu'       => $this->load->view('menu', NULL, TRUE),
-            'submit_url' => site_url(uri_string()),
+            'title'  => 'Create ' . $this->title,
+            'menu'   => $this->load->view('menu', NULL, TRUE),
+            'form'   => array(
+                'action' => site_url(uri_string()),
+                'method' => 'post',
+                'fields' => $this->fields,
+            ),
+            'fields' => $this->fields,
         );
 
         $this->load->view($this->view[__FUNCTION__], $data);
@@ -86,8 +95,7 @@ abstract class CrudController extends CI_Controller
 
         if ($this->db->insert($this->table, $this->input->post()) !== FALSE) {
             $create = json_encode(site_url(uri_string()));
-            $seg = explode('/', uri_string());
-            $list = json_encode(site_url(array_slice($seg, 0, -1)));
+            $list = json_encode(site_url(dirname(uri_string())));
 
             $this->output->append_output(
                 "<script>
@@ -99,6 +107,7 @@ abstract class CrudController extends CI_Controller
             );
         } else {
             $this->output->set_status_header(500);
+            $this->load->view('menu');
             $this->db->display_error();
         }
     }
@@ -108,9 +117,13 @@ abstract class CrudController extends CI_Controller
         check_access(TRUE, TRUE);
 
         $data = array(
-            'title'      => $this->title,
+            'title'      => 'Edit ' . $this->title,
             'menu'       => $this->load->view('menu', NULL, TRUE),
-            'submit_url' => site_url(uri_string()),
+            'form'   => array(
+                'action' => site_url(uri_string()),
+                'method' => 'post',
+                'fields' => $this->fields,
+            ),
         );
 
         $r = $this->db->where('id', $id)->get($this->table);
@@ -125,14 +138,14 @@ abstract class CrudController extends CI_Controller
         check_access(TRUE, TRUE);
 
         if ($this->db->where('id', $id)->update($this->table, $this->input->post()) !== FALSE) {
-            $seg = explode('/', uri_string());
-            $list = json_encode(site_url(array_slice($seg, 0, -1)));
+            $list = json_encode(site_url(dirname(uri_string())));
 
             $this->output->append_output(
-                "<script>window.location = $list;</script>"
+                "<script>alert('Update Success!');window.location = $list;</script>"
             );
         } else {
             $this->output->set_status_header(500);
+            $this->load->view('menu');
             $this->db->display_error();
         }
     }
@@ -142,14 +155,14 @@ abstract class CrudController extends CI_Controller
         check_access(TRUE, TRUE);
 
         if ($this->db->where('id', $id)->delete($this->table) !== FALSE) {
-            $seg = explode('/', uri_string());
-            $list = json_encode(site_url(array_slice($seg, 0, -1)));
+            $list = json_encode(site_url(dirname(uri_string())));
 
             $this->output->append_output(
-                "<script>window.location = $list;</script>"
+                "<script>alert('Delete Success!');window.location = $list;</script>"
             );
         } else {
             $this->output->set_status_header(500);
+            $this->load->view('menu');
             $this->db->display_error();
         }
     }
