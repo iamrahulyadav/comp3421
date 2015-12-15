@@ -36,8 +36,12 @@ abstract class CrudController extends CI_Controller
     {
         check_access(TRUE);
         $data = array(
-            'title' => $this->title,
-            'menu'  => $this->load->view('menu', NULL, TRUE)
+            'title'      => $this->title,
+            'menu'       => $this->load->view('menu', NULL, TRUE),
+            'item_url'   => site_url(uri_string() . '/item/{id}'),
+            'create_url' => site_url(uri_string() . '/create'),
+            'edit_url'   => site_url(uri_string() . '/edit/{id}'),
+            'delete_url' => site_url(uri_string() . '/delete/{id}'),
         );
 
         $r = $this->db->get($this->table);
@@ -51,8 +55,10 @@ abstract class CrudController extends CI_Controller
     {
         check_access(TRUE);
         $data = array(
-            'title' => $this->title,
-            'menu'  => $this->load->view('menu', NULL, TRUE)
+            'title'      => $this->title,
+            'menu'       => $this->load->view('menu', NULL, TRUE),
+            'edit_url'   => site_url(dirname(uri_string()) . '/edit/{id}'),
+            'delete_url' => site_url(uri_string()),
         );
 
         $r = $this->db->where('id', $id)->get($this->table);
@@ -66,8 +72,9 @@ abstract class CrudController extends CI_Controller
     {
         check_access(TRUE, TRUE);
         $data = array(
-            'title' => 'Add ' . $this->title,
-            'menu'  => $this->load->view('menu', NULL, TRUE)
+            'title'      => 'Add ' . $this->title,
+            'menu'       => $this->load->view('menu', NULL, TRUE),
+            'submit_url' => site_url(uri_string()),
         );
 
         $this->load->view($this->view[__FUNCTION__], $data);
@@ -101,8 +108,9 @@ abstract class CrudController extends CI_Controller
         check_access(TRUE, TRUE);
 
         $data = array(
-            'title' => $this->title,
-            'menu'  => $this->load->view('menu', NULL, TRUE)
+            'title'      => $this->title,
+            'menu'       => $this->load->view('menu', NULL, TRUE),
+            'submit_url' => site_url(uri_string()),
         );
 
         $r = $this->db->where('id', $id)->get($this->table);
