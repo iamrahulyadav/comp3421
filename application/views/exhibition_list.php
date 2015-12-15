@@ -54,6 +54,7 @@ for ($i = 0; $i < count($data); $i++) {
         echo "<td><button>edit</button></td>";
         echo "<td><button>delete</button></td>";
     }
+    echo "</tr>";
 }
 echo "</table>";
 ?>
