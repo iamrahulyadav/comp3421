@@ -19,18 +19,18 @@ class Conference extends CrudController
     public $fields = array(
         'topic'         => array('name' => 'Conference topic', 'type' => 'text'),
         'info'          => array('name' => 'Conference Description', 'type' => 'textarea'),
-        'start_time'    => array('name' => 'Start time', 'type' => 'datetime'),
-        'end_time'      => array('name' => 'End time', 'type' => 'datetime'),
+        'start_time'    => array('name' => 'Start time', 'type' => 'datetime-local'),
+        'end_time'      => array('name' => 'End time', 'type' => 'datetime-local'),
         'speaker'       => array('name' => 'Speaker', 'type' => 'text'),
         'location_lat'  => array(
             'name' => 'Location (lat)',
             'type' => 'number',
-            'attr' => array('min' => '-90', 'max' => '90'),
+            'attr' => array('min' => '-90', 'max' => '90', 'step' => '0.00000000001'),
         ),
         'location_long' => array(
             'name' => 'Location (lng)',
             'type' => 'number',
-            'attr' => array('min' => '-180', 'max' => '180'),
+            'attr' => array('min' => '-180', 'max' => '180', 'step' => '0.00000000001'),
         ),
     );
 

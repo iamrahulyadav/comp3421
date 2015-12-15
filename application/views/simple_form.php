@@ -43,13 +43,13 @@
                     break;
                 case 'radio':
                     if (isset($f['values'])) {
-                        foreach ($f['values'] as $v) {
-                            echo "<input type=\"radio\" name=\"$name\" value=\"$v\"";
+                        foreach ($f['values'] as $k => $v) {
+                            echo "<label><input type=\"radio\" name=\"$name\" value=\"$k\"";
                             if (isset($f['attr'])) {
                                 foreach ($f['attr'] as $ak => $av)
                                     echo " $ak=\"$av\"";
                             }
-                            echo " />";
+                            echo " />" . htmlspecialchars($v) . '</label>';
                         }
                     }
                     break;

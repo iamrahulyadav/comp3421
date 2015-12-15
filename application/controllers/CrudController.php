@@ -78,6 +78,7 @@ abstract class CrudController extends CI_Controller
         $data = array(
             'title'  => 'Create ' . $this->title,
             'menu'   => $this->load->view('menu', NULL, TRUE),
+            'button' => 'Create',
             'form'   => array(
                 'action' => site_url(uri_string()),
                 'method' => 'post',
@@ -117,8 +118,9 @@ abstract class CrudController extends CI_Controller
         check_access(TRUE, TRUE);
 
         $data = array(
-            'title'      => 'Edit ' . $this->title,
-            'menu'       => $this->load->view('menu', NULL, TRUE),
+            'title'  => 'Edit ' . $this->title,
+            'menu'   => $this->load->view('menu', NULL, TRUE),
+            'button' => 'Update',
             'form'   => array(
                 'action' => site_url(uri_string()),
                 'method' => 'post',
