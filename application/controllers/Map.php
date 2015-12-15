@@ -30,7 +30,7 @@ public function  __construct(){
 
     public function get_location()
     {
-        $r = $this->db->select(array('lat', 'long'))->from('conference_location')->get();
+        $r = $this->db->select(array('location_lat', 'location_long'))->from('conference')->get();
         $result = $r->result_array();
         header('Content-Type: application/json; charset=utf-8');
         echo json_encode($result);
