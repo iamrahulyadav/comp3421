@@ -14,6 +14,15 @@ class Conference extends CrudController
         'index'  => 'conference_list',
         'item'   => 'conference_item',
         'create' => 'conference_create',
-        'edit'   => 'conference_edit'
+        'edit' => 'conference_edit',
     );
+
+    public function get_location($id)
+    {
+        $this->load->database();
+        $r = $this->db->select(array('location_lat', 'location_long'))->from('conference')->where('id', $id)->get();
+        $result = $r->result_array();
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($result[0]);
+    }
 }
