@@ -20,29 +20,32 @@ echo '<th>Time</th>';
 echo '<th>Topic</th>';
 echo '<th>Speaker</th>';
 echo '<th>Venue</th>';
+echo '<th>Venue Location</th>';
 echo '<th>View Information</th>';
 if ($this->auth->user()->is_admin) {
     echo '<th>Edit</th>';
     echo '<th>Delete</th>';
 }
 echo '</tr>';
-for ($i = 0; $i < count($data); $i++) {
-    $startDate = date("Y-m-d", strtotime($data[$i]['start_time']));
-    $endDate = date("Y-m-d", strtotime($data[$i]['end_time']));
-    $startTime = date("H:i", strtotime($data[$i]['start_time']));
-    $endTime = date("H:i", strtotime($data[$i]['end_time']));
-    $no = $i + 1;
+$no = 0;
+foreach ($data as $item) {
+    $no++;
+    $startDate = date("Y-m-d", strtotime($item['start_time']));
+    $endDate = date("Y-m-d", strtotime($item['end_time']));
+    $startTime = date("H:i", strtotime($item['start_time']));
+    $endTime = date("H:i", strtotime($item['end_time']));
     echo '<tr>';
     echo "<td>{$no}</td>";
     echo "<td>{$startDate} - {$endDate}</td>";
     echo "<td>{$startTime} - {$endTime}</td>";
-    echo "<td>{$data[$i]['topic']}</td>";
-    echo "<td>{$data[$i]['speaker']}</td>";
-    echo "<td>{$data[$i]['location_lat']}, {$data[$i]['location_long']}</td>";
-    echo "<td><button>view information</button></td>";
+    echo "<td>{$item['topic']}</td>";
+    echo "<td>{$item['speaker']}</td>";
+    echo "<td>{$item['venue']}</td>";
+    echo "<td>{$item['location_lat']}, {$item['location_long']}</td>";
+    echo '<td><a href="' . str_replace('{id}', $item['id'], $item_url) . '"><button>view information</button></a></td>';
     if ($this->auth->user()->is_admin) {
-        echo "<td><button>edit</button></td>";
-        echo "<td><button>delete</button></td>";
+        echo '<td><a href="' . str_replace('{id}', $item['id'], $edit_url) . '"><button>edit</button></a></td>';
+        echo '<td><a href="' . str_replace('{id}', $item['id'], $delete_url) . '"><button>delete</button></a></td>';
     }
 }
 echo "</table>";
