@@ -60,6 +60,10 @@
                         }
                     }
                     break;
+                case 'datetime':
+                case 'datetime-local':
+                    if (isset($data[$name]))
+                        $data[$name] = date('Y-m-d\\TH:i:s', strtotime($data[$name]));
                 default:
                     echo "<input name=\"$name\" type=\"{$f['type']}\"";
                     if (isset($f['attr'])) {
@@ -77,6 +81,7 @@
         ?>
     </table>
     <input type="submit" value="<?php echo $button ?>"/>
+    <input type="reset" value="Reset"/>
 </form>
 <iframe name="async" style="display: none"></iframe>
 <?php if (isset($err)) echo '<script>alert(' . json_encode($err) . ');</script>' ?>
