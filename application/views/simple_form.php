@@ -26,7 +26,7 @@
                         foreach ($f['attr'] as $k => $v)
                             echo " $k=\"$v\"";
                     }
-                    echo "></textarea>";
+                    echo ">" . (isset($data[$name]) ? htmlspecialchars($data[$name]) : '') . "</textarea>";
                     break;
                 case 'select':
                     echo "<select name=\"$name\"";
@@ -36,8 +36,13 @@
                     }
                     echo ">";
                     if (isset($f['values'])) {
-                        foreach ($f['values'] as $k => $v)
-                            echo "<option value=\"$k\">" . htmlspecialchars($v) . "</option>";
+                        if (isset($data[$name])) {
+                            foreach ($f['values'] as $k => $v)
+                                echo "<option value=\"$k\"" . ($data[$name] == $k ? ' selected' : '') . ">" . htmlspecialchars($v) . "</option>";
+                        } else {
+                            foreach ($f['values'] as $k => $v)
+                                echo "<option value=\"$k\">" . htmlspecialchars($v) . "</option>";
+                        }
                     }
                     echo "</select>";
                     break;
@@ -49,6 +54,8 @@
                                 foreach ($f['attr'] as $ak => $av)
                                     echo " $ak=\"$av\"";
                             }
+                            if (isset($data[$name]) && $data[$name] = $k)
+                                echo " checked";
                             echo " />" . htmlspecialchars($v) . '</label>';
                         }
                     }
@@ -59,6 +66,8 @@
                         foreach ($f['attr'] as $k => $v)
                             echo " $k=\"$v\"";
                     }
+                    if (isset($data[$name]))
+                        echo ' value="' . htmlspecialchars($data[$name]) . '"';
                     echo " />";
                     break;
 

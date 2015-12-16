@@ -44,10 +44,10 @@ abstract class CrudController extends CI_Controller
             'create_url' => site_url(uri_string() . '/create'),
             'edit_url'   => site_url(uri_string() . '/edit/{id}'),
             'delete_url' => site_url(uri_string() . '/delete/{id}'),
+            'fields'     => $this->fields,
         );
 
         $r = $this->db->get($this->table);
-
         $data['data'] = $r->result_array();
 
         $this->load->view($this->view[__FUNCTION__], $data);
@@ -82,7 +82,6 @@ abstract class CrudController extends CI_Controller
             'form'   => array(
                 'action' => site_url(uri_string()),
                 'method' => 'post',
-                'fields' => $this->fields,
             ),
             'fields' => $this->fields,
         );
@@ -124,8 +123,8 @@ abstract class CrudController extends CI_Controller
             'form'   => array(
                 'action' => site_url(uri_string()),
                 'method' => 'post',
-                'fields' => $this->fields,
             ),
+            'fields' => $this->fields,
         );
 
         $r = $this->db->where('id', $id)->get($this->table);

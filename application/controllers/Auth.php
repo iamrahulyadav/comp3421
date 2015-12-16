@@ -21,7 +21,7 @@ class Auth extends CI_Controller
                 ),
                 'pw'    => array(
                     'name' => 'Password',
-                    'type' => 'password',
+                    'type' => 'passwoPaid by rd',
                 ),
             ),
         );
@@ -68,57 +68,94 @@ class Auth extends CI_Controller
                 'id'             => array(
                     'name' => 'Registration ID',
                     'type' => 'text',
+                    'attr' => array('required' => '', 'autofocus' => ''),
+                ),
+                'email'          => array(
+                    'name' => 'Email',
+                    'type' => 'email',
                     'attr' => array('required' => ''),
                 ),
-                'email'          => array('name' => 'Email', 'type' => 'email', 'attr' => array('required' => '')),
-                'password'       => array('name' => 'Password', 'type' => 'password'),
+                'password'       => array(
+                    'name' => 'Password',
+                    'type' => 'password',
+                ),
                 'title'          => array(
-                    'name'   => 'Title (Dr, Prof, Mr, Ms, Mrs)',
+                    'name'   => 'Title',
                     'type'   => 'select',
                     'values' => array(
-                        'Dr'   => 'Dr',
-                        'Prof' => 'Prof',
                         'Mr'   => 'Mr',
                         'Ms'   => 'Ms',
                         'Mrs'  => 'Mrs',
+                        'Dr'   => 'Dr',
+                        'Prof' => 'Prof',
                     ),
                 ),
-                'first_name'     => array('name' => 'First Name', 'type' => 'text'),
-                'last_name'      => array('name' => 'Last Name', 'type' => 'text'),
-                'address'        => array('name' => 'Address', 'type' => 'textarea'),
-                'city'           => array('name' => 'City', 'type' => 'text'),
-                'country'        => array('name' => 'Country', 'type' => 'text'),
+                'first_name'     => array(
+                    'name' => 'First Name',
+                    'type' => 'text',
+                ),
+                'last_name'      => array(
+                    'name' => 'Last Name',
+                    'type' => 'text',
+                ),
+                'address'        => array(
+                    'name' => 'Address',
+                    'type' => 'textarea',
+                ),
+                'city'           => array(
+                    'name' => 'City',
+                    'type' => 'text',
+                ),
+                'country'        => array(
+                    'name' => 'Country',
+                    'type' => 'text',
+                ),
                 'attendee_type'  => array(
                     'name'   => 'Attendee Type',
                     'type'   => 'select',
                     'values' => array(
-                        'Student'     => 'Student',
-                        'Participant' => 'Participant',
-                        'Sponsor'     => 'Sponsor',
-                        'VIP'         => 'VIP',
-                        'Speaker'     => 'Speaker',
+                        'student'     => 'Student',
+                        'participant' => 'Participant',
+                        'sponsor'     => 'Sponsor',
+                        'vip'         => 'VIP',
+                        'speaker'     => 'Speaker',
                     ),
                 ),
-                'department'     => array('name' => 'Department', 'type' => 'text'),
-                'company'        => array('name' => 'Company', 'type' => 'text'),
+                'department'     => array(
+                    'name' => 'Department',
+                    'type' => 'text',
+                ),
+                'company'        => array(
+                    'name' => 'Company',
+                    'type' => 'text',
+                ),
                 'phone_number'   => array(
                     'name' => 'Phone Number',
                     'type' => 'tel',
                 ),
-                'fax_number'     => array('name' => 'Fax Number', 'type' => 'tel'),
+                'fax_number'     => array(
+                    'name' => 'Fax Number',
+                    'type' => 'tel',
+                ),
                 'payment_status' => array(
                     'name'   => 'Payment Status',
                     'type'   => 'select',
                     'values' => array(
-                        'Unpaid' => 'Unpaid',
-                        'Cash'   => 'Cash',
-                        'Credit' => 'Credit Card',
-                        'EPS'    => 'EPS',
-                        'Cheque' => 'Cheque',
+                        'unpaid' => 'Unpaid',
+                        'cash'   => 'Paid by Cash',
+                        'credit' => 'Paid by Credit Card',
+                        'epa'    => 'Paid by EPS',
+                        'cheque' => 'Paid by Cheque',
                     ),
                 ),
-                'remarks'        => array('name' => 'Remarks', 'type' => 'textarea'),
-                'is_admin'       => array('name' => 'Is administrator ? ', 'type' => 'checkbox'),
+                'remarks'        => array(
+                    'name' => 'Remarks',
+                    'type' => 'textarea',
+                ),
+                'is_admin'       => array(
+                    'name' => 'Is administrator?',
+                    'type' => 'checkbox',
+                ),
             ),
         );
 
