@@ -155,8 +155,21 @@ abstract class CrudController extends CI_Controller
     {
         check_access(TRUE, TRUE);
 
+        $list = site_url(dirname(dirname(uri_string())));
+        $this->load->view('confirm', array(
+            'msg'        => 'Are you sure to delete the item? This cannot be undone!',
+            'form'       => array('method' => 'post'),
+            'cancel_url' => $list,
+            'color'      => 'red',
+        ));
+    }
+
+    public function delete_post($id)
+    {
+        check_access(TRUE, TRUE);
+
         if ($this->db->where('id', $id)->delete($this->table) !== FALSE) {
-            $list = json_encode(site_url(dirname(uri_string())));
+            $list = json_encode(site_url(dirname(dirname(uri_string()))));
 
             $this->output->append_output(
                 "<script>alert('Delete Success!');window.location = $list;</script>"
