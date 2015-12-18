@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Registration and Attendance Managing Application</title>
+    <script src="<?php echo base_url('jquery/jquery.js') ?>"></script>
 </head>
 <body>
 <?php echo isset($menu) ? $menu : '' ?>
@@ -60,6 +61,11 @@
                         }
                     }
                     break;
+                case 'map':
+                    $div_id = 'map_' . $name;
+                    $map_id[$div_id] = NULL;
+                    echo "<div id=\"$div_id\" lat=\"{$f['lat']}\" lng=\"{$f['lng']}\"></div>";
+                    break;
                 case 'datetime':
                 case 'datetime-local':
                     if (isset($data[$name]))
@@ -85,5 +91,30 @@
 </form>
 <iframe name="async" style="display: none"></iframe>
 <?php if (isset($err)) echo '<script>alert(' . json_encode($err) . ');</script>' ?>
+<?php if (!empty($map_id)) { ?>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzzmr04bM7hfgehfBvpTC7vFLEiugg6KE&callback=initMap"
+            async defer></script>
+    <script>
+        var maps = <?php echo json_encode($map_id) ?>;
+        function initMap() {
+            for (var id in maps) {
+                var map = $("#" + id);
+                var p = {
+                    lat: parseFloat($('[name=' + map.attr('lat') + ']').val()),
+                    lng: parseFloat($('[name=' + map.attr('lng') + ']').val())
+                };
+                p.lat = isNaN(p.lat) ? p.lat : 0;
+                p.lng = isNaN(p.lng) ? p.lng : 0;
+                maps[id] = new google.maps.Map(map[0], {
+                    center: p,
+                    zoom: 10
+                });
+                maps[id].addListener('click', function (e) {
+
+                });
+            }
+        }
+    </script>
+<?php } ?>
 </body>
 </html>
