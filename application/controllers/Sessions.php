@@ -6,7 +6,7 @@ require_once dirname(__FILE__) . '/CrudController.php';
  * Created by LKHO.
  * Date: 14/12/2015 17:34
  */
-class Conference extends CrudController
+class Sessions extends CrudController
 {
     public $table = 'session';
     public $title = 'Conference Sessions';
@@ -24,9 +24,11 @@ class Conference extends CrudController
         'speaker'    => array('name' => 'Speaker', 'type' => 'text'),
         'venue'      => array('name' => 'Venue', 'type' => 'text'),
         'venue_lat'  => array(
+            'name' => 'Location (lat)',
             'type' => 'hidden',
         ),
         'venue_lng'  => array(
+            'name' => 'Location (Lng)',
             'type' => 'hidden',
         ),
         'venue_map'  => array(
@@ -34,6 +36,9 @@ class Conference extends CrudController
             'type' => 'map',
             'lat'  => 'venue_lat',
             'lng'  => 'venue_lng',
+            'attr' => array(
+                'style' => 'width: 400px; height: 300px',
+            ),
         ),
     );
 }
