@@ -10,7 +10,7 @@
 <?php
 
 if ($this->auth->user()->is_admin) {
-    echo "<button>create</button>";
+    echo "<a href=\"$create_url\"><button>create</button></a>";
 }
 echo "<table>";
 echo '<tr>';
