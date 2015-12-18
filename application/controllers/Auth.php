@@ -21,7 +21,7 @@ class Auth extends CI_Controller
                 ),
                 'pw'    => array(
                     'name' => 'Password',
-                    'type' => 'passwoPaid by rd',
+                    'type' => 'password',
                 ),
             ),
         );
