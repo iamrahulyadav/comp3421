@@ -10,14 +10,13 @@
 <p>Welcome<?php
     $urls = array();
     if ($this->auth->isLoggedIn()) {
-        $urls['View Conferences'] = 'conference';
+        $urls['View Conference Sessions'] = 'session';
         $urls['View Exhibitions'] = 'exhibition';
-        $urls['View Forum'] = 'forum';
+        $urls['View Forums'] = 'forum';
         $urls['View Announcements'] = 'announcement';
         $urls['View Surveys'] = 'survey';
         $urls['View Rewards'] = 'reward';
         $urls['View Messages'] = 'message';
-        $urls['View Conference Location'] = 'map';
         $urls['View Conference Schedule'] = 'schedule';
         if ($this->auth->user()->is_admin) {
             $urls['View Attendance Info'] = 'attendance';
