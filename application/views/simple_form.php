@@ -110,6 +110,9 @@
                     lat: parseFloat($('[name=' + map.attr('lat') + ']').val()),
                     lng: parseFloat($('[name=' + map.attr('lng') + ']').val())
                 };
+                if (!isNaN(p.lat) && !isNaN(p.lng)) {
+                    maps[id].mymarker = new google.maps.Marker({map: maps[id], position: p});
+                }
                 p.lat = isNaN(p.lat) ? 0 : p.lat;
                 p.lng = isNaN(p.lng) ? 0 : p.lng;
                 maps[id] = new google.maps.Map(map[0], {
@@ -120,6 +123,10 @@
                     var div = $(this.getDiv());
                     $('[name=' + div.attr('lat') + ']').val(e.latLng.lat());
                     $('[name=' + div.attr('lng') + ']').val(e.latLng.lng());
+                    if (!this.mymarker) {
+                        this.mymarker = new google.maps.Marker({map: this});
+                    }
+                    this.mymarker.setPosition(e.latLng);
                 });
             }
         }
