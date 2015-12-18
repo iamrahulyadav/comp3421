@@ -10,7 +10,7 @@
 <p>Welcome<?php
     $urls = array();
     if ($this->auth->isLoggedIn()) {
-        $urls['View Conference Sessions'] = 'session';
+        $urls['View Conference Sessions'] = 'sessions';
         $urls['View Exhibitions'] = 'exhibition';
         $urls['View Forums'] = 'forum';
         $urls['View Announcements'] = 'announcement';
