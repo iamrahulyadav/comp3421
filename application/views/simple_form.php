@@ -17,9 +17,11 @@
         <?php
 
         foreach ($fields as $name => $f) {
-            echo '<tr><td>' . htmlspecialchars($f['name']) . '</td>';
-            echo '<td>';
             if (empty($f['type'])) $f['type'] = 'text';
+            if ($f['type'] != 'hidden') {
+                echo '<tr><td>' . htmlspecialchars($f['name']) . '</td>';
+                echo '<td>';
+            }
             switch ($f['type']) {
                 case 'textarea':
                     echo "<textarea name=\"$name\"";
@@ -64,7 +66,10 @@
                 case 'map':
                     $div_id = 'map_' . $name;
                     $map_id[$div_id] = NULL;
-                    echo "<div id=\"$div_id\" lat=\"{$f['lat']}\" lng=\"{$f['lng']}\"></div>";
+                    echo "<div id=\"$div_id\" lat=\"{$f['lat']}\" lng=\"{$f['lng']}\"";
+                    foreach ($f['attr'] as $k => $v)
+                        echo " $k=\"$v\"";
+                    echo "></div>";
                     break;
                 case 'datetime':
                 case 'datetime-local':
@@ -80,7 +85,9 @@
                         echo ' value="' . htmlspecialchars($data[$name]) . '"';
                     echo " />";
                     break;
-
+            }
+            if ($f['type'] != 'hidden') {
+                echo '</td></tr>';
             }
         }
 
@@ -103,14 +110,16 @@
                     lat: parseFloat($('[name=' + map.attr('lat') + ']').val()),
                     lng: parseFloat($('[name=' + map.attr('lng') + ']').val())
                 };
-                p.lat = isNaN(p.lat) ? p.lat : 0;
-                p.lng = isNaN(p.lng) ? p.lng : 0;
+                p.lat = isNaN(p.lat) ? 0 : p.lat;
+                p.lng = isNaN(p.lng) ? 0 : p.lng;
                 maps[id] = new google.maps.Map(map[0], {
                     center: p,
-                    zoom: 10
+                    zoom: 2
                 });
                 maps[id].addListener('click', function (e) {
-
+                    var div = $(this.getDiv());
+                    $('[name=' + div.attr('lat') + ']').val(e.latLng.lat());
+                    $('[name=' + div.attr('lng') + ']').val(e.latLng.lng());
                 });
             }
         }
