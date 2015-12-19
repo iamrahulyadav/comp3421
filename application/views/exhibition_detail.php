@@ -31,7 +31,7 @@
             }
             map = new google.maps.Map(document.getElementById("map"), myOptions);
             marker = new google.maps.Marker({
-                position: myLatLng,
+                position: myLatlng,
                 map: map
             });
         }
@@ -62,4 +62,4 @@
 <div id="map" style="height: 300px;width: 450px">
 </div>
 </body>
-
+</html>
