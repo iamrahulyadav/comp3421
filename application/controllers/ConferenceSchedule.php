@@ -12,7 +12,7 @@ class ConferenceSchedule extends CrudController
     public $title = 'Conference Schedule';
     public $view = array(
         'index'  => 'conferenceSchedule_list',
-        'item'   => 'conferenceSchedule_item',
+        'detail'   => 'conferenceSchedule_item',
         'create' => 'conferenceSchedule_create',
         'edit'   => 'conferenceSchedule_edit'
     );

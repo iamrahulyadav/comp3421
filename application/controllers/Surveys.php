@@ -12,7 +12,7 @@ class Surveys extends CrudController
     public $title = 'Surveys';
     public $view = array(
         'index'  => 'simple_list',
-        'item'   => 'surveys_item',
+        'detail'   => 'surveys_item',
         'create' => 'simple_form',
         'edit'   => 'simple_form',
     );
