@@ -82,7 +82,7 @@ abstract class CrudController extends CI_Controller
         check_access(TRUE);
 
         $data = array(
-            'title'      => $this->title,
+            'title'      => $this->title . ' Details',
             'menu'       => $this->load->view('menu', NULL, TRUE),
             'edit_url'   => site_url(dirname(uri_string()) . '/edit/{id}'),
             'delete_url' => site_url(uri_string()),
