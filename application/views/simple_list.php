@@ -12,7 +12,7 @@
         <?php
         echo '<th>';
         foreach ($fields as $name => $f) {
-            if(isset($f['title'])
+            if(isset($f['title']))
                 echo '<td>' . htmlspecialchars($f['title']) . '</td>';
         }
         if ($this->auth->isLoggedIn()&& $this->auth->user()->is_admin) {
