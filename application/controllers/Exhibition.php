@@ -14,27 +14,27 @@ class Exhibition extends CrudController
         'index'  => 'simple_list',
         'item'   => 'exhibition_item',
         'create' => 'simple_form',
-        'edit'   => 'simple_form'
+        'edit'   => 'simple_form',
     );
 
     public $fields = array(
-    	'id'=> array('title'=>'No.'),
-    	'start_time' => array('name' => 'Start time', 'type' => 'datetime-local', 'title' => 'Start'),
-        'end_time'   => array('name' => 'End time', 'type' => 'datetime-local', 'title' => 'End'),
-    	'name'=> array('name'=>'Name','type'=>'text','title'=>'Name'),
-    	'venue'      => array('name' => 'Venue', 'type' => 'text', 'title' => 'Venue'),
-    	'company'=> array('name'=>'Company','type'=>'text','title'=>'Company'),
-    	'info'=> array('name'=>'Infomation','type'=>'text','title'=>'View Infomation')
-        'venue_lat'  => array('name' => 'Location (lat)', 'type' => 'text',),
-        'venue_lng'  => array('name' => 'Location (Lng)', 'type' => 'text',),
+        'id'         => array('column' => 'No.'),
+        'start_time' => array('label' => 'Start time', 'type' => 'datetime-local', 'column' => 'Start'),
+        'end_time'   => array('label' => 'End time', 'type' => 'datetime-local', 'column' => 'End'),
+        'name'       => array('label' => 'Name', 'type' => 'text', 'title' => 'Name'),
+        'venue'      => array('label' => 'Venue', 'type' => 'text', 'column' => 'Venue'),
+        'company'    => array('label' => 'Company', 'type' => 'text', 'column' => 'Company'),
+        'info'       => array('label' => 'Infomation', 'type' => 'text', 'column' => 'View Infomation'),
+        'venue_lat'  => array('label' => 'Location (lat)', 'type' => 'text'),
+        'venue_lng'  => array('label' => 'Location (Lng)', 'type' => 'text'),
         'venue_map'  => array(
-            'name' => 'Pick the location of the venue on the map<br>or type it in the box above',
+            'label' => 'Pick the location of the venue on the map<br>or type it in the box above',
             'type' => 'map',
             'lat'  => 'venue_lat',
             'lng'  => 'venue_lng',
             'attr' => array(
-                'style' => 'width: 400px; height: 300px',
+                'style' => 'width: 450px; height: 300px',
             ),
         ),
-    	);
+    );
 }
