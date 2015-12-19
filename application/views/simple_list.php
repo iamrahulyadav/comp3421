@@ -35,7 +35,7 @@
                 if (isset($f['type']) && $f['type'] == "checkbox")
                     echo empty($v[$dbcolumn]) ? 'False' : 'True';
                 else
-                    echo htmlspecialchars($v[$dbcolumn]);
+                    echo $v[$dbcolumn];
                 echo '</td>';
             }
         }
