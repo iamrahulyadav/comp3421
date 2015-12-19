@@ -17,9 +17,9 @@
         <?php
 
         foreach ($fields as $name => $f) {
-            if (empty($f['type'])) $f['type'] = 'text';
-            if ($f['type'] != 'hidden') {
-                echo '<tr><td>' . htmlspecialchars($f['name']) . '</td>';
+            if (empty($f['type'])) continue;
+            if (isset($f['name']) && $f['type'] != 'hidden') {
+                echo '<tr><td>' . ($f['name']) . '</td>';
                 echo '<td>';
             }
             switch ($f['type']) {
@@ -86,7 +86,7 @@
                     echo " />";
                     break;
             }
-            if ($f['type'] != 'hidden') {
+            if (isset($f['name']) && $f['type'] != 'hidden') {
                 echo '</td></tr>';
             }
         }
@@ -137,9 +137,9 @@
                     this.mymarker.setPosition(e.latLng);
                 });
 
-                $([$lat, $lng]).on('change', function () {
+                $lat.add($lng).on('change', function () {
                     if (!isNaN($lat.val()) && !isNaN(($lng.val()))) {
-                        var pp = {lat: $lat.val(), lng: $lng.val()};
+                        var pp = {lat: parseFloat($lat.val()), lng: parseFloat($lng.val())};
                         if (!map.mymarker)
                             map.mymarker = new google.maps.Marker({
                                 map: map,
