@@ -18,7 +18,6 @@
         $urls['View Rewards'] = 'rewards';
         $urls['View Messages'] = 'messages';
         if ($this->auth->user()->is_admin) {
-            $urls['View Attendance Info'] = 'attendance';
             $urls['Register Member'] = 'auth/register';
         }
     } else {
