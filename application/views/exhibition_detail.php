@@ -42,32 +42,42 @@
 <h1><?php echo htmlspecialchars($title) ?></h1>
 <table>
     <tr>
-        <td>Company: </td>
+        <td>Company:</td>
         <td><?php echo $data['company']; ?></td>
     </tr>
     <tr>
-        <td>Name: </td>
+        <td>Name:</td>
         <td><?php echo $data['name']; ?></td>
     </tr>
     <tr>
-        <td>Information: </td>
+        <td>Information:</td>
         <td><?php echo $data['info']; ?></td>
     </tr>
     <tr>
-        <td>Start Time: </td>
+        <td>Start Time:</td>
         <td><?php echo $data['start_time']; ?></td>
     </tr>
     <tr>
-        <td>End Time: </td>
+        <td>End Time:</td>
         <td><?php echo $data['end_time']; ?></td>
     </tr>
     <tr>
-        <td>Venue: </td>
+        <td>Venue:</td>
         <td><?php echo $data['venue']; ?></td>
     </tr>
 </table>
 
 <div id="map" style="height: 300px;width: 450px">
 </div>
+<br>
+<?php
+if ($this->auth->isLoggedIn() && $this->auth->user()->is_admin) {
+    if (isset($edit_url))
+        echo '<a href="' . str_replace('{id}', $data['id'], $edit_url) . '"><button>Edit</button></a>';
+    if (isset($delete_url))
+        echo '<a href="' . str_replace('{id}', $data['id'], $delete_url) . '"><button>Delete</button></a>';
+}
+echo '<a href="' . site_url($url) . '" title="' . $data['title'] . '"><button>Back</button></a >'
+?>
 </body>
 </html>
