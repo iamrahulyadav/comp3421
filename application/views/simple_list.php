@@ -8,7 +8,7 @@
 <body>
 <?php echo isset($menu) ? $menu : '' ?>
 <h1><?php echo htmlspecialchars($title) ?></h1>
-<?php if ($this->auth->user()->is_admin) {
+<?php if ($this->auth->user()->is_admin && isset($create_url)) {
     echo "<a href=\"$create_url\"><button>Create</button></a>";
 } ?>
 <table border="1">
