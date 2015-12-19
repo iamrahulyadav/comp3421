@@ -17,12 +17,12 @@ class Sessions extends CrudController
         'edit'   => 'simple_form',
     );
     public $fields = array(
-        'topic'      => array('name' => 'Conference topic', 'type' => 'text'),
+        'topic'      => array('name' => 'Conference topic', 'type' => 'text', 'title' => 'Topic'),
         'info'       => array('name' => 'Conference Description', 'type' => 'textarea'),
-        'start_time' => array('name' => 'Start time', 'type' => 'datetime-local'),
-        'end_time'   => array('name' => 'End time', 'type' => 'datetime-local'),
-        'speaker'    => array('name' => 'Speaker', 'type' => 'text'),
-        'venue'      => array('name' => 'Venue', 'type' => 'text'),
+        'start_time' => array('name' => 'Start time', 'type' => 'datetime-local', 'title' => 'Start'),
+        'end_time'   => array('name' => 'End time', 'type' => 'datetime-local', 'title' => 'End'),
+        'speaker'    => array('name' => 'Speaker', 'type' => 'text', 'title' => 'Speaker'),
+        'venue'      => array('name' => 'Venue', 'type' => 'text', 'title' => 'Venue'),
         'venue_lat'  => array(
             'name' => 'Location (lat)',
             'type' => 'text',
@@ -32,7 +32,7 @@ class Sessions extends CrudController
             'type' => 'text',
         ),
         'venue_map'  => array(
-            'name' => 'Pick the location of the venue on the map',
+            'name' => 'Pick the location of the venue on the map<br>or type it in the box above',
             'type' => 'map',
             'lat'  => 'venue_lat',
             'lng'  => 'venue_lng',
