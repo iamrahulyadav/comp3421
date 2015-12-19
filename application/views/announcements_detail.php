@@ -22,7 +22,7 @@
 <h1><?php echo htmlspecialchars($title) ?></h1>
 <table>
     <tr>
-        <td>Anouncement ID:</td>
+        <td>Announcement ID:</td>
         <td><?php echo $data['id']; ?></td>
     </tr>
     <tr>
@@ -38,5 +38,13 @@
         <td><?php echo $data['time']; ?></td>
     </tr>
 </table>
+<br>
+<?php
+if ($this->auth->isLoggedIn() && $this->auth->user()->is_admin) {
+    echo '<a href="' . site_url("announcements") . '/edit/'.$data['id'].'"><button>Edit</button></a>';
+    echo '<a href="' . site_url("announcements") . '/delete/'.$data['id'].'"><button>Delete</button></a>';
+}
+echo '<a href="' . site_url("announcements") . '"><button>Back</button></a >'
+?>
 </body>
 </html>

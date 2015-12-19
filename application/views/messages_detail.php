@@ -46,5 +46,13 @@
         <td><?php echo $data['time']; ?></td>
     </tr>
 </table>
+<br>
+<?php
+if ($this->auth->isLoggedIn() && $this->auth->user()->is_admin) {
+    echo '<a href="' . site_url("messages") . '/edit/'.$data['id'].'"><button>Edit</button></a>';
+    echo '<a href="' . site_url("messages") . '/delete/'.$data['id'].'"><button>Delete</button></a>';
+}
+echo '<a href="' . site_url("messages") . '"><button>Back</button></a >'
+?>
 </body>
 </html>
