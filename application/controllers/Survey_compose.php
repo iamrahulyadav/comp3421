@@ -100,4 +100,9 @@ collected may result in data not displayed properly.</p>',
         $_POST['survey_id'] = $survey_id;
         parent::create_post();
     }
+
+    public function detail($id)
+    {
+        redirect(dirname(dirname(uri_string())));
+    }
 }
