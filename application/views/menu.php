@@ -13,11 +13,11 @@
         $urls['View Conference Sessions'] = 'sessions';
         $urls['View Exhibitions'] = 'exhibition';
         $urls['View Forums'] = 'forum';
-        $urls['View Announcements'] = 'announcement';
-        $urls['View Surveys'] = 'survey';
-        $urls['View Rewards'] = 'reward';
-        $urls['View Messages'] = 'message';
-        $urls['View Conference Schedule'] = 'schedule';
+        $urls['View Announcements'] = 'announcements';
+        $urls['View Surveys'] = 'surveys';
+        $urls['View Rewards'] = 'rewards';
+        $urls['View Messages'] = 'messages';
+        $urls['View Conference Schedule'] = 'conferenceschedule';
         if ($this->auth->user()->is_admin) {
             $urls['View Attendance Info'] = 'attendance';
             $urls['Register Member'] = 'auth/register';
