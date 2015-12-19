@@ -11,9 +11,15 @@ class Rewards extends CrudController
     public $table = 'rewards';
     public $title = 'Rewards';
     public $view = array(
-        'index'  => 'rewards_list',
+        'index'  => 'simple_list',
         'item'   => 'rewards_item',
-        'create' => 'rewards_create',
-        'edit'   => 'rewards_edit'
+        'create' => 'simple_form',
+        'edit'   => 'simple_form'
+    );
+    public $fields = array(
+        'id'      => array('column' => 'No.'),
+        'title'   => array('label' => 'Title', 'type' => 'text', 'column' => 'Title'),
+        'content' => array('label' => 'Content', 'type' => 'textarea', 'column' => 'Content'),
+        'time'    => array('label' => 'Time', 'type' => 'datetime-local', 'title' => 'Time'),
     );
 }

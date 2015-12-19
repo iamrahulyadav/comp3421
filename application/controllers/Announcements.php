@@ -8,7 +8,7 @@ require_once dirname(__FILE__) . '/CrudController.php';
  */
 class Announcements extends CrudController
 {
-    public $table = 'announcements';
+    public $table = 'announcement';
     public $title = 'Announcements';
     public $view = array(
         'index'  => 'simple_list',
@@ -18,11 +18,9 @@ class Announcements extends CrudController
     );
 
     public $fields = array(
-        'topic'      => array('name' => 'id', 'type' => 'text'),
-        'info'       => array('name' => 'Conference Description', 'type' => 'textarea'),
-        'start_time' => array('name' => 'Start time', 'type' => 'datetime-local'),
-        'end_time'   => array('name' => 'End time', 'type' => 'datetime-local'),
-        'speaker'    => array('name' => 'Speaker', 'type' => 'text'),
-        'venue'      => array('name' => 'Venue', 'type' => 'text'),
+        'id'      => array('column' => 'No.'),
+        'title'   => array('label' => 'Title', 'type' => 'text', 'column' => 'Title'),
+        'content' => array('label' => 'Content', 'type' => 'textarea', 'column' => 'Content'),
+        'time'    => array('label' => 'Time', 'type' => 'datetime-local', 'title' => 'Time'),
     );
 }
