@@ -20,6 +20,7 @@
         if ($this->auth->user()->is_admin) {
             $urls['Edit Surveys'] = 'surveys';
             $urls['Register Member'] = 'auth/register';
+            $urls['View Members'] = 'members';
         }
     } else {
     }
