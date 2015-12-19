@@ -99,26 +99,34 @@
 <iframe name="async" style="display: none"></iframe>
 <?php if (isset($err)) echo '<script>alert(' . json_encode($err) . ');</script>' ?>
 <?php if (!empty($map_id)) { ?>
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzzmr04bM7hfgehfBvpTC7vFLEiugg6KE&callback=initMap"
             async defer></script>
     <script>
         var maps = <?php echo json_encode($map_id) ?>;
         function initMap() {
             for (var id in maps) {
-                var map = $("#" + id);
+                var $map = $("#" + id);
+                var $lat = $('[name=' + $map.attr('lat') + ']');
+                var $lng = $('[name=' + $map.attr('lng') + ']');
                 var p = {
-                    lat: parseFloat($('[name=' + map.attr('lat') + ']').val()),
-                    lng: parseFloat($('[name=' + map.attr('lng') + ']').val())
+                    lat: parseFloat($lat.val()),
+                    lng: parseFloat($lng.val())
                 };
+                var mymarker = null;
                 if (!isNaN(p.lat) && !isNaN(p.lng)) {
-                    maps[id].mymarker = new google.maps.Marker({map: maps[id], position: p});
+                    mymarker = new google.maps.Marker({map: maps[id], position: p});
+                } else {
+                    if (google.loader.ClientLocation)
+                        p = {lat: google.loader.ClientLocation.latitude, lng: google.loader.ClientLocation.longitude};
+                    else
+                        p = {lat: 22.3, lng: 114.1};
                 }
-                p.lat = isNaN(p.lat) ? 0 : p.lat;
-                p.lng = isNaN(p.lng) ? 0 : p.lng;
-                maps[id] = new google.maps.Map(map[0], {
+                var map = maps[id] = new google.maps.Map(map[0], {
                     center: p,
-                    zoom: 2
+                    zoom: 8
                 });
+                maps[id].mymarker = mymarker;
                 maps[id].addListener('click', function (e) {
                     var div = $(this.getDiv());
                     $('[name=' + div.attr('lat') + ']').val(e.latLng.lat());
@@ -127,6 +135,19 @@
                         this.mymarker = new google.maps.Marker({map: this});
                     }
                     this.mymarker.setPosition(e.latLng);
+                });
+
+                $([$lat, $lng]).on('change', function () {
+                    if (!isNaN($lat.val()) && !isNaN(($lng.val()))) {
+                        var pp = {lat: $lat.val(), lng: $lng.val()};
+                        if (!map.mymarker)
+                            map.mymarker = new google.maps.Marker({
+                                map: map,
+                                position: pp
+                            });
+                        else
+                            map.mymarker.setPosition(pp);
+                    }
                 });
             }
         }

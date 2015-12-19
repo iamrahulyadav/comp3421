@@ -25,11 +25,11 @@ class Sessions extends CrudController
         'venue'      => array('name' => 'Venue', 'type' => 'text'),
         'venue_lat'  => array(
             'name' => 'Location (lat)',
-            'type' => 'hidden',
+            'type' => 'text',
         ),
         'venue_lng'  => array(
             'name' => 'Location (Lng)',
-            'type' => 'hidden',
+            'type' => 'text',
         ),
         'venue_map'  => array(
             'name' => 'Pick the location of the venue on the map',
