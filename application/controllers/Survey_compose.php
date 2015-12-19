@@ -16,6 +16,7 @@ class Survey_compose extends CrudController
         'index'  => 'simple_list',
         'create' => 'simple_form',
         'edit'   => 'simple_form',
+        'detail' => FALSE,
     );
 
     public function __construct()
@@ -79,19 +80,8 @@ collected may result in data not displayed properly.</p>',
     public function index($survey_id = 0)
     {
         check_access(TRUE, TRUE);
-        $data = array(
-            'title'      => $this->title,
-            'menu'       => $this->load->view('menu', NULL, TRUE),
-            'create_url' => site_url(uri_string() . '/create'),
-            'edit_url'   => site_url(uri_string() . '/edit/{id}'),
-            'delete_url' => site_url(uri_string() . '/delete/{id}'),
-            'fields'     => $this->processDynamicSource($this->fields, array(__FUNCTION__)),
-        );
-
-        $r = $this->db->where('survey_id', $survey_id)->order_by('order')->get($this->table);
-        $data['data'] = $r->result_array();
-
-        $this->load->view($this->view[__FUNCTION__], $data);
+        $this->db->where('survey_id', $survey_id)->order_by('order');
+        parent::index();
     }
 
     public function create($survey_id = 0)
