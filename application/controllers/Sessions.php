@@ -17,6 +17,7 @@ class Sessions extends CrudController
         'edit'   => 'simple_form',
     );
     public $fields = array(
+        'id'         => array('title' => 'ID'),
         'topic'      => array('name' => 'Conference topic', 'type' => 'text', 'title' => 'Topic'),
         'info'       => array('name' => 'Conference Description', 'type' => 'textarea'),
         'start_time' => array('name' => 'Start time', 'type' => 'datetime-local', 'title' => 'Start'),

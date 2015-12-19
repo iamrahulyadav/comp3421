@@ -8,28 +8,26 @@
 <body>
 <?php echo isset($menu) ? $menu : '' ?>
 <h1><?php echo htmlspecialchars($title) ?></h1>
-<table>
+<table border="1">
     <?php
-    echo '<th>';
+    echo '<tr>';
     foreach ($fields as $name => $f) {
         if (isset($f['title']))
-            echo '<td>' . htmlspecialchars($f['title']) . '</td>';
+            echo '<th>' . htmlspecialchars($f['title']) . '</th>';
     }
     if ($this->auth->isLoggedIn() && $this->auth->user()->is_admin) {
-        echo '<td><button>edit</button></td>';
-        echo "<td><button>delete</button></td>";
+        echo "<th>Edit</th><th>Delete</th>";
     }
-    echo '</th>';
-    for ($i = 0; $i < count($data); $i++) {
+    echo '</tr>';
+    foreach ($data as $v) {
         echo '<tr>';
-        foreach ($fields as $name => $f) {
+        foreach ($fields as $dbcolumn => $f) {
             if (isset($f['title']))
-                echo "<td>{$data[$i][$name]}</td>";
+                echo "<td>{$v[$dbcolumn]}</td>";
         }
-
         if ($this->auth->isLoggedIn() && $this->auth->user()->is_admin) {
-            echo '<td><button>edit</button></td>';
-            echo "<td><button>delete</button></td>";
+            echo '<td><a href="' . str_replace('{id}', $v['id'], $edit_url) . '"><button>Edit</button></a></td>';
+            echo '<td><a href="' . str_replace('{id}', $v['id'], $delete_url) . '"><button>Delete</button></a></td>';
         }
         echo '</tr>';
     }
