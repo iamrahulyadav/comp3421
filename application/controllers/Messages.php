@@ -8,7 +8,7 @@ require_once dirname(__FILE__) . '/CrudController.php';
  */
 class Messages extends CrudController
 {
-    public $table = 'messages';
+    public $table = 'message';
     public $title = 'Messages Programs';
     public $view = array(
         'index'  => 'simple_list',
