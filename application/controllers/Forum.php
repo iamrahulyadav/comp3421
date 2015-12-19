@@ -11,9 +11,12 @@ class Forum extends CrudController
     public $table = 'forum';
     public $title = 'Forums';
     public $view = array(
-        'index'  => 'forum_list',
+        'index'  => 'simple_list',
         'item'   => 'forum_item',
-        'create' => 'forum_create',
-        'edit'   => 'forum_edit'
+        'create' => 'simple_form',
+        'edit'   => 'simple_form',
+    );
+    public $fields = array(
+        
     );
 }
