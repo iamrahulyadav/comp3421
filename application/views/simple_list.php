@@ -15,8 +15,8 @@
     <?php
     echo '<tr>';
     foreach ($fields as $name => $f) {
-        if (isset($f['title']))
-            echo '<th>' . htmlspecialchars($f['title']) . '</th>';
+        if (isset($f['column']))
+            echo '<th>' . htmlspecialchars($f['column']) . '</th>';
     }
     if ($this->auth->isLoggedIn() && $this->auth->user()->is_admin) {
         echo "<th>Edit</th><th>Delete</th>";
@@ -25,7 +25,7 @@
     foreach ($data as $v) {
         echo '<tr>';
         foreach ($fields as $dbcolumn => $f) {
-            if (isset($f['title']))
+            if (isset($f['column']))
                 echo "<td>{$v[$dbcolumn]}</td>";
         }
         if ($this->auth->isLoggedIn() && $this->auth->user()->is_admin) {

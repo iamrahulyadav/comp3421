@@ -17,22 +17,22 @@ class Sessions extends CrudController
         'edit'   => 'simple_form',
     );
     public $fields = array(
-        'id'         => array('title' => 'ID'),
-        'topic'      => array('name' => 'Conference topic', 'type' => 'text', 'title' => 'Topic'),
-        'info'       => array('name' => 'Conference Description', 'type' => 'textarea'),
-        'start_time' => array('name' => 'Start time', 'type' => 'datetime-local', 'title' => 'Start'),
-        'end_time'   => array('name' => 'End time', 'type' => 'datetime-local', 'title' => 'End'),
-        'speaker'    => array('name' => 'Speaker', 'type' => 'text', 'title' => 'Speaker'),
-        'venue'      => array('name' => 'Venue', 'type' => 'text', 'title' => 'Venue'),
-        'venue_lat'  => array('name' => 'Location (lat)', 'type' => 'text',),
-        'venue_lng'  => array('name' => 'Location (Lng)', 'type' => 'text',),
+        'id'         => array('column' => 'ID'),
+        'topic'      => array('label' => 'Conference topic', 'type' => 'text', 'column' => 'Topic'),
+        'info'       => array('label' => 'Conference Description', 'type' => 'textarea'),
+        'start_time' => array('label' => 'Start time', 'type' => 'datetime-local', 'column' => 'Start'),
+        'end_time'   => array('label' => 'End time', 'type' => 'datetime-local', 'column' => 'End'),
+        'speaker'    => array('label' => 'Speaker', 'type' => 'text', 'column' => 'Speaker'),
+        'venue'      => array('label' => 'Venue', 'type' => 'text', 'column' => 'Venue'),
+        'venue_lat'  => array('label' => 'Location (lat)', 'type' => 'text',),
+        'venue_lng'  => array('label' => 'Location (Lng)', 'type' => 'text',),
         'venue_map'  => array(
-            'name' => 'Pick the location of the venue on the map<br>or type it in the box above',
+            'label' => 'Pick the location of the venue on the map<br>or type it in the box above',
             'type' => 'map',
             'lat'  => 'venue_lat',
             'lng'  => 'venue_lng',
             'attr' => array(
-                'style' => 'width: 400px; height: 300px',
+                'style' => 'width: 450px; height: 300px',
             ),
         ),
     );

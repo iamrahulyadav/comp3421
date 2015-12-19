@@ -15,12 +15,12 @@ class Auth extends CI_Controller
             'button' => 'Log In',
             'fields' => array(
                 'email' => array(
-                    'name' => 'Email',
+                    'label' => 'Email',
                     'type' => 'email',
                     'attr' => array('required' => '', 'autofocus' => ''),
                 ),
                 'pw'    => array(
-                    'name' => 'Password',
+                    'label' => 'Password',
                     'type' => 'password',
                 ),
             ),
@@ -66,21 +66,21 @@ class Auth extends CI_Controller
             'button' => 'Register',
             'fields' => array(
                 'id'             => array(
-                    'name' => 'Registration ID',
+                    'label' => 'Registration ID',
                     'type' => 'text',
                     'attr' => array('required' => '', 'autofocus' => ''),
                 ),
                 'email'          => array(
-                    'name' => 'Email',
+                    'label' => 'Email',
                     'type' => 'email',
                     'attr' => array('required' => ''),
                 ),
                 'password'       => array(
-                    'name' => 'Password',
+                    'label' => 'Password',
                     'type' => 'password',
                 ),
                 'title'          => array(
-                    'name'   => 'Title',
+                    'label'   => 'Title',
                     'type'   => 'select',
                     'values' => array(
                         'Mr'   => 'Mr',
@@ -91,27 +91,27 @@ class Auth extends CI_Controller
                     ),
                 ),
                 'first_name'     => array(
-                    'name' => 'First Name',
+                    'label' => 'First Name',
                     'type' => 'text',
                 ),
                 'last_name'      => array(
-                    'name' => 'Last Name',
+                    'label' => 'Last Name',
                     'type' => 'text',
                 ),
                 'address'        => array(
-                    'name' => 'Address',
+                    'label' => 'Address',
                     'type' => 'textarea',
                 ),
                 'city'           => array(
-                    'name' => 'City',
+                    'label' => 'City',
                     'type' => 'text',
                 ),
                 'country'        => array(
-                    'name' => 'Country',
+                    'label' => 'Country',
                     'type' => 'text',
                 ),
                 'attendee_type'  => array(
-                    'name'   => 'Attendee Type',
+                    'label'   => 'Attendee Type',
                     'type'   => 'select',
                     'values' => array(
                         'student'     => 'Student',
@@ -122,23 +122,23 @@ class Auth extends CI_Controller
                     ),
                 ),
                 'department'     => array(
-                    'name' => 'Department',
+                    'label' => 'Department',
                     'type' => 'text',
                 ),
                 'company'        => array(
-                    'name' => 'Company',
+                    'label' => 'Company',
                     'type' => 'text',
                 ),
                 'phone_number'   => array(
-                    'name' => 'Phone Number',
+                    'label' => 'Phone Number',
                     'type' => 'tel',
                 ),
                 'fax_number'     => array(
-                    'name' => 'Fax Number',
+                    'label' => 'Fax Number',
                     'type' => 'tel',
                 ),
                 'payment_status' => array(
-                    'name'   => 'Payment Status',
+                    'label'   => 'Payment Status',
                     'type'   => 'select',
                     'values' => array(
                         'unpaid' => 'Unpaid',
@@ -149,11 +149,11 @@ class Auth extends CI_Controller
                     ),
                 ),
                 'remarks'        => array(
-                    'name' => 'Remarks',
+                    'label' => 'Remarks',
                     'type' => 'textarea',
                 ),
                 'is_admin'       => array(
-                    'name' => 'Is administrator?',
+                    'label' => 'Is administrator?',
                     'type' => 'checkbox',
                 ),
             ),

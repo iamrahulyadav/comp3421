@@ -18,8 +18,8 @@
 
         foreach ($fields as $name => $f) {
             if (empty($f['type'])) continue;
-            if (isset($f['name']) && $f['type'] != 'hidden') {
-                echo '<tr><td>' . ($f['name']) . '</td>';
+            if (isset($f['label']) && $f['type'] != 'hidden') {
+                echo '<tr><td>' . ($f['label']) . '</td>';
                 echo '<td>';
             }
             switch ($f['type']) {
@@ -86,7 +86,7 @@
                     echo " />";
                     break;
             }
-            if (isset($f['name']) && $f['type'] != 'hidden') {
+            if (isset($f['label']) && $f['type'] != 'hidden') {
                 echo '</td></tr>';
             }
         }
@@ -120,11 +120,11 @@
                     if (google.loader.ClientLocation)
                         p = {lat: google.loader.ClientLocation.latitude, lng: google.loader.ClientLocation.longitude};
                     else
-                        p = {lat: 22.3, lng: 114.1};
+                        p = {lat: 22.36, lng: 114.13};
                 }
                 var map = maps[id] = new google.maps.Map($map[0], {
                     center: p,
-                    zoom: 8
+                    zoom: 10
                 });
                 maps[id].mymarker = mymarker;
                 maps[id].addListener('click', function (e) {
