@@ -12,7 +12,7 @@ class Announcements extends CrudController
     public $title = 'Announcements';
     public $view = array(
         'index'  => 'simple_list',
-        'detail'   => 'announcements',
+        'detail'   => 'announcements_detail',
         'create' => 'simple_form',
         'edit'   => 'simple_form',
     );
