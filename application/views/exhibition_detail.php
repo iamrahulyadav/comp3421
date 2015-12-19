@@ -72,10 +72,8 @@
 <br>
 <?php
 if ($this->auth->isLoggedIn() && $this->auth->user()->is_admin) {
-    if (isset($edit_url))
-        echo '<a href="' . str_replace('detail/{id}', $data['id'], $edit_url) . '"><button>Edit</button></a>';
-    if (isset($delete_url))
-        echo '<a href="' . str_replace('detail/{id}', $data['id'], $delete_url) . '"><button>Delete</button></a>';
+        echo '<a href="' . site_url("exhibition") . '/edit/'.$data['id'].'"><button>Edit</button></a>';
+        echo '<a href="' . site_url("exhibition") . '/delete/'.$data['id'].'"><button>Delete</button></a>';
 }
 echo '<a href="' . site_url("exhibition") . '"><button>Back</button></a >'
 ?>
