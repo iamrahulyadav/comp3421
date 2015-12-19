@@ -12,7 +12,7 @@
         <?php
         echo '<th>';
         foreach ($fields as $name => $f) {
-            if(!$f['title'])
+            if(isset($f['title'])
                 echo '<td>' . htmlspecialchars($f['title']) . '</td>';
         }
         if ($this->auth->isLoggedIn()&& $this->auth->user()->is_admin) {
@@ -23,7 +23,7 @@
         for($i=0;$i<count($data);$i++){
             echo '<tr>';
             foreach ($fields as $name => $f){
-                if(!$f['title'])
+                if(isset($f['title']))
                     echo "<td>{$data[$i][$name]}</td>";
             }
             
