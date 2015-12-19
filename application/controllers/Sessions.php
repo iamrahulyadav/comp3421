@@ -12,7 +12,7 @@ class Sessions extends CrudController
     public $title = 'Conference Sessions';
     public $view = array(
         'index'  => 'simple_list',
-        'item'   => 'conference_item',
+        'detail'   => 'conference_item',
         'create' => 'simple_form',
         'edit'   => 'simple_form',
     );
