@@ -48,6 +48,8 @@ abstract class CrudController extends CI_Controller
         foreach ($this->fields as $k => $v) {
             if (isset($v['data_source']))
                 $item[$k] = call_user_func($v['data_source'], $action, $item[$k]);
+//            if (isset($v['type']) && $v['type'] == 'checkbox')
+//                $item[$k] = !empty($item[$k]);
         }
 
         return $item;
@@ -69,6 +71,8 @@ abstract class CrudController extends CI_Controller
 
         $r = $this->db->get($this->table);
         $data['data'] = $r->result_array();
+        foreach ($data['data'] as &$v)
+            $v = $this->processItemSource($v, __FUNCTION__);
 
         $this->load->view($this->view[__FUNCTION__], $data);
     }
@@ -166,7 +170,7 @@ abstract class CrudController extends CI_Controller
         check_access(TRUE, TRUE);
 
         if ($this->db->where('id', $id)->update($this->table, $this->input->post()) !== FALSE) {
-            $list = json_encode(site_url(dirname(uri_string())));
+            $list = json_encode(site_url(dirname(dirname(uri_string()))));
 
             $this->output->append_output(
                 "<script>alert('Update Success!');window.parent.location = $list;</script>"

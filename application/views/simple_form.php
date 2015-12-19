@@ -75,6 +75,16 @@
                 case 'datetime-local':
                     if (isset($data[$name]))
                         $data[$name] = date('Y-m-d\\TH:i:s', strtotime($data[$name]));
+                case 'checkbox':
+                    echo "<input name=\"$name\" type=\"{$f['type']}\" value=\"1\"";
+                    if (isset($f['attr'])) {
+                        foreach ($f['attr'] as $k => $v)
+                            echo " $k=\"$v\"";
+                    }
+                    if (!empty($data[$name]))
+                        echo ' checked';
+                    echo " />";
+                    break;
                 default:
                     echo "<input name=\"$name\" type=\"{$f['type']}\"";
                     if (isset($f['attr'])) {
