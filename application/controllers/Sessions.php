@@ -23,19 +23,47 @@ class Sessions extends CrudController
         $this->load->model('DBMember');
         $this->fields = array(
             'id'         => array('column' => 'ID'),
-            'topic'      => array('label' => 'Conference topic', 'type' => 'text', 'column' => 'Topic'),
+            'topic'      => array(
+                'label'  => 'Conference topic',
+                'type'   => 'text',
+                'column' => 'Topic',
+                'attr'   => array('required' => ''),
+            ),
             'info'       => array('label' => 'Conference Description', 'type' => 'textarea'),
-            'start_time' => array('label' => 'Start time', 'type' => 'datetime-local', 'column' => 'Start'),
-            'end_time'   => array('label' => 'End time', 'type' => 'datetime-local', 'column' => 'End'),
+            'start_time' => array(
+                'label'  => 'Start time',
+                'type'   => 'datetime-local',
+                'column' => 'Start',
+                'attr'   => array('required' => ''),
+            ),
+            'end_time'   => array(
+                'label'  => 'End time',
+                'type'   => 'datetime-local',
+                'column' => 'End',
+                'attr'   => array('required' => ''),
+            ),
             'speaker'    => array(
                 'label'         => 'Speaker',
                 'type'          => 'select',
                 'column'        => 'Speaker',
                 'values_source' => array($this, 'get_speakers'),
+                'attr'          => array('required' => ''),
             ),
-            'venue'      => array('label' => 'Venue', 'type' => 'text', 'column' => 'Venue'),
-            'venue_lat'  => array('label' => 'Location (lat)', 'type' => 'text',),
-            'venue_lng'  => array('label' => 'Location (Lng)', 'type' => 'text',),
+            'venue'      => array(
+                'label'  => 'Venue',
+                'type'   => 'text',
+                'column' => 'Venue',
+            ),
+            'venue_lat'  => array(
+                'label' => 'Location (lat)',
+                'type'  => 'text',
+                'attr'  => array('required' => ''),
+            ),
+            'venue_lng'  => array(
+                'label' => 'Location (Lng)',
+                'type'  => 'text',
+                'attr'  => array('required' => ''),
+            ),
             'venue_map'  => array(
                 'label' => 'Pick the location of the venue on the map<br>or type it in the box above',
                 'type'  => 'map',

@@ -51,7 +51,7 @@ abstract class CrudController extends CI_Controller
         $data = array(
             'title'      => $this->title,
             'menu'       => $this->load->view('menu', NULL, TRUE),
-            'detail_url'   => site_url(uri_string() . '/detail/{id}'),
+            'detail_url' => site_url(uri_string() . '/detail/{id}'),
             'create_url' => site_url(uri_string() . '/create'),
             'edit_url'   => site_url(uri_string() . '/edit/{id}'),
             'delete_url' => site_url(uri_string() . '/delete/{id}'),
@@ -112,16 +112,22 @@ abstract class CrudController extends CI_Controller
             $this->output->append_output(
                 "<script>
                 if (confirm('Create Success!\\nClick OK to add more or Cancel to go back to the listing.'))
-                    window.location = $create;
+                    window.parent.location = $create;
                 else
-                    window.location = $list;
+                    window.parent.location = $list;
                 </script>"
             );
         } else {
-            $this->output->set_status_header(500);
-            $this->load->view('menu');
-            $this->db->display_error();
+            $this->dbError();
         }
+    }
+
+    public function dbError()
+    {
+        $this->output->set_status_header(500);
+        $e = $this->db->error();
+        $e = json_encode($e['message']);
+        $this->output->append_output("<script>alert($e);</script>");
     }
 
     public function edit($id)
@@ -154,12 +160,10 @@ abstract class CrudController extends CI_Controller
             $list = json_encode(site_url(dirname(uri_string())));
 
             $this->output->append_output(
-                "<script>alert('Update Success!');window.location = $list;</script>"
+                "<script>alert('Update Success!');window.parent.location = $list;</script>"
             );
         } else {
-            $this->output->set_status_header(500);
-            $this->load->view('menu');
-            $this->db->display_error();
+            $this->dbError();
         }
     }
 
@@ -184,12 +188,10 @@ abstract class CrudController extends CI_Controller
             $list = json_encode(site_url(dirname(dirname(uri_string()))));
 
             $this->output->append_output(
-                "<script>alert('Delete Success!');window.location = $list;</script>"
+                "<script>alert('Delete Success!');window.parent.location = $list;</script>"
             );
         } else {
-            $this->output->set_status_header(500);
-            $this->load->view('menu');
-            $this->db->display_error();
+            $this->dbError();
         }
     }
 }
