@@ -9,6 +9,7 @@ abstract class CrudController extends CI_Controller
 {
 
     public $table;
+    public $fields;
     public $title;
     public $view;
 
@@ -32,49 +33,78 @@ abstract class CrudController extends CI_Controller
         }
     }
 
+    protected function processDynamicSource($fields, $params)
+    {
+        foreach ($fields as $k => &$v) {
+            if (isset($v['values_source']))
+                $v['values'] = call_user_func_array($v['values_source'], $params);
+        }
+
+        return $fields;
+    }
+
+    protected function processItemSource($item, $action)
+    {
+        foreach ($this->fields as $k => $v) {
+            if (isset($v['data_source']))
+                $item[$k] = call_user_func($v['data_source'], $action, $item[$k]);
+        }
+
+        return $item;
+    }
+
     public function index()
     {
         check_access(TRUE);
+
         $data = array(
             'title'      => $this->title,
             'menu'       => $this->load->view('menu', NULL, TRUE),
-            'item_url'   => site_url(uri_string() . '/item/{id}'),
+            'detail_url' => site_url(uri_string() . '/detail/{id}'),
             'create_url' => site_url(uri_string() . '/create'),
             'edit_url'   => site_url(uri_string() . '/edit/{id}'),
             'delete_url' => site_url(uri_string() . '/delete/{id}'),
+            'fields'     => $this->processDynamicSource($this->fields, array(__FUNCTION__)),
         );
 
         $r = $this->db->get($this->table);
-
         $data['data'] = $r->result_array();
 
         $this->load->view($this->view[__FUNCTION__], $data);
     }
 
-    public function item($id)
+    public function detail($id)
     {
         check_access(TRUE);
+
         $data = array(
             'title'      => $this->title,
             'menu'       => $this->load->view('menu', NULL, TRUE),
             'edit_url'   => site_url(dirname(uri_string()) . '/edit/{id}'),
             'delete_url' => site_url(uri_string()),
+            'fields'     => $this->processDynamicSource($this->fields, array(__FUNCTION__, $id)),
         );
 
         $r = $this->db->where('id', $id)->get($this->table);
         $r = $r->result_array();
-        $data['data'] = reset($r);
-
+        $r = reset($r);
+        $data['data'] = $this->processItemSource($r, __FUNCTION__);
         $this->load->view($this->view[__FUNCTION__], $data);
     }
 
     public function create()
     {
         check_access(TRUE, TRUE);
+
         $data = array(
-            'title'      => 'Add ' . $this->title,
-            'menu'       => $this->load->view('menu', NULL, TRUE),
-            'submit_url' => site_url(uri_string()),
+            'title'  => 'Create ' . $this->title,
+            'menu'   => $this->load->view('menu', NULL, TRUE),
+            'button' => 'Create',
+            'form'   => array(
+                'action' => site_url(uri_string()),
+                'method' => 'post',
+            ),
+            'fields' => $this->processDynamicSource($this->fields, array(__FUNCTION__)),
         );
 
         $this->load->view($this->view[__FUNCTION__], $data);
@@ -86,21 +116,27 @@ abstract class CrudController extends CI_Controller
 
         if ($this->db->insert($this->table, $this->input->post()) !== FALSE) {
             $create = json_encode(site_url(uri_string()));
-            $seg = explode('/', uri_string());
-            $list = json_encode(site_url(array_slice($seg, 0, -1)));
+            $list = json_encode(site_url(dirname(uri_string())));
 
             $this->output->append_output(
                 "<script>
                 if (confirm('Create Success!\\nClick OK to add more or Cancel to go back to the listing.'))
-                    window.location = $create;
+                    window.parent.location = $create;
                 else
-                    window.location = $list;
+                    window.parent.location = $list;
                 </script>"
             );
         } else {
-            $this->output->set_status_header(500);
-            $this->db->display_error();
+            $this->dbError();
         }
+    }
+
+    public function dbError()
+    {
+        $this->output->set_status_header(500);
+        $e = $this->db->error();
+        $e = json_encode($e['message']);
+        $this->output->append_output("<script>alert($e);</script>");
     }
 
     public function edit($id)
@@ -108,15 +144,20 @@ abstract class CrudController extends CI_Controller
         check_access(TRUE, TRUE);
 
         $data = array(
-            'title'      => $this->title,
-            'menu'       => $this->load->view('menu', NULL, TRUE),
-            'submit_url' => site_url(uri_string()),
+            'title'  => 'Edit ' . $this->title,
+            'menu'   => $this->load->view('menu', NULL, TRUE),
+            'button' => 'Update',
+            'form'   => array(
+                'action' => site_url(uri_string()),
+                'method' => 'post',
+            ),
+            'fields' => $this->processDynamicSource($this->fields, array(__FUNCTION__, $id)),
         );
 
         $r = $this->db->where('id', $id)->get($this->table);
         $r = $r->result_array();
-        $data['data'] = reset($r);
-
+        $r = reset($r);
+        $data['data'] = $this->processItemSource($r, __FUNCTION__);
         $this->load->view($this->view[__FUNCTION__], $data);
     }
 
@@ -125,15 +166,13 @@ abstract class CrudController extends CI_Controller
         check_access(TRUE, TRUE);
 
         if ($this->db->where('id', $id)->update($this->table, $this->input->post()) !== FALSE) {
-            $seg = explode('/', uri_string());
-            $list = json_encode(site_url(array_slice($seg, 0, -1)));
+            $list = json_encode(site_url(dirname(uri_string())));
 
             $this->output->append_output(
-                "<script>window.location = $list;</script>"
+                "<script>alert('Update Success!');window.parent.location = $list;</script>"
             );
         } else {
-            $this->output->set_status_header(500);
-            $this->db->display_error();
+            $this->dbError();
         }
     }
 
@@ -141,16 +180,27 @@ abstract class CrudController extends CI_Controller
     {
         check_access(TRUE, TRUE);
 
+        $list = site_url(dirname(dirname(uri_string())));
+        $this->load->view('confirm', array(
+            'msg'        => 'Are you sure to delete the item? This cannot be undone!',
+            'form'       => array('method' => 'post'),
+            'cancel_url' => $list,
+            'color'      => 'red',
+        ));
+    }
+
+    public function delete_post($id)
+    {
+        check_access(TRUE, TRUE);
+
         if ($this->db->where('id', $id)->delete($this->table) !== FALSE) {
-            $seg = explode('/', uri_string());
-            $list = json_encode(site_url(array_slice($seg, 0, -1)));
+            $list = json_encode(site_url(dirname(dirname(uri_string()))));
 
             $this->output->append_output(
-                "<script>window.location = $list;</script>"
+                "<script>alert('Delete Success!');window.parent.location = $list;</script>"
             );
         } else {
-            $this->output->set_status_header(500);
-            $this->db->display_error();
+            $this->dbError();
         }
     }
 }

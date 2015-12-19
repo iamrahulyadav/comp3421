@@ -3,6 +3,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Map extends CI_Controller
 {
+public function  __construct(){
+    parent::__construct();
+    $this->load->database();
+}
 
     /**
      * Index Page for this controller.
@@ -22,5 +26,13 @@ class Map extends CI_Controller
     public function index()
     {
         $this->load->view('conference_location');
+    }
+
+    public function get_location()
+    {
+        $r = $this->db->select(array('location_lat', 'location_long'))->from('conference')->get();
+        $result = $r->result_array();
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($result);
     }
 }
