@@ -122,7 +122,7 @@
                     else
                         p = {lat: 22.3, lng: 114.1};
                 }
-                var map = maps[id] = new google.maps.Map(map[0], {
+                var map = maps[id] = new google.maps.Map($map[0], {
                     center: p,
                     zoom: 8
                 });
