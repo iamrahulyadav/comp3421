@@ -20,7 +20,7 @@ class Announcements extends CrudController
     public $fields = array(
         'id'      => array('column' => 'No.'),
         'title'   => array('label' => 'Title', 'type' => 'text', 'column' => 'Title'),
-        'content' => array('label' => 'Content', 'type' => 'textarea', 'column' => 'Content'),
+        'content' => array('label' => 'Content', 'type' => 'textarea'),
         'time'    => array('label' => 'Time', 'type' => 'datetime-local', 'title' => 'Time'),
     );
 }
