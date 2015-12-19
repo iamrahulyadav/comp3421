@@ -20,7 +20,7 @@ class Rewards extends CrudController
         'id'      => array('column' => 'No.'),
         'title'   => array('label' => 'Title', 'type' => 'text', 'column' => 'Title'),
         'content' => array('label' => 'Content', 'type' => 'textarea', 'column' => 'Content'),
-        'receive_id'   => array('label' => 'Receiver ID', 'type' => 'text', 'column' => 'Title'),
+        'receiver_id'   => array('label' => 'Receiver ID', 'type' => 'text', 'column' => 'Title'),
     );
     public function index()
     {
