@@ -33,6 +33,17 @@ abstract class CrudController extends CI_Controller
         }
     }
 
+    protected function processDataSource($fields, $action)
+    {
+        foreach ($fields as $k => &$v) {
+            if (isset($v['values_source'])) {
+                $v['values'] = call_user_func($v['values_source'], $action, $this->input->method());
+            }
+        }
+
+        return $fields;
+    }
+
     public function index()
     {
         check_access(TRUE);
@@ -40,11 +51,11 @@ abstract class CrudController extends CI_Controller
         $data = array(
             'title'      => $this->title,
             'menu'       => $this->load->view('menu', NULL, TRUE),
-            'item_url'   => site_url(uri_string() . '/item/{id}'),
+            'detail_url'   => site_url(uri_string() . '/detail/{id}'),
             'create_url' => site_url(uri_string() . '/create'),
             'edit_url'   => site_url(uri_string() . '/edit/{id}'),
             'delete_url' => site_url(uri_string() . '/delete/{id}'),
-            'fields'     => $this->fields,
+            'fields'     => $this->processDataSource($this->fields, __FUNCTION__),
         );
 
         $r = $this->db->get($this->table);
@@ -53,7 +64,7 @@ abstract class CrudController extends CI_Controller
         $this->load->view($this->view[__FUNCTION__], $data);
     }
 
-    public function item($id)
+    public function detail($id)
     {
         check_access(TRUE);
 
@@ -62,7 +73,7 @@ abstract class CrudController extends CI_Controller
             'menu'       => $this->load->view('menu', NULL, TRUE),
             'edit_url'   => site_url(dirname(uri_string()) . '/edit/{id}'),
             'delete_url' => site_url(uri_string()),
-            'fields'     => $this->fields,
+            'fields'     => $this->processDataSource($this->fields, __FUNCTION__),
         );
 
         $r = $this->db->where('id', $id)->get($this->table);
@@ -84,7 +95,7 @@ abstract class CrudController extends CI_Controller
                 'action' => site_url(uri_string()),
                 'method' => 'post',
             ),
-            'fields' => $this->fields,
+            'fields' => $this->processDataSource($this->fields, __FUNCTION__),
         );
 
         $this->load->view($this->view[__FUNCTION__], $data);
@@ -125,7 +136,7 @@ abstract class CrudController extends CI_Controller
                 'action' => site_url(uri_string()),
                 'method' => 'post',
             ),
-            'fields' => $this->fields,
+            'fields' => $this->processDataSource($this->fields, __FUNCTION__),
         );
 
         $r = $this->db->where('id', $id)->get($this->table);
