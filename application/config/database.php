@@ -104,7 +104,7 @@ $db['local'] = array(
     'dbdriver'     => 'mysqli',
     'dbprefix'     => 'comp3421_',
     'pconnect'     => FALSE,
-    'db_debug'     => FALSE && (ENVIRONMENT !== 'production'),
+    'db_debug'     =>  (ENVIRONMENT !== 'production'),
     'cache_on'     => FALSE,
     'cachedir'     => '',
     'char_set'     => 'utf8',
