@@ -23,14 +23,8 @@ class Sessions extends CrudController
         'end_time'   => array('name' => 'End time', 'type' => 'datetime-local', 'title' => 'End'),
         'speaker'    => array('name' => 'Speaker', 'type' => 'text', 'title' => 'Speaker'),
         'venue'      => array('name' => 'Venue', 'type' => 'text', 'title' => 'Venue'),
-        'venue_lat'  => array(
-            'name' => 'Location (lat)',
-            'type' => 'text',
-        ),
-        'venue_lng'  => array(
-            'name' => 'Location (Lng)',
-            'type' => 'text',
-        ),
+        'venue_lat'  => array('name' => 'Location (lat)', 'type' => 'text',),
+        'venue_lng'  => array('name' => 'Location (Lng)', 'type' => 'text',),
         'venue_map'  => array(
             'name' => 'Pick the location of the venue on the map<br>or type it in the box above',
             'type' => 'map',
