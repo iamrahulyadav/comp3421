@@ -79,8 +79,19 @@ collected may result in data not displayed properly.</p>',
     public function index($survey_id = 0)
     {
         check_access(TRUE, TRUE);
-        $this->db->where('survey_id', $survey_id)->order_by('order');
-        parent::index();
+        $data = array(
+            'title'      => $this->title,
+            'menu'       => $this->load->view('menu', NULL, TRUE),
+            'create_url' => site_url(uri_string() . '/create'),
+            'edit_url'   => site_url(uri_string() . '/edit/{id}'),
+            'delete_url' => site_url(uri_string() . '/delete/{id}'),
+            'fields'     => $this->processDynamicSource($this->fields, array(__FUNCTION__)),
+        );
+
+        $r = $this->db->where('survey_id', $survey_id)->order_by('order')->get($this->table);
+        $data['data'] = $r->result_array();
+
+        $this->load->view($this->view[__FUNCTION__], $data);
     }
 
     public function create($survey_id = 0)
@@ -99,10 +110,5 @@ collected may result in data not displayed properly.</p>',
     {
         $_POST['survey_id'] = $survey_id;
         parent::create_post();
-    }
-
-    public function detail($id)
-    {
-        redirect(dirname(dirname(uri_string())));
     }
 }
