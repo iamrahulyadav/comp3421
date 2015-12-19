@@ -43,19 +43,27 @@
 <table>
     <tr>
         <td>Company: </td>
-        <td><?php $data['company'] ?></td>
+        <td><?php $data['company']; ?></td>
+    </tr>
+    <tr>
+        <td>Name: </td>
+        <td><?php $data['name']; ?></td>
+    </tr>
+    <tr>
+        <td>Information: </td>
+        <td><?php $data['info']; ?></td>
     </tr>
     <tr>
         <td>Start Time: </td>
-        <td><?php $data['start_time'] ?></td>
+        <td><?php $data['start_time']; ?></td>
     </tr>
     <tr>
         <td>End Time: </td>
-        <td><?php $data['end_time'] ?></td>
+        <td><?php $data['end_time']; ?></td>
     </tr>
     <tr>
         <td>Venue: </td>
-        <td><?php $data['venue'] ?></td>
+        <td><?php $data['venue']; ?></td>
     </tr>
 </table>
 
