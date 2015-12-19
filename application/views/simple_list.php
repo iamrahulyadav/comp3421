@@ -27,7 +27,15 @@
         echo '<tr>';
         foreach ($fields as $dbcolumn => $f) {
             if (isset($f['column']))
-                echo "<td>{$v[$dbcolumn]}</td>";
+                if (!$f['type'] == "checkbox")
+                    echo "<td>{$v[$dbcolumn]}</td>";
+                else {
+                    if ($v[$dbcolumn] == TRUE)
+                        echo "<td>True</td>";
+                    else
+                        echo "<td>False</td>";
+                }
+
         }
         if ($this->auth->isLoggedIn() && $this->auth->user()->is_admin) {
             echo '<td><a href="' . str_replace('{id}', $v['id'], $edit_url) . '"><button>Edit</button></a></td>';
