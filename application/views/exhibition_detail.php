@@ -77,7 +77,7 @@ if ($this->auth->isLoggedIn() && $this->auth->user()->is_admin) {
     if (isset($delete_url))
         echo '<a href="' . str_replace('detail/{id}', $data['id'], $delete_url) . '"><button>Delete</button></a>';
 }
-echo '<a href="' . str_replace('detail/{id}', $data['id'], $data['title']) . '"><button>Back</button></a >'
+echo '<a href="' . str_replace({id}', 'detail/'.$data['id'], $data['title']) . '"><button>Back</button></a >'
 ?>
 </body>
 </html>
