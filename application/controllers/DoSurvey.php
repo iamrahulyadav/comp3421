@@ -99,7 +99,11 @@ class DoSurvey extends CrudController
                 </script>"
             );
         } else {
-            $this->dbError();
+            $e = $this->db->error();
+            if ($e['code'] == 1062)
+                $this->output->append_output("<script>alert('You have done this survey already!');</script>");
+            else
+                $this->dbError();
         }
     }
 }
