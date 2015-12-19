@@ -12,7 +12,7 @@ class Messages extends CrudController
     public $title = 'Messages Programs';
     public $view = array(
         'index'  => 'simple_list',
-        'item'   => 'messages_item',
+        'detail'   => 'messages_item',
         'create' => 'simple_form',
         'edit'   => 'simple_form',
     );
