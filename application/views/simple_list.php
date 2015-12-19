@@ -22,7 +22,7 @@
         for($i=0;$i<count($data);$i++){
             echo '<tr>';
             foreach($list as $name=>$f){
-                echo '<td>{$data[$i][$f["db_column_name"]}<td>'
+                echo '<td>{$data[$i][$f["db_column_name"]}<td>';
             }
             if ($this->auth->isLoggedIn() && $this->auth->user()->is_admin) {
                 echo "<td><button>edit</button></td>";
