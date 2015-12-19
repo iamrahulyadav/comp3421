@@ -28,7 +28,7 @@ class Survey_compose extends CrudController
                 'attr'   => array('min' => 0, 'required' => ''),
                 'column' => 'Display Order',
             ),
-            'name'        => array(
+            'id'          => array(
                 'label'  => 'Field Key<br>
 (must be unique within question)
 <p style="color:red">WARNING!<br>
@@ -113,11 +113,5 @@ collected may result in data not displayed properly.</p>',
     {
         $_POST['survey_id'] = $survey_id;
         parent::create_post();
-    }
-
-    public function edit($field_name, $survey_id = 0)
-    {
-        $this->db->select(array('*', 'name as id'))->where('survey_id', $survey_id);
-        parent::edit($field_name);
     }
 }
