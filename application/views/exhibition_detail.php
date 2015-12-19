@@ -11,8 +11,8 @@
         var geocoder;
         var marker;
         function drawMap() {
-            var lat =<?php echo $data['lat'] ?>;
-            var lng =<?php echo $data['lng'] ?>;
+            var lat =<?php echo $data['venue_lat'] ?>;
+            var lng =<?php echo $data['venue_lng'] ?>;
             var myLatlng = new google.maps.LatLng(lat, lng,);
             var myOptions = {
                 "zoom": 10,
@@ -41,6 +41,6 @@
     </tr>
 </table>
 
-<div id="map" style="height: 450px;width: 400px">
+<div id="map" style="height: 450px;width: 300px">
 </div>
 
