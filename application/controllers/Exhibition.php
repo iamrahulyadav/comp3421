@@ -19,11 +19,22 @@ class Exhibition extends CrudController
 
     public $fields = array(
     	'id'=> array('title'=>'No.'),
-    	'start_time'=> array('title'=>'Start Time'),
-    	'end_time'=> array('title'=>'End Time'),
-    	'name'=> array('title'=>'Name'),
-    	'venue'=> array('title'=>'Venue'),
-    	'company'=> array('title'=>'Company'),
-    	'info'=> array('title'=>'View Infomation')
+    	'start_time' => array('name' => 'Start time', 'type' => 'datetime-local', 'title' => 'Start'),
+        'end_time'   => array('name' => 'End time', 'type' => 'datetime-local', 'title' => 'End'),
+    	'name'=> array('name'=>'Name','type'=>'text','title'=>'Name'),
+    	'venue'      => array('name' => 'Venue', 'type' => 'text', 'title' => 'Venue'),
+    	'company'=> array('name'=>'Company','type'=>'text','title'=>'Company'),
+    	'info'=> array('name'=>'Infomation','type'=>'text','title'=>'View Infomation')
+        'venue_lat'  => array('name' => 'Location (lat)', 'type' => 'text',),
+        'venue_lng'  => array('name' => 'Location (Lng)', 'type' => 'text',),
+        'venue_map'  => array(
+            'name' => 'Pick the location of the venue on the map<br>or type it in the box above',
+            'type' => 'map',
+            'lat'  => 'venue_lat',
+            'lng'  => 'venue_lng',
+            'attr' => array(
+                'style' => 'width: 400px; height: 300px',
+            ),
+        ),
     	);
 }
