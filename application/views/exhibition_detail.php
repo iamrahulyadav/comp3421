@@ -7,7 +7,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzzmr04bM7hfgehfBvpTC7vFLEiugg6KE&callback=initMap"
             async defer></script>
 </head>
-<body>
+<body onload="drawMap()">
 <?php echo $menu ?>
 <h1><?php echo htmlspecialchars($title) ?></h1>
 <table>
@@ -21,5 +21,18 @@
 </div>
 
 <script>
-    var map = new google.maps.
+    var map;
+    var geocoder;
+    var marker;
+    function drawMap() {
+        geocoder = new google.maps.Geocoder();
+
+        var myLatlng = new google.maps.LatLng(<?php echo $data['lat'] ?>;, <?php echo $data['lng'] ?>);
+        var myOptions = {
+            "zoom": 10,
+            "center": myLatlng,
+            "mapTypeId": google.maps.MapTypeId.ROADMAP
+        }
+        map = new google.maps.Map(document.getElementById("map"), myOptions);
+    }
 </script>
