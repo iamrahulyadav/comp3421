@@ -53,7 +53,7 @@ class Sessions extends CrudController
         $data = array();
         if ($action !== 'create') return $data;
         foreach ($this->db->select(array('member.id', 'first_name', 'last_name', 'title'))
-                     //->join('speaker', 'speaker.id=member.id')
+                          ->join('speaker', 'speaker.id=member.id')
                           ->get('member')->result('DBMember') as $user) {
             $data[$user->id] = '[' . $user->id . '] ' . $user->display_name();
         }
