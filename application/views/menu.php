@@ -14,10 +14,11 @@
         $urls['View Exhibitions'] = 'exhibition';
         $urls['View Forums'] = 'forum';
         $urls['View Announcements'] = 'announcements';
-        $urls['View Surveys'] = 'surveys';
         $urls['View Rewards'] = 'rewards';
         $urls['View Messages'] = 'messages';
+        $urls['Do Survey'] = 'doSurvey';
         if ($this->auth->user()->is_admin) {
+            $urls['Edit Surveys'] = 'surveys';
             $urls['Register Member'] = 'auth/register';
         }
     } else {
