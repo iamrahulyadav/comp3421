@@ -12,7 +12,7 @@ class Exhibition extends CrudController
     public $title = 'Exhibitions';
     public $view = array(
         'index'  => 'simple_list',
-        'item'   => 'exhibition_item',
+        'detail'   => 'exhibition_item',
         'create' => 'simple_form',
         'edit'   => 'simple_form',
     );
