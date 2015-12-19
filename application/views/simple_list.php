@@ -12,11 +12,12 @@
         <?php
         echo '<th>';
         foreach ($fields as $name => $f) {
-            echo '<td>' . htmlspecialchars($f['title']) . '</td>';
+            if(!$f['title'])
+                echo '<td>' . htmlspecialchars($f['title']) . '</td>';
         }
         if ($this->auth->isLoggedIn()&& $this->auth->user()->is_admin) {
-            echo '<td>Edit</td>';
-            echo '<td>Delete</td>';
+            echo '<td><button>edit</button></td>';
+                echo "<td><button>delete</button></td>";
         }
         echo '</th>';
         for($i=0;$i<count($data);$i++){
