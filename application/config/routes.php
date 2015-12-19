@@ -52,3 +52,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'main';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+$route['surveys/(:num)'] = 'doSurvey/$1';
+$route['surveys/detail/(:num)'] = 'survey_compose/index/$1';
+$route['surveys/detail/(:num)/(:any)'] = 'survey_compose/$2/$1';
+$route['surveys/detail/(:num)/(:any)/(:num)'] = 'survey_compose/$2/$3/$1';
