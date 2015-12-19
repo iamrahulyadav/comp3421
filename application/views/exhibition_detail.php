@@ -16,12 +16,9 @@
             width    : 50px;
         }
     </style>
-    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzzmr04bM7hfgehfBvpTC7vFLEiugg6KE&callback=initMap"
-            async defer></script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
     <script>
         var map;
-        var geocoder;
         var marker;
         function drawMap() {
             var lat =<?php echo $data['venue_lat'] ?>;
@@ -33,6 +30,10 @@
                 "mapTypeId": google.maps.MapTypeId.ROADMAP
             }
             map = new google.maps.Map(document.getElementById("map"), myOptions);
+            marker = new google.maps.Marker({
+                position: myLatLng,
+                map: map
+            });
         }
     </script>
 </head>
@@ -58,7 +59,7 @@
     </tr>
 </table>
 
-<div id="map" style="height: 450px;width: 300px">
+<div id="map" style="height: 300px;width: 450px">
 </div>
 </body>
 
