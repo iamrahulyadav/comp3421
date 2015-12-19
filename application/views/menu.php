@@ -17,7 +17,6 @@
         $urls['View Surveys'] = 'surveys';
         $urls['View Rewards'] = 'rewards';
         $urls['View Messages'] = 'messages';
-        $urls['View Conference Schedule'] = 'conferenceschedule';
         if ($this->auth->user()->is_admin) {
             $urls['View Attendance Info'] = 'attendance';
             $urls['Register Member'] = 'auth/register';

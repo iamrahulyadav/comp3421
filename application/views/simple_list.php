@@ -21,6 +21,7 @@
     if ($this->auth->isLoggedIn() && $this->auth->user()->is_admin) {
         echo "<th>Edit</th><th>Delete</th>";
     }
+    echo '<th>Detail</th>';
     echo '</tr>';
     foreach ($data as $v) {
         echo '<tr>';
@@ -32,6 +33,7 @@
             echo '<td><a href="' . str_replace('{id}', $v['id'], $edit_url) . '"><button>Edit</button></a></td>';
             echo '<td><a href="' . str_replace('{id}', $v['id'], $delete_url) . '"><button>Delete</button></a></td>';
         }
+        echo '<td><a href="' . str_replace('{id}', $v['id'], $detail_url) . '"><button>View</button></a></td>';
         echo '</tr>';
     }
     ?>
