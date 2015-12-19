@@ -8,32 +8,32 @@
 <body>
 <?php echo isset($menu) ? $menu : '' ?>
 <h1><?php echo htmlspecialchars($title) ?></h1>
-    <table>
-        <?php
-        echo '<th>';
+<table>
+    <?php
+    echo '<th>';
+    foreach ($fields as $name => $f) {
+        if (isset($f['title']))
+            echo '<td>' . htmlspecialchars($f['title']) . '</td>';
+    }
+    if ($this->auth->isLoggedIn() && $this->auth->user()->is_admin) {
+        echo '<td><button>edit</button></td>';
+        echo "<td><button>delete</button></td>";
+    }
+    echo '</th>';
+    for ($i = 0; $i < count($data); $i++) {
+        echo '<tr>';
         foreach ($fields as $name => $f) {
-            if(isset($f['title']))
-                echo '<td>' . htmlspecialchars($f['title']) . '</td>';
+            if (isset($f['title']))
+                echo "<td>{$data[$i][$name]}</td>";
         }
-        if ($this->auth->isLoggedIn()&& $this->auth->user()->is_admin) {
+
+        if ($this->auth->isLoggedIn() && $this->auth->user()->is_admin) {
             echo '<td><button>edit</button></td>';
-                echo "<td><button>delete</button></td>";
+            echo "<td><button>delete</button></td>";
         }
-        echo '</th>';
-        for($i=0;$i<count($data);$i++){
-            echo '<tr>';
-            foreach ($fields as $name => $f){
-                if(isset($f['title']))
-                    echo "<td>{$data[$i][$name]}</td>";
-            }
-            
-            if ($this->auth->isLoggedIn() && $this->auth->user()->is_admin) {
-                echo '<td><button>edit</button></td>';
-                echo "<td><button>delete</button></td>";
-            }
-            echo '</tr>';
-        }
-        ?>
-    </table>
+        echo '</tr>';
+    }
+    ?>
+</table>
 </body>
 </html>
