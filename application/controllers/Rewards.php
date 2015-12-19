@@ -12,16 +12,39 @@ class Rewards extends CrudController
     public $title = 'Rewards';
     public $view = array(
         'index'  => 'simple_list',
-        'detail'   => 'rewards_item',
+        'detail' => 'rewards_item',
         'create' => 'simple_form',
-        'edit'   => 'simple_form'
+        'edit'   => 'simple_form',
     );
-    public $fields = array(
-        'id'      => array('column' => 'No.'),
-        'title'   => array('label' => 'Title', 'type' => 'text', 'column' => 'Title'),
-        'content' => array('label' => 'Content', 'type' => 'textarea', 'column' => 'Content'),
-        'receiver_id'   => array('label' => 'Receiver ID', 'type' => 'text', 'column' => 'Title'),
-    );
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->fields = array(
+            'id'          => array('column' => 'No.'),
+            'title'       => array('label' => 'Title', 'type' => 'text', 'column' => 'Title'),
+            'content'     => array('label' => 'Content', 'type' => 'textarea', 'column' => 'Content'),
+            'receiver_id' => array(
+                'label'         => 'Receiver',
+                'type'          => 'select',
+                'column'        => 'Title',
+                'values_source' => array($this, 'get_receiver'),
+            ),
+        );
+    }
+
+    public function get_receiver($action, $method)
+    {
+        $data = array();
+        if ($action !== 'create') return $data;
+        foreach ($this->db->select(array('member.id', 'first_name', 'last_name', 'title'))
+                          ->get('member')->result('DBMember') as $user) {
+            $data[$user->id] = '[' . $user->id . '] ' . $user->display_name();
+        }
+
+        return $data;
+    }
+
     public function index()
     {
         check_access(TRUE);
