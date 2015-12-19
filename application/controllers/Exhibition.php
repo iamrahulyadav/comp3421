@@ -39,7 +39,7 @@ class Exhibition extends CrudController
         ),
         'venue'      => array('label' => 'Venue', 'type' => 'text', 'column' => 'Venue'),
         'company'    => array('label' => 'Company', 'type' => 'text', 'column' => 'Company'),
-        'info'       => array('label' => 'Infomation', 'type' => 'textarea'),
+        'info'       => array('label' => 'Information', 'type' => 'textarea'),
         'venue_lat'  => array(
             'label' => 'Location (lat)',
             'type'  => 'text',
