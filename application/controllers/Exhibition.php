@@ -18,14 +18,14 @@ class Exhibition extends CrudController
     );
 
     public $fields = array(
-    	'id'=> array('name'=>'No.'),
-    	'start_date'=> array('name'=>'Start Date'),
-    	'end_date'=> array('name'=>'End Date'),
-    	'start_time'=> array('name'=>'Start Time'),
-    	'end_time'=> array('name'=>'End Time'),
-    	'name'=> array('name'=>'Name'),
-    	'venue'=> array('name'=>'Venue'),
-    	'company'=> array('name'=>'Company'),
-    	'info'=> array('name'=>'View Infomation')
+    	'id'=> array('title'=>'No.'),
+    	'start_date'=> array('title'=>'Start Date'),
+    	'end_date'=> array('title'=>'End Date'),
+    	'start_time'=> array('title'=>'Start Time'),
+    	'end_time'=> array('title'=>'End Time'),
+    	'name'=> array('title'=>'Name'),
+    	'venue'=> array('title'=>'Venue'),
+    	'company'=> array('title'=>'Company'),
+    	'info'=> array('title'=>'View Infomation')
     	);
 }
