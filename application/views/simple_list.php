@@ -11,7 +11,7 @@
     <table>
         <?php
         echo '<th>';
-        foreach ($list as $name => $f) {
+        foreach ($fields as $name => $f) {
             echo '<td>' . htmlspecialchars($f['title']) . '</td>';
         }
         if ($this->auth->isLoggedIn()&& $this->auth->user()->is_admin) {
@@ -21,11 +21,13 @@
         echo '</th>';
         for($i=0;$i<count($data);$i++){
             echo '<tr>';
-            foreach ($list as $name => $f)
-                echo '<td>{$data[$i][$f["db_column_name"]}</td>';
+            foreach ($fields as $name => $f){
+                if(!$f['title'])
+                    echo "<td>{$data[$i][$name]}</td>";
+            }
             
             if ($this->auth->isLoggedIn() && $this->auth->user()->is_admin) {
-                echo "<td><button>edit</button></td>";
+                echo '<td><button>edit</button></td>';
                 echo "<td><button>delete</button></td>";
             }
             echo '</tr>';
