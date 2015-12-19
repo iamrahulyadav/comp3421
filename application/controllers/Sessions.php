@@ -48,6 +48,7 @@ class Sessions extends CrudController
                 'column'        => 'Speaker',
                 'values_source' => array($this, 'get_speakers'),
                 'attr'          => array('required' => ''),
+                'data_source'   => array($this, 'get_speaker'),
             ),
             'venue'      => array(
                 'label'  => 'Venue',
@@ -76,10 +77,10 @@ class Sessions extends CrudController
         );
     }
 
-    public function get_speakers($action, $method)
+    public function get_speakers($action)
     {
         $data = array();
-        if ($action !== 'create') return $data;
+        if ($action !== 'create' || $action !== 'edit') return $data;
         foreach ($this->db->select(array('member.id', 'first_name', 'last_name', 'title'))
                           ->join('speaker', 'speaker.id=member.id')
                           ->get('member')->result('DBMember') as $user) {
@@ -87,5 +88,13 @@ class Sessions extends CrudController
         }
 
         return $data;
+    }
+
+    public function get_speaker($action, $id)
+    {
+        if ($action !== 'detail') return $id;
+        $r = $this->db->get_where('member', array('id' => $id))->result('DBMember');
+
+        return reset($r);
     }
 }

@@ -33,15 +33,24 @@ abstract class CrudController extends CI_Controller
         }
     }
 
-    protected function processDataSource($fields, $action)
+    protected function processDynamicSource($fields, $params)
     {
         foreach ($fields as $k => &$v) {
-            if (isset($v['values_source'])) {
-                $v['values'] = call_user_func($v['values_source'], $action, $this->input->method());
-            }
+            if (isset($v['values_source']))
+                $v['values'] = call_user_func_array($v['values_source'], $params);
         }
 
         return $fields;
+    }
+
+    protected function processItemSource($item, $action)
+    {
+        foreach ($this->fields as $k => $v) {
+            if (isset($v['data_source']))
+                $item[$k] = call_user_func($v['data_source'], $action, $item[$k]);
+        }
+
+        return $item;
     }
 
     public function index()
@@ -55,7 +64,7 @@ abstract class CrudController extends CI_Controller
             'create_url' => site_url(uri_string() . '/create'),
             'edit_url'   => site_url(uri_string() . '/edit/{id}'),
             'delete_url' => site_url(uri_string() . '/delete/{id}'),
-            'fields'     => $this->processDataSource($this->fields, __FUNCTION__),
+            'fields'     => $this->processDynamicSource($this->fields, array(__FUNCTION__)),
         );
 
         $r = $this->db->get($this->table);
@@ -73,13 +82,13 @@ abstract class CrudController extends CI_Controller
             'menu'       => $this->load->view('menu', NULL, TRUE),
             'edit_url'   => site_url(dirname(uri_string()) . '/edit/{id}'),
             'delete_url' => site_url(uri_string()),
-            'fields'     => $this->processDataSource($this->fields, __FUNCTION__),
+            'fields'     => $this->processDynamicSource($this->fields, array(__FUNCTION__, $id)),
         );
 
         $r = $this->db->where('id', $id)->get($this->table);
         $r = $r->result_array();
-        $data['data'] = reset($r);
-
+        $r = reset($r);
+        $data['data'] = $this->processItemSource($r, __FUNCTION__);
         $this->load->view($this->view[__FUNCTION__], $data);
     }
 
@@ -95,7 +104,7 @@ abstract class CrudController extends CI_Controller
                 'action' => site_url(uri_string()),
                 'method' => 'post',
             ),
-            'fields' => $this->processDataSource($this->fields, __FUNCTION__),
+            'fields' => $this->processDynamicSource($this->fields, array(__FUNCTION__)),
         );
 
         $this->load->view($this->view[__FUNCTION__], $data);
@@ -142,13 +151,13 @@ abstract class CrudController extends CI_Controller
                 'action' => site_url(uri_string()),
                 'method' => 'post',
             ),
-            'fields' => $this->processDataSource($this->fields, __FUNCTION__),
+            'fields' => $this->processDynamicSource($this->fields, array(__FUNCTION__, $id)),
         );
 
         $r = $this->db->where('id', $id)->get($this->table);
         $r = $r->result_array();
-        $data['data'] = reset($r);
-
+        $r = reset($r);
+        $data['data'] = $this->processItemSource($r, __FUNCTION__);
         $this->load->view($this->view[__FUNCTION__], $data);
     }
 
