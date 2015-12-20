@@ -45,7 +45,7 @@
     </tr>
     <tr>
         <td>Speaker:</td>
-        <td><?php echo $data['speaker']->display_name(); ?> <a id="show" href="">View detail</a></td>
+        <td><?php echo $data['speaker']->display_name(); ?> <button onclick="show()">View detail</button></td>
     </tr>
     <tr class='toggle'>
         <td>Speaker ID:</td>
@@ -110,9 +110,9 @@ echo '<a href="' . site_url("sessions") . '"><button>Back</button></a >'
 ?>
 <script>
     $(".toggle").hide();
-    $("#show").click(function () {
+    function show(){
         $(".toggle").toggle("slow");
-    });
+    }
 </script>
 </body>
 </html>
