@@ -14,7 +14,7 @@ class Forum extends CrudController
         'index'  => 'simple_list',
         'detail' => 'forum_detail',
         'create' => 'simple_form',
-        'create_article' => 'forum_article_form',
+        'create_article' => 'simple_form',
         'edit'   => 'simple_form',
     );
     public $fields = array(
@@ -79,7 +79,7 @@ class Forum extends CrudController
         //check_access(TRUE, TRUE);
 
         $data = array(
-            'title'  => 'Create ' . 'Article',
+            'title'  => 'Create Article',
             'menu'   => $this->load->view('menu', NULL, TRUE),
             'button' => 'Create',
             'form'   => array(
