@@ -89,7 +89,6 @@ collected may result in data not displayed properly.</p>',
         $order_id = $this->db->select('max(' . $this->db->protect_identifiers('order') . ')+1', FALSE)
                              ->where('survey_id', $survey_id)
                              ->get($this->table);
-        var_dump($this->db->last_query());
         $order_id = $order_id->row_array();
         $order_id = reset($order_id);
         $this->fields['order']['attr']['value'] = isset($order_id) ? $order_id : 1;

@@ -79,7 +79,7 @@ class Forum extends CrudController
         //check_access(TRUE, TRUE);
 
         $data = array(
-            'title'  => 'Create ' . 'Article',
+            'title'  => 'Create Article',
             'menu'   => $this->load->view('menu', NULL, TRUE),
             'button' => 'Create',
             'form'   => array(
