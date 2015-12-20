@@ -1,14 +1,14 @@
 
 
 table {
+    alignment: center;
     table-layout : fixed;
     width        : 400px;
 }
 
-tr{
+#menuBar,tr{
     background-image: url("../images/menuBar.png");
     background-repeat: no-repeat;
-    background-size: cover;
 }
 
 td {

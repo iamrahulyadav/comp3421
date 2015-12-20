@@ -34,7 +34,7 @@
     } else {
         echo '! (<a href="' . site_url('auth/login') . '">Log in</a>)';
     } ?></p>
-<table>
+<table id="menuBar">
     <tr>
     <?php foreach ($urls as $title => $url) {
         echo '<td><a href="' . site_url($url) . '" title="' . $title . '">' . $title . '</a ></td > ';
