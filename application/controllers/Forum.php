@@ -14,6 +14,7 @@ class Forum extends CrudController
         'index'  => 'simple_list',
         'detail' => 'forum_detail',
         'create' => 'simple_form',
+        'create_article' => 'forum_article_form',
         'edit'   => 'simple_form',
     );
     public $fields = array(
