@@ -1,14 +1,9 @@
-
-
-table {
-    alignment: center;
-    table-layout : fixed;
-    width        : 400px;
-}
-
-#menuBar,tr{
+#menuBar{
     background-image: url("../images/menuBar.png");
     background-repeat: no-repeat;
+    alignment: center;
+    table-layout : fixed;
+    width        : 500px;
 }
 
 td {
