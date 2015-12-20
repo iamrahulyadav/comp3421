@@ -47,6 +47,7 @@ for ($i = 0;
      $i < sizeof($data['item']);
      $i++) {
     $ii = $i + 1;
+//    var_dump($data['item'][$i]['writer_id']);
     echo "<br>
 <table class='item'>
     <tr>
