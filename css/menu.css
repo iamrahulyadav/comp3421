@@ -4,9 +4,9 @@
     background-repeat: no-repeat;
     alignment: center;
     table-layout : fixed;
+    width:100%;
 }
 
 td {
     overflow : hidden;
-    width    : 100px;
 }
