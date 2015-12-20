@@ -44,10 +44,12 @@
 
 <?php
 for ($i = 0; $i < sizeof($data['item']); $i++) {
+    $ii = $i + 1;
     echo "<br>
 <table class='item'>
     <tr>
-        <td>No. {$data['item'][$i]['id']}</td>
+        <td>No. {$ii}</td>
+        <td>id: {$data['item'][$i]['id']}</td>
         <td>{$data['item'][$i]['writer_id']}</td>
         <td>{$data['item'][$i]['time']}</td>
     </tr>
@@ -55,16 +57,16 @@ for ($i = 0; $i < sizeof($data['item']); $i++) {
     if (isset($data['item'][$i]['reply_to'])) {
         echo "
         <tr>
-        <td colspan='3'>Reply to: {$data['item'][$i]['reply_to']}</td>
+        <td colspan='4'>Reply to: {$data['item'][$i]['reply_to']}</td>
     </tr>
         ";
     }
     echo "
     <tr>
-        <td colspan='3'>Title: {$data['item'][$i]['title']}</td>
+        <td colspan='4'>Title: {$data['item'][$i]['title']}</td>
     </tr>
     <tr>
-        <td colspan='3'>{$data['item'][$i]['content']}</td>
+        <td colspan='4'>{$data['item'][$i]['content']}</td>
     </tr>
 </table>
 ";

@@ -29,7 +29,7 @@ class Forum extends CrudController
         'content'   => array('label' => 'Content', 'type' => 'textarea', 'column' => 'Content'),
         'writer_id' => array('column' => 'Writer'),
         'time'      => array('label' => 'Time', 'column' => 'Time'),
-        'reply_to'  => array('label' => 'reply to', 'type' => 'number', 'column' => 'Reply to'),
+//        'reply_to'  => array('label' => 'reply to', 'type' => 'number', 'column' => 'Reply to'),
     );
 
     public function detail($id)
@@ -101,7 +101,7 @@ class Forum extends CrudController
 //        parent::create_post();
         if ($this->db->insert($this->table, $this->input->post()) !== FALSE) {
             $create = json_encode(site_url(uri_string()));
-            $list = json_encode(site_url(dirname(dirname(uri_string())).'detail/'.$id));
+            $list = json_encode(site_url(dirname(dirname(uri_string())).'/detail/'.$id));
             $this->output->append_output(
                 "<script>
                 if (confirm('Create Success!\\nClick OK to add more or Cancel to go back to the listing.'))
