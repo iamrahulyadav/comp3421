@@ -43,13 +43,11 @@
 } ?>
 
 <?php
-for ($i = 0;
-     $i < sizeof($data['item']);
-     $i++) {
+for ($i = 0; $i < sizeof($data['item']); $i++) {
     $ii = $i + 1;
-//    var_dump($data['item'][$i]['writer_id']);
+    $level = 50 * $data['item'][$i]['level'];
     echo "<br>
-<table class='item'>
+<table class='item' style='margin-left: {$level}px'>
     <tr>
         <td>No. {$ii}</td>
         <td>id: {$data['item'][$i]['id']}</td>
@@ -80,14 +78,14 @@ for ($i = 0;
     }
     if ($this->auth->isLoggedIn() && $this->auth->user()->id == $data['item'][$i]['writer_id']['id']) {
         echo '<a href="'
-            . str_replace('{forum_id}',$data['item'][$i]['forum_id'],
-                str_replace('{article_id}', $data['item'][$i]['id'], $edit_article_url) )
-                . '"><button>Edit</button></a>';
+            . str_replace('{forum_id}', $data['item'][$i]['forum_id'],
+                str_replace('{article_id}', $data['item'][$i]['id'], $edit_article_url))
+            . '"><button>Edit</button></a>';
     }
     if ($this->auth->isLoggedIn() && $this->auth->user()->id == $data['item'][$i]['writer_id']['id']) {
         echo '<a href="'
-            . str_replace('{forum_id}',$data['item'][$i]['forum_id'],
-                str_replace('{article_id}', $data['item'][$i]['id'], $delete_article_url) )
+            . str_replace('{forum_id}', $data['item'][$i]['forum_id'],
+                str_replace('{article_id}', $data['item'][$i]['id'], $delete_article_url))
             . '"><button>Delete</button></a>';
     }
     echo "</td>

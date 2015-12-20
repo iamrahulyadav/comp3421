@@ -64,8 +64,11 @@ class Forum extends CrudController
         $r = $this->db->where('id', $id)->get($this->table);
         $r = $r->result_array();
         $data['data'] = reset($r);
-        $r = $this->db->where('forum_id', $id)->get($this->item_table);
-        $data['data']['item'] = $r->result_array();
+
+//        $r = $this->db->where('forum_id', $id)->get($this->item_table);
+//        $data['data']['item'] = $r->result_array();
+
+        $data['data']['item'] = $this->queryPosts($id);
 
         $temp = $this->fields;
         $this->fields = $this->item_fields;
@@ -76,6 +79,24 @@ class Forum extends CrudController
         $this->load->view($this->view[__FUNCTION__], $data);
     }
 
+    public function queryPosts($forum_id, $parent_post = NULL, $level = 0)
+    {
+        $posts = $this->db
+            ->where(array('forum_id' => $forum_id, 'reply_to' => $parent_post))
+            ->order_by('time', 'desc')
+            ->get('forum_article');
+        $posts = $posts->result_array();
+        $return = array();
+        foreach ($posts as &$post) {
+            $post['level'] = $level;
+            $return[] = $post;
+            $replies = $this->queryPosts($forum_id, $post['id'], $level + 1);
+            foreach ($replies as $reply)
+                $return[] = $reply;
+        }
+
+        return $return;
+    }
 
     public function create_article($id)
     {
