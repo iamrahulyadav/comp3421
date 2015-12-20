@@ -45,7 +45,7 @@
 <?php
 for ($i = 0; $i < sizeof($data['item']); $i++) {
     $ii = $i + 1;
-    $level = 50 * $data['item'][$i]['level'];
+    $level = 50 * min($data['item'][$i]['level'], 10);
     echo "<br>
 <table class='item' style='margin-left: {$level}px'>
     <tr>
