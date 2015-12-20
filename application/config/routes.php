@@ -57,3 +57,5 @@ $route['doSurvey/(:num)'] = 'doSurvey/create/$1';
 $route['surveys/detail/(:num)'] = 'survey_compose/index/$1';
 $route['surveys/detail/(:num)/(:any)'] = 'survey_compose/$2/$1';
 $route['surveys/detail/(:num)/(:any)/(:any)'] = 'survey_compose/$2/$3/$1';
+
+$route['forum/detail/(:num)/(:any)']= 'forum/$2/$1';

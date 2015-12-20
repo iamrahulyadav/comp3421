@@ -12,7 +12,7 @@ class Forum extends CrudController
     public $title = 'Forums';
     public $view = array(
         'index'  => 'simple_list',
-        'detail' => 'forum_item',
+        'detail' => 'forum_detail',
         'create' => 'simple_form',
         'edit'   => 'simple_form',
     );
@@ -40,7 +40,7 @@ class Forum extends CrudController
         $data = array(
             'title'      => $this->title . ' ',
             'menu'       => $this->load->view('menu', NULL, TRUE),
-            'create_url' => !isset($this->view['create']) || $this->view['create'] !== FALSE ? site_url(uri_string() . '/create') : NULL,
+            'create_url' => !isset($this->view['create']) || $this->view['create'] !== FALSE ? site_url(uri_string() . '/create_article') : NULL,
             'edit_url'   => site_url(dirname(uri_string()) . '/edit/{id}'),
             'delete_url' => site_url(uri_string()),
             'fields'     => $this->processDynamicSource($this->fields, array(__FUNCTION__, $id)),
@@ -69,7 +69,7 @@ class Forum extends CrudController
         check_access(TRUE, TRUE);
 
         $data = array(
-            'title'  => 'Create ' . 'Article',
+            'title'  => 'Create  Article',
             'menu'   => $this->load->view('menu', NULL, TRUE),
             'button' => 'Create',
             'form'   => array(
