@@ -18,6 +18,7 @@ class Forum extends CrudController
     );
     public $fields = array(
         'id' => array('column' => 'No.'),
-        'topic' => array('label'=>'Topic','type'=>'textarea','column'=>'Topic')
+        'topic' => array('label'=>'Topic','type'=>'textarea','column'=>'Topic'),
+        'time' => array('label' => 'Time', 'type' => 'datetime')
     );
 }
