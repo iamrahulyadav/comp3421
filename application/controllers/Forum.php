@@ -201,7 +201,7 @@ class Forum extends CrudController
 
     public function delete_article_post($forum_id,$article_id)
     {
-        check_access(TRUE, TRUE);
+        check_access(TRUE, FALSE);
 
         if ($this->db->where('forum_id', $forum_id)->where('id', $article_id)->delete($this->item_table) !== FALSE) {
             $list = json_encode(site_url(dirname(dirname(dirname(uri_string()))).'/detail/'.$forum_id));
