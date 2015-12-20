@@ -5,6 +5,7 @@
  * Date: 14/12/2015 17:07
  */
 ?>
+<link rel="stylesheet" type="text/css" href="../css/menu.css"/>
 <h1>Registration and Attendance Managing Application</h1>
 
 <p>Welcome<?php
