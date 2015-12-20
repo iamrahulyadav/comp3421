@@ -67,17 +67,6 @@ class Forum extends CrudController
 
     public function create_article($id)
     {
-//        $order_id = $this->db->select('max(' . $this->db->protect_identifiers('order') . ')+1', FALSE)
-//                             ->where('forum_id', $id)
-//                             ->get($this->item_table);
-//        var_dump($this->db->last_query());
-//        $order_id = $order_id->row_array();
-//        $order_id = reset($order_id);
-//        $this->fields['order']['attr']['value'] = isset($order_id) ? $order_id : 1;
-//        //parent::create();
-
-        //check_access(TRUE, TRUE);
-
         $data = array(
             'title'  => 'Create Article',
             'menu'   => $this->load->view('menu', NULL, TRUE),
@@ -95,7 +84,7 @@ class Forum extends CrudController
 
     public function create_article_post($id)
     {
-        $_POST[]['forum_id'] = $id;
+        $_POST['forum_id'] = $id;
         parent::create_post();
     }
 }
