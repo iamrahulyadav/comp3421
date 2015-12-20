@@ -36,6 +36,12 @@
         <td><?php echo $data['time']; ?></td>
     </tr>
 </table>
+
+<br>
+<?php if ($this->auth->isLoggedIn() && isset($create_url)) {
+    echo "<a href=\"$create_url\"><button>Create</button></a>";
+} ?>
+
 <?php
 for ($i = 0; $i < sizeof($data['item']); $i++) {
     echo "<br>

@@ -25,6 +25,7 @@ class Forum extends CrudController
     public $item_table = 'forum_article';
     public $item_fields = array(
         'id' => array('label' => 'id'),
+        'forum_id' =>array('label' => 'forum_id'),
         'title' => array('label'=>'Title','type'=>'textarea','column'=>'Title'),
         'content' => array('label'=>'Content','type'=>'textarea','column'=>'Content'),
         'writer' => array('label'=>'Writer','type'=>'textarea','column'=>'writer_id'),
@@ -37,8 +38,9 @@ class Forum extends CrudController
         check_access(TRUE);
 
         $data = array(
-            'title'      => $this->title . ' Details',
+            'title'      => $this->title . ' ',
             'menu'       => $this->load->view('menu', NULL, TRUE),
+            'create_url' => !isset($this->view['create']) || $this->view['create'] !== FALSE ? site_url(uri_string() . '/create') : NULL,
             'edit_url'   => site_url(dirname(uri_string()) . '/edit/{id}'),
             'delete_url' => site_url(uri_string()),
             'fields'     => $this->processDynamicSource($this->fields, array(__FUNCTION__, $id)),
@@ -59,6 +61,24 @@ class Forum extends CrudController
             $v = $this->processItemSource($v, __FUNCTION__);
         $r = reset($r);
         //$data['data']['item'] = $this->processItemSource($r, __FUNCTION__);
+        $this->load->view($this->view[__FUNCTION__], $data);
+    }
+
+    public function create_article($id)
+    {
+        check_access(TRUE, TRUE);
+
+        $data = array(
+            'title'  => 'Create ' . 'Article',
+            'menu'   => $this->load->view('menu', NULL, TRUE),
+            'button' => 'Create',
+            'form'   => array(
+                'action' => site_url(uri_string()),
+                'method' => 'post',
+            ),
+            'fields' => $this->processDynamicSource($this->item_fields, array(__FUNCTION__)),
+        );
+
         $this->load->view($this->view[__FUNCTION__], $data);
     }
 }
