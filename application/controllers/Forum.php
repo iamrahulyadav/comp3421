@@ -29,7 +29,7 @@ class Forum extends CrudController
     public function __construct()
     {
         parent::__construct();
-        $item_fields = array(
+        $this->item_fields = array(
             'title'     => array('label' => 'Title', 'type' => 'text', 'column' => 'title'),
             'content'   => array('label' => 'Content', 'type' => 'textarea', 'column' => 'Content'),
             'writer_id' => array(
