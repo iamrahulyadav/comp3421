@@ -34,8 +34,10 @@
     } else {
         echo '! (<a href="' . site_url('auth/login') . '">Log in</a>)';
     } ?></p>
-<ul>
+<table>
+    <tr>
     <?php foreach ($urls as $title => $url) {
-        echo '<li><a href="' . site_url($url) . '" title="' . $title . '">' . $title . '</a ></li > ';
+        echo '<td><a href="' . site_url($url) . '" title="' . $title . '">' . $title . '</a ></td > ';
     } ?>
-</ul>
+    </tr>
+</table>

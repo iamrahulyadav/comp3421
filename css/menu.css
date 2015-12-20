@@ -1,8 +1,20 @@
-p{
-    alignment: center;
-    font-size:2em;
-}
 body{
     background-image: url("../images/menuBar.png");
     background-repeat: no-repeat;
+}
+
+p{
+    font-size:1em;
+}
+
+table {
+    border       : 1px solid black;
+    table-layout : fixed;
+    width        : 400px;
+}
+
+td {
+    border   : 1px solid black;
+    overflow : hidden;
+    width    : 50px;
 }
