@@ -93,7 +93,7 @@ class Surveys extends CrudController
             foreach ($data['data'] as $row) {
                 $temp = array();
                 foreach ($keys as $k)
-                    $temp[] = $row[$k];
+                    $temp[] = isset($row[$k]) ? $row[$k] : NULL;
                 fputcsv($out, $temp);
             }
             fclose($out);

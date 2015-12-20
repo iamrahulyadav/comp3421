@@ -60,7 +60,7 @@ class DoSurvey extends CrudController
                 'attr'  => empty($row['is_required']) ? array() : array('required' => ''),
             );
             if (!empty($row['options'])) {
-                $options = explode(PHP_EOL, $row['options']);
+                $options = explode("\n", preg_replace('/\r\n|\r|\n/', "\n", $row['options']));
                 $fields[$row['id']]['values'] = array_combine($options, $options);
             }
         }
