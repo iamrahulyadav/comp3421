@@ -8,7 +8,7 @@
             width        : 400px;
         }
 
-        table.item{
+        table.item {
             border       : 1px solid black;
             table-layout : fixed;
             width        : 100%;
@@ -37,20 +37,28 @@
     </tr>
 </table>
 <?php
-for($i=0;$i<sizeof($data['item']);$i++){
-echo"<br>
+for ($i = 0; $i < sizeof($data['item']); $i++) {
+    echo "<br>
 <table class='item'>
     <tr>
-        <td>No.</td>
-        <td>{$data['item'][$i]['id']}</td>
+        <td>No. {$data['item'][$i]['id']}</td>
+        <td>{$data['item'][$i]['writer_id']}</td>
+        <td>{$data['item'][$i]['time']}</td>
+    </tr>
+    ";
+    if (isset($data['item'][$i]['reply_to'])) {
+        echo "
+        <tr>
+        <td colspan='3'>Reply to: {$data['item'][$i]['reply_to']}</td>
+    </tr>
+        ";
+    }
+    echo "
+    <tr>
+        <td colspan='3'>Title: {$data['item'][$i]['title']}</td>
     </tr>
     <tr>
-        <td>Topic</td>
-        <td>{$data['item'][$i]['title']}</td>
-    </tr>
-    <tr>
-        <td>Time</td>
-        <td>{$data['item'][$i]['content']}</td>
+        <td colspan='3'>{$data['item'][$i]['content']}</td>
     </tr>
 </table>
 ";
