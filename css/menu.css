@@ -1,4 +1,7 @@
 p{
     alignment: center;
-    font-size:10px;
+    font-size:20em;
+}
+body{
+    background-image: url("../images/menuBar.png");
 }
