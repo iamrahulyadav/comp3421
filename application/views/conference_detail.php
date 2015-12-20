@@ -45,7 +45,7 @@
     </tr>
     <tr>
         <td>Speaker:</td>
-        <td><?php echo $data['speaker']->display_name(); ?> <a href="javascript:toggle()">View detail</a></td>
+        <td><?php echo $data['speaker']->display_name(); ?> <button onclick="show()">View detail</button></td>
     </tr>
     <tr class='toggle'>
         <td>Speaker ID:</td>
@@ -103,16 +103,16 @@
 <br>
 <?php
 if ($this->auth->isLoggedIn() && $this->auth->user()->is_admin) {
-    echo '<a href="' . site_url("sessions") . '/edit/'.$data['id'].'"><button>Edit</button></a>';
-    echo '<a href="' . site_url("sessions") . '/delete/'.$data['id'].'"><button>Delete</button></a>';
+    echo '<a href="' . site_url("sessions") . '/edit/' . $data['id'] . '"><button>Edit</button></a>';
+    echo '<a href="' . site_url("sessions") . '/delete/' . $data['id'] . '"><button>Delete</button></a>';
 }
 echo '<a href="' . site_url("sessions") . '"><button>Back</button></a >'
 ?>
 <script>
     $(".toggle").hide();
-    $("a").click(function () {
+    function show(){
         $(".toggle").toggle("slow");
-    });
+    }
 </script>
 </body>
 </html>

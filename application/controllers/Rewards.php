@@ -12,7 +12,7 @@ class Rewards extends CrudController
     public $title = 'Rewards';
     public $view = array(
         'index'  => 'simple_list',
-        'detail' => 'rewards_item',
+        'detail' => 'reward_detail',
         'create' => 'simple_form',
         'edit'   => 'simple_form',
     );
@@ -52,7 +52,7 @@ class Rewards extends CrudController
         $data = array(
             'title'      => $this->title,
             'menu'       => $this->load->view('menu', NULL, TRUE),
-            'item_url'   => site_url(uri_string() . '/item/{id}'),
+            'detail_url'   => site_url(uri_string() . '/detail/{id}'),
             'create_url' => site_url(uri_string() . '/create'),
             'edit_url'   => site_url(uri_string() . '/edit/{id}'),
             'delete_url' => site_url(uri_string() . '/delete/{id}'),
