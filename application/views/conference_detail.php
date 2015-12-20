@@ -45,7 +45,7 @@
     </tr>
     <tr>
         <td>Speaker:</td>
-        <td><?php echo $data['speaker']->display_name(); ?> <a id="toggle" href="javascript:toggle()">View detail</a></td>
+        <td><?php echo $data['speaker']->display_name(); ?> <a id="toggle" href="">View detail</a></td>
     </tr>
     <tr class='toggle'>
         <td>Speaker ID:</td>
