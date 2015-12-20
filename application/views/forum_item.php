@@ -36,22 +36,26 @@
         <td><?php echo $data['time']; ?></td>
     </tr>
 </table>
-<br>
-<table class="item">
+<?php
+for($i=0;$i<sizeof($data['item']);$i++){
+echo"<br>
+<table class='item'>
     <tr>
         <td>No.</td>
-        <td><?php echo $data['item']['id']; ?></td>
+        <td>{$data['item'][$i]['id']}</td>
     </tr>
     <tr>
         <td>Topic</td>
-        <td><?php echo $data['item']['title']; ?></td>
+        <td>{$data['item'][$i]['title']}</td>
     </tr>
     <tr>
         <td>Time</td>
-        <td><?php echo $data['item']['content']; ?></td>
+        <td>{$data['item'][$i]['content']}</td>
     </tr>
 </table>
-
+";
+}
+?>
 <?php
 echo '<a href="' . site_url("forum") . '"><button>Back</button></a >'
 ?>
