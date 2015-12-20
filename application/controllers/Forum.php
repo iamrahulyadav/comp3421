@@ -97,6 +97,21 @@ class Forum extends CrudController
         $this->fields = $this->item_fields;
         $_POST['forum_id'] = $id;
         $_POST['writer_id'] = $this->auth->user()->id;
-        parent::create_post();
+
+//        parent::create_post();
+        if ($this->db->insert($this->table, $this->input->post()) !== FALSE) {
+            $create = json_encode(site_url(uri_string()));
+            $list = json_encode(site_url(dirname(dirname(uri_string())).'detail/'.$id));
+            $this->output->append_output(
+                "<script>
+                if (confirm('Create Success!\\nClick OK to add more or Cancel to go back to the listing.'))
+                    window.parent.location = $create;
+                else
+                    window.parent.location = $list;
+                </script>"
+            );
+        } else {
+            $this->dbError();
+        }
     }
 }
