@@ -12,7 +12,7 @@ class Rewards extends CrudController
     public $title = 'Rewards';
     public $view = array(
         'index'  => 'simple_list',
-        'detail' => 'rewards_item',
+        'detail' => 'reward_detail',
         'create' => 'simple_form',
         'edit'   => 'simple_form',
     );
