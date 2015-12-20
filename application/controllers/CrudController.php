@@ -48,11 +48,20 @@ abstract class CrudController extends CI_Controller
         foreach ($this->fields as $k => $v) {
             if (isset($v['data_source']))
                 $item[$k] = call_user_func($v['data_source'], $action, $item[$k]);
-//            if (isset($v['type']) && $v['type'] == 'checkbox')
-//                $item[$k] = !empty($item[$k]);
+            if (isset($v['type']) && $v['type'] == 'checkbox')
+                $item[$k] = !empty($item[$k]);
         }
 
         return $item;
+    }
+
+    protected function processPostFields($fields, $post)
+    {
+        foreach ($post as &$v) {
+            if ($v === '') $v = NULL;
+        }
+
+        return $post;
     }
 
     public function index()
@@ -118,7 +127,7 @@ abstract class CrudController extends CI_Controller
     {
         check_access(TRUE, TRUE);
 
-        if ($this->db->insert($this->table, $this->input->post()) !== FALSE) {
+        if ($this->db->insert($this->table, $this->processPostFields($this->fields, $this->input->post())) !== FALSE) {
             $create = json_encode(site_url(uri_string()));
             $list = json_encode(site_url(dirname(uri_string())));
 
@@ -169,7 +178,10 @@ abstract class CrudController extends CI_Controller
     {
         check_access(TRUE, TRUE);
 
-        if ($this->db->where('id', $id)->update($this->table, $this->input->post()) !== FALSE) {
+        if (FALSE !== $this->db
+                ->where('id', $id)
+                ->update($this->table, $this->processPostFields($this->fields, $this->input->post()))
+        ) {
             $list = json_encode(site_url(dirname(dirname(uri_string()))));
 
             $this->output->append_output(

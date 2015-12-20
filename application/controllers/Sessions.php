@@ -80,9 +80,9 @@ class Sessions extends CrudController
     public function get_speakers($action)
     {
         $data = array();
-        if ($action !== 'create' || $action !== 'edit') return $data;
+        if ($action !== 'create' && $action !== 'edit') return $data;
         foreach ($this->db->select(array('member.id', 'first_name', 'last_name', 'title'))
-                          ->join('speaker', 'speaker.id=member.id')
+                          ->where('attendee_type', 'speaker')
                           ->get('member')->result('DBMember') as $user) {
             $data[$user->id] = '[' . $user->id . '] ' . $user->display_name();
         }
