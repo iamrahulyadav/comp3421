@@ -82,7 +82,7 @@ CREATE TABLE `comp3421_forum_article` (
   `writer_id` varchar(255) NOT NULL,
   `reply_to` int(11) unsigned DEFAULT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`,`forum_id`),
+  PRIMARY KEY (`id`),
   KEY `fk_forum_article_idx` (`forum_id`),
   KEY `fk_forum_writer_idx` (`writer_id`),
   KEY `fk_forum_reply_idx` (`reply_to`),
@@ -198,21 +198,6 @@ CREATE TABLE `comp3421_session_attendee` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `comp3421_speaker`
---
-
-DROP TABLE IF EXISTS `comp3421_speaker`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `comp3421_speaker` (
-  `id` varchar(255) NOT NULL,
-  `info` text,
-  PRIMARY KEY (`id`),
-  CONSTRAINT `fk_speaker_member` FOREIGN KEY (`id`) REFERENCES `comp3421_member` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Table structure for table `comp3421_survey`
 --
 
@@ -275,4 +260,4 @@ CREATE TABLE `comp3421_survey_response` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-12-20 11:34:03
+-- Dump completed on 2015-12-20 22:01:41
