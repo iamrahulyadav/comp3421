@@ -52,7 +52,9 @@ for ($i = 0;
     <tr>
         <td>No. {$ii}</td>
         <td>id: {$data['item'][$i]['id']}</td>
-        <td>{$data['item'][$i]['writer_id']}</td>
+        <td>{$data['item'][$i]['writer_id']['id']}
+        {$data['item'][$i]['writer_id']['first_name']}
+        {$data['item'][$i]['writer_id']['last_name']}</td>
         <td>{$data['item'][$i]['time']}</td>
     </tr>
     ";
@@ -75,13 +77,13 @@ for ($i = 0;
     if ($this->auth->isLoggedIn()) {
         echo '<a href="' . str_replace('{reply_id}', $data['item'][$i]['id'], $reply_url) . '"><button>Reply</button></a>';
     }
-    if ($this->auth->isLoggedIn() && $this->auth->user()->id == $data['item'][$i]['writer_id']) {
+    if ($this->auth->isLoggedIn() && $this->auth->user()->id == $data['item'][$i]['writer_id']['id']) {
         echo '<a href="'
             . str_replace('{forum_id}',$data['item'][$i]['forum_id'],
                 str_replace('{article_id}', $data['item'][$i]['id'], $edit_article_url) )
                 . '"><button>Edit</button></a>';
     }
-    if ($this->auth->isLoggedIn() && $this->auth->user()->id == $data['item'][$i]['writer_id']) {
+    if ($this->auth->isLoggedIn() && $this->auth->user()->id == $data['item'][$i]['writer_id']['id']) {
         echo '<a href="'
             . str_replace('{forum_id}',$data['item'][$i]['forum_id'],
                 str_replace('{article_id}', $data['item'][$i]['id'], $delete_article_url) )

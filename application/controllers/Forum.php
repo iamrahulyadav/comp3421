@@ -24,13 +24,20 @@ class Forum extends CrudController
     );
 
     public $item_table = 'forum_article';
-    public $item_fields = array(
-        'title'     => array('label' => 'Title', 'type' => 'text', 'column' => 'title'),
-        'content'   => array('label' => 'Content', 'type' => 'textarea', 'column' => 'Content'),
-        'writer_id' => array('column' => 'Writer'),
-        'time'      => array('label' => 'Time', 'column' => 'Time'),
-        //        'reply_to'  => array('label' => 'reply to', 'type' => 'number', 'column' => 'Reply to'),
-    );
+    public $item_fields;
+
+    public function __construct(){
+        parent::__construct();
+        $item_fields = array(
+            'title'     => array('label' => 'Title', 'type' => 'text', 'column' => 'title'),
+            'content'   => array('label' => 'Content', 'type' => 'textarea', 'column' => 'Content'),
+            'writer_id' => array('column' => 'Writer',
+                                 'data_source' => array($this, 'get_writer')),
+            'time'      => array('label' => 'Time', 'column' => 'Time'),
+            //        'reply_to'  => array('label' => 'reply to', 'type' => 'number', 'column' => 'Reply to'),
+        );
+
+    }
 
     public function detail($id)
     {
@@ -218,4 +225,11 @@ class Forum extends CrudController
         }
     }
 
+    public function get_writer($action, $id)
+    {
+        if ($action !== 'detail') return $id;
+        $r = $this->db->get_where('member', array('id' => $id))->result_array();
+
+        return reset($r);
+    }
 }
