@@ -40,12 +40,13 @@ class Forum extends CrudController
             'title'      => $this->title . ' ',
             'menu'       => $this->load->view('menu', NULL, TRUE),
             'create_url' => site_url(dirname(dirname(uri_string())) . '/create_article/' . $id),
+            'reply_url' => site_url(dirname(dirname(uri_string())) . '/reply_article/' . $id.'/{reply_id}'),
             'edit_url'   => site_url(dirname(uri_string()) . '/edit/{id}'),
             'delete_url' => site_url(uri_string()),
+            'edit_article_url'   => site_url(dirname(dirname(uri_string())) . '/edit_article/{forum_id}/{article_id}'),
+            'delete_article_url' => site_url(dirname(dirname(uri_string())). '/delete_article/{forum_id}/{article_id}'),
             'fields'     => $this->processDynamicSource($this->fields, array(__FUNCTION__, $id)),
             'item'       => array(
-                'edit_url'   => site_url(dirname(uri_string()) . '/edit/{id}'),
-                'delete_url' => site_url(uri_string()),
                 'fields'     => $this->processDynamicSource($this->item_fields, array(__FUNCTION__, $id)),
             ),
         );
@@ -63,19 +64,10 @@ class Forum extends CrudController
         $this->load->view($this->view[__FUNCTION__], $data);
     }
 
+
+
     public function create_article($id)
     {
-//        $order_id = $this->db->select('max(' . $this->db->protect_identifiers('order') . ')+1', FALSE)
-//                             ->where('forum_id', $id)
-//                             ->get($this->item_table);
-//        var_dump($this->db->last_query());
-//        $order_id = $order_id->row_array();
-//        $order_id = reset($order_id);
-//        $this->fields['order']['attr']['value'] = isset($order_id) ? $order_id : 1;
-//        //parent::create();
-
-        //check_access(TRUE, TRUE);
-
         $data = array(
             'title'  => 'Create Article',
             'menu'   => $this->load->view('menu', NULL, TRUE),
@@ -96,17 +88,18 @@ class Forum extends CrudController
         $this->table = 'forum_article';
         $this->fields = $this->item_fields;
         $_POST['forum_id'] = $id;
+        check_access(TRUE, FALSE);
         $_POST['writer_id'] = $this->auth->user()->id;
 
 //        parent::create_post();
+
+
+        //if($this->auth->user()->id==)
         if ($this->db->insert($this->table, $this->input->post()) !== FALSE) {
             $create = json_encode(site_url(uri_string()));
             $list = json_encode(site_url(dirname(dirname(uri_string())).'/detail/'.$id));
             $this->output->append_output(
                 "<script>
-                if (confirm('Create Success!\\nClick OK to add more or Cancel to go back to the listing.'))
-                    window.parent.location = $create;
-                else
                     window.parent.location = $list;
                 </script>"
             );
@@ -114,4 +107,111 @@ class Forum extends CrudController
             $this->dbError();
         }
     }
+
+    public function reply_article($forum_id,$reply_id)
+    {
+        $data = array(
+            'title'  => 'Create Article',
+            'menu'   => $this->load->view('menu', NULL, TRUE),
+            'button' => 'Create',
+            'form'   => array(
+                'action' => site_url(uri_string()),
+                'method' => 'post',
+            ),
+            'fields' => $this->processDynamicSource($this->item_fields, array(__FUNCTION__)),
+        );
+        //echo site_url(uri_string());
+        $this->load->view($this->view['create'], $data);
+
+    }
+
+    public function reply_article_post($forum_id,$reply_id)
+    {
+        $this->table = 'forum_article';
+        $this->fields = $this->item_fields;
+        $_POST['forum_id'] = $forum_id;
+        $_POST['writer_id'] = $this->auth->user()->id;
+        $_POST['reply_to'] = $reply_id;
+
+//        parent::create_post();
+        check_access(TRUE,FALSE);
+
+        if ($this->db->insert($this->table, $this->input->post()) !== FALSE) {
+            $create = json_encode(site_url(uri_string()));
+            $list = json_encode(site_url(dirname(dirname(dirname(uri_string()))).'/detail/'.$forum_id));
+            $this->output->append_output(
+                "<script>
+                    window.parent.location = $list;
+                </script>"
+            );
+        } else {
+            $this->dbError();
+        }
+    }
+
+    public function edit_article($forum_id,$article_id)
+    {
+        check_access(TRUE, FALSE);
+
+        $data = array(
+            'title'  => 'Edit ' . 'Article',
+            'menu'   => $this->load->view('menu', NULL, TRUE),
+            'button' => 'Update',
+            'form'   => array(
+                'action' => site_url(uri_string()),
+                'method' => 'post',
+            ),
+            'fields' => $this->processDynamicSource($this->item_fields, array(__FUNCTION__, $forum_id)),
+        );
+
+        $r = $this->db->where('forum_id', $forum_id)->where('id', $article_id)->get($this->item_table);
+        $r = $r->result_array();
+        $r = reset($r);
+        $data['data'] = $this->processItemSource($r, __FUNCTION__);
+        $this->load->view($this->view['edit'], $data);
+    }
+
+    public function edit_article_post($forum_id,$article_id)
+    {
+        check_access(TRUE, FALSE);
+
+        if ($this->db->where('forum_id', $forum_id)->where('id', $article_id)->update($this->item_table, $this->input->post()) !== FALSE) {
+            $list = json_encode(site_url(dirname(dirname(dirname(uri_string()))).'/detail/'.$forum_id));
+
+            $this->output->append_output(
+                "<script>alert('Update Success!');window.parent.location = $list;</script>"
+            );
+        } else {
+            $this->dbError();
+        }
+    }
+
+    public function delete_article($forum_id,$article_id)
+    {
+        check_access(TRUE, FALSE);
+
+        $list = site_url(dirname(dirname(dirname(uri_string()))).'/detail/'.$forum_id);
+        $this->load->view('confirm', array(
+            'msg'        => 'Are you sure to delete the item? This cannot be undone!',
+            'form'       => array('method' => 'post'),
+            'cancel_url' => $list,
+            'color'      => 'red',
+        ));
+    }
+
+    public function delete_article_post($forum_id,$article_id)
+    {
+        check_access(TRUE, TRUE);
+
+        if ($this->db->where('forum_id', $forum_id)->where('id', $article_id)->delete($this->item_table) !== FALSE) {
+            $list = json_encode(site_url(dirname(dirname(dirname(uri_string()))).'/detail/'.$forum_id));
+
+            $this->output->append_output(
+                "<script>alert('Delete Success!');window.parent.location = $list;</script>"
+            );
+        } else {
+            $this->dbError();
+        }
+    }
+
 }
