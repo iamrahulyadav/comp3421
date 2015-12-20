@@ -42,26 +42,21 @@ class Forum extends CrudController
             'edit_url'   => site_url(dirname(uri_string()) . '/edit/{id}'),
             'delete_url' => site_url(uri_string()),
             'fields'     => $this->processDynamicSource($this->fields, array(__FUNCTION__, $id)),
+            'item' => array(
+                'edit_url'   => site_url(dirname(uri_string()) . '/edit/{id}'),
+                'delete_url' => site_url(uri_string()),
+                'fields'     => $this->processDynamicSource($this->item_fields, array(__FUNCTION__, $id)),
+            )
         );
 
         $r = $this->db->where('id', $id)->get($this->table);
         $r = $r->result_array();
         $r = reset($r);
         $data['data'] = $this->processItemSource($r, __FUNCTION__);
-        $this->load->view($this->view[__FUNCTION__], $data);
-
-        $item_data = array(
-            'title'      => $this->title . ' Details',
-//            'menu'       => $this->load->view('menu', NULL, TRUE),
-            'edit_url'   => site_url(dirname(uri_string()) . '/edit/{id}'),
-            'delete_url' => site_url(uri_string()),
-            'fields'     => $this->processDynamicSource($this->fields, array(__FUNCTION__, $id)),
-        );
-
         $r = $this->db->where('forum_id', $id)->get($this->item_table);
         $r = $r->result_array();
         $r = reset($r);
-        $item_data['data'] = $this->processItemSource($r, __FUNCTION__);
-//        $this->load->view($this->view[__FUNCTION__], $item_data);
+        $data['data']['item'] = $this->processItemSource($r, __FUNCTION__);
+        $this->load->view($this->view[__FUNCTION__], $data);
     }
 }

@@ -40,15 +40,15 @@
 <table class="item">
     <tr>
         <td>No.</td>
-        <td><?php echo $item_data['id']; ?></td>
+        <td><?php echo $data['item']['id']; ?></td>
     </tr>
     <tr>
         <td>Topic</td>
-        <td><?php echo $item_data['title']; ?></td>
+        <td><?php echo $data['item']['title']; ?></td>
     </tr>
     <tr>
         <td>Time</td>
-        <td><?php echo $item_data['content']; ?></td>
+        <td><?php echo $data['item']['content']; ?></td>
     </tr>
 </table>
 
