@@ -35,7 +35,14 @@
         <td>Content:</td>
         <td><?php echo $data['content']; ?></td>
     </tr>
-
 </table>
+<br>
+<?php
+if ($this->auth->isLoggedIn() && $this->auth->user()->is_admin) {
+    echo '<a href="' . site_url("rewards") . '/edit/'.$data['id'].'"><button>Edit</button></a>';
+    echo '<a href="' . site_url("rewards") . '/delete/'.$data['id'].'"><button>Delete</button></a>';
+}
+echo '<a href="' . site_url("rewards") . '"><button>Back</button></a >'
+?>
 </body>
 </html>
