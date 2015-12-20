@@ -31,7 +31,7 @@ class Forum extends CrudController
         'content'  => array('label' => 'Content', 'type' => 'textarea', 'column' => 'Content'),
         'writer'   => array('label' => 'Writer', 'type' => 'textarea', 'column' => 'writer_id'),
         'time'     => array('label' => 'Time',  'column' => 'Time'),
-        'reply'    => array('label' => 'reply', 'type' => 'textarea', 'column' => 'reply_to'),
+        'reply_to'    => array('label' => 'reply', 'type' => 'textarea', 'column' => 'reply_to'),
     );
 
     public function detail($id)
@@ -95,7 +95,7 @@ class Forum extends CrudController
 
     public function create_article_post($id)
     {
-        $_POST['forum_id'] = $id;
+        $_POST[]['forum_id'] = $id;
         parent::create_post();
     }
 }
