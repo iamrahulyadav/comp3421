@@ -48,8 +48,8 @@ abstract class CrudController extends CI_Controller
         foreach ($this->fields as $k => $v) {
             if (isset($v['data_source']))
                 $item[$k] = call_user_func($v['data_source'], $action, $item[$k]);
-//            if (isset($v['type']) && $v['type'] == 'checkbox')
-//                $item[$k] = !empty($item[$k]);
+            if (isset($v['type']) && $v['type'] == 'checkbox')
+                $item[$k] = !empty($item[$k]);
         }
 
         return $item;
