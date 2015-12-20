@@ -29,7 +29,7 @@ class Forum extends CrudController
         'content'   => array('label' => 'Content', 'type' => 'textarea', 'column' => 'Content'),
         'writer_id' => array('column' => 'Writer'),
         'time'      => array('label' => 'Time', 'column' => 'Time'),
-//        'reply_to'  => array('label' => 'reply to', 'type' => 'number', 'column' => 'Reply to'),
+        //        'reply_to'  => array('label' => 'reply to', 'type' => 'number', 'column' => 'Reply to'),
     );
 
     public function detail($id)
@@ -37,17 +37,17 @@ class Forum extends CrudController
         check_access(TRUE);
 
         $data = array(
-            'title'      => $this->title . ' ',
-            'menu'       => $this->load->view('menu', NULL, TRUE),
-            'create_url' => site_url(dirname(dirname(uri_string())) . '/create_article/' . $id),
-            'reply_url' => site_url(dirname(dirname(uri_string())) . '/reply_article/' . $id.'/{reply_id}'),
-            'edit_url'   => site_url(dirname(uri_string()) . '/edit/{id}'),
-            'delete_url' => site_url(uri_string()),
+            'title'              => $this->title . ' ',
+            'menu'               => $this->load->view('menu', NULL, TRUE),
+            'create_url'         => site_url(dirname(dirname(uri_string())) . '/create_article/' . $id),
+            'reply_url'          => site_url(dirname(dirname(uri_string())) . '/reply_article/' . $id . '/{reply_id}'),
+            'edit_url'           => site_url(dirname(uri_string()) . '/edit/{id}'),
+            'delete_url'         => site_url(uri_string()),
             'edit_article_url'   => site_url(dirname(dirname(uri_string())) . '/edit_article/{forum_id}/{article_id}'),
-            'delete_article_url' => site_url(dirname(dirname(uri_string())). '/delete_article/{forum_id}/{article_id}'),
-            'fields'     => $this->processDynamicSource($this->fields, array(__FUNCTION__, $id)),
-            'item'       => array(
-                'fields'     => $this->processDynamicSource($this->item_fields, array(__FUNCTION__, $id)),
+            'delete_article_url' => site_url(dirname(dirname(uri_string())) . '/delete_article/{forum_id}/{article_id}'),
+            'fields'             => $this->processDynamicSource($this->fields, array(__FUNCTION__, $id)),
+            'item'               => array(
+                'fields' => $this->processDynamicSource($this->item_fields, array(__FUNCTION__, $id)),
             ),
         );
 
@@ -63,7 +63,6 @@ class Forum extends CrudController
         //$data['data']['item'] = $this->processItemSource($r, __FUNCTION__);
         $this->load->view($this->view[__FUNCTION__], $data);
     }
-
 
 
     public function create_article($id)
@@ -97,7 +96,7 @@ class Forum extends CrudController
         //if($this->auth->user()->id==)
         if ($this->db->insert($this->table, $this->input->post()) !== FALSE) {
             $create = json_encode(site_url(uri_string()));
-            $list = json_encode(site_url(dirname(dirname(uri_string())).'/detail/'.$id));
+            $list = json_encode(site_url(dirname(dirname(uri_string())) . '/detail/' . $id));
             $this->output->append_output(
                 "<script>
                     window.parent.location = $list;
@@ -108,7 +107,7 @@ class Forum extends CrudController
         }
     }
 
-    public function reply_article($forum_id,$reply_id)
+    public function reply_article($forum_id, $reply_id)
     {
         $data = array(
             'title'  => 'Create Article',
@@ -125,7 +124,7 @@ class Forum extends CrudController
 
     }
 
-    public function reply_article_post($forum_id,$reply_id)
+    public function reply_article_post($forum_id, $reply_id)
     {
         $this->table = 'forum_article';
         $this->fields = $this->item_fields;
@@ -134,11 +133,11 @@ class Forum extends CrudController
         $_POST['reply_to'] = $reply_id;
 
 //        parent::create_post();
-        check_access(TRUE,FALSE);
+        check_access(TRUE, FALSE);
 
         if ($this->db->insert($this->table, $this->input->post()) !== FALSE) {
             $create = json_encode(site_url(uri_string()));
-            $list = json_encode(site_url(dirname(dirname(dirname(uri_string()))).'/detail/'.$forum_id));
+            $list = json_encode(site_url(dirname(dirname(dirname(uri_string()))) . '/detail/' . $forum_id));
             $this->output->append_output(
                 "<script>
                     window.parent.location = $list;
@@ -149,7 +148,7 @@ class Forum extends CrudController
         }
     }
 
-    public function edit_article($forum_id,$article_id)
+    public function edit_article($forum_id, $article_id)
     {
         check_access(TRUE, FALSE);
 
@@ -171,12 +170,15 @@ class Forum extends CrudController
         $this->load->view($this->view['edit'], $data);
     }
 
-    public function edit_article_post($forum_id,$article_id)
+    public function edit_article_post($forum_id, $article_id)
     {
         check_access(TRUE, FALSE);
 
-        if ($this->db->where('forum_id', $forum_id)->where('id', $article_id)->update($this->item_table, $this->input->post()) !== FALSE) {
-            $list = json_encode(site_url(dirname(dirname(dirname(uri_string()))).'/detail/'.$forum_id));
+        if ($this->db->where('forum_id', $forum_id)
+                     ->where('id', $article_id)
+                     ->update($this->item_table, $this->input->post()) !== FALSE
+        ) {
+            $list = json_encode(site_url(dirname(dirname(dirname(uri_string()))) . '/detail/' . $forum_id));
 
             $this->output->append_output(
                 "<script>alert('Update Success!');window.parent.location = $list;</script>"
@@ -186,11 +188,11 @@ class Forum extends CrudController
         }
     }
 
-    public function delete_article($forum_id,$article_id)
+    public function delete_article($forum_id, $article_id)
     {
         check_access(TRUE, FALSE);
 
-        $list = site_url(dirname(dirname(dirname(uri_string()))).'/detail/'.$forum_id);
+        $list = site_url(dirname(dirname(dirname(uri_string()))) . '/detail/' . $forum_id);
         $this->load->view('confirm', array(
             'msg'        => 'Are you sure to delete the item? This cannot be undone!',
             'form'       => array('method' => 'post'),
@@ -199,12 +201,14 @@ class Forum extends CrudController
         ));
     }
 
-    public function delete_article_post($forum_id,$article_id)
+    public function delete_article_post($forum_id, $article_id)
     {
         check_access(TRUE, FALSE);
 
-        if ($this->db->where('forum_id', $forum_id)->where('id', $article_id)->delete($this->item_table) !== FALSE) {
-            $list = json_encode(site_url(dirname(dirname(dirname(uri_string()))).'/detail/'.$forum_id));
+        if ($this->db->where(array('forum_id' => $forum_id, 'id' => $article_id))
+                     ->delete($this->item_table) !== FALSE
+        ) {
+            $list = json_encode(site_url(dirname(dirname(dirname(uri_string()))) . '/detail/' . $forum_id));
 
             $this->output->append_output(
                 "<script>alert('Delete Success!');window.parent.location = $list;</script>"
