@@ -5,10 +5,13 @@ table {
     width        : 400px;
 }
 
-td {
+tr{
     background-image: url("../images/menuBar.png");
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
+}
+
+td {
     border   : 1px solid black;
     overflow : hidden;
     width    : 50px;
