@@ -40,7 +40,7 @@ class Forum extends CrudController
         $data = array(
             'title'      => $this->title . ' ',
             'menu'       => $this->load->view('menu', NULL, TRUE),
-            'create_url' => !isset($this->view['create']) || $this->view['create'] !== FALSE ? site_url(uri_string() . '/create_article') : NULL,
+            'create_url' => !isset($this->view['create']) || $this->view['create'] !== FALSE ? site_url(uri_string() . '/create') : NULL,
             'edit_url'   => site_url(dirname(uri_string()) . '/edit/{id}'),
             'delete_url' => site_url(uri_string()),
             'fields'     => $this->processDynamicSource($this->fields, array(__FUNCTION__, $id)),
