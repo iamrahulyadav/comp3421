@@ -6,7 +6,6 @@
  */
 ?>
 <link rel="stylesheet" type="text/css" href="../css/menu.css"/>
-<p>Registration and Attendance Managing Application</p>
 <?php
 $urls = array();
 if ($this->auth->isLoggedIn()) {
@@ -31,9 +30,10 @@ if ($this->auth->isLoggedIn()) {
             echo '<td><a href="' . site_url($url) . '" title="' . $title . '">' . $title . '</a ></td > ';
         }
         if ($this->auth->isLoggedIn()) {
-            echo '<td>' . $this->auth->user()->display_name() . '!</td>';
+            echo '<td>' . $this->auth->user()->display_name() ;
             if ($this->auth->user()->is_admin)
                 echo ' [admin]';
+            echo '</td>';
             echo ' <td><a href="' . site_url('auth/logout') . '">Logout</a></td>';
         } else {
             echo '<td><a href="' . site_url('auth/login') . '">Login</a></td>';
