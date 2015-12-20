@@ -100,6 +100,14 @@
         <td><?php echo $data['speaker']->fax_number ?></td>
     </tr>
 </table>
+<br>
+<?php
+if ($this->auth->isLoggedIn() && $this->auth->user()->is_admin) {
+    echo '<a href="' . site_url("sessions") . '/edit/'.$data['id'].'"><button>Edit</button></a>';
+    echo '<a href="' . site_url("sessions") . '/delete/'.$data['id'].'"><button>Delete</button></a>';
+}
+echo '<a href="' . site_url("sessions") . '"><button>Back</button></a >'
+?>
 <script>
     $(".toggle").hide();
     $("a").click(function () {

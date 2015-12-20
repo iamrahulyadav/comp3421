@@ -171,7 +171,7 @@ class Auth extends CI_Controller
 
             if ($this->db
                     ->set('registration_date', 'now()', FALSE)
-                    ->insert('members', $fields) === FALSE
+                    ->insert('member', $fields) === FALSE
             ) {
                 $e = $this->db->error();
                 $e = json_encode($e['message']);

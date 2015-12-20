@@ -62,10 +62,10 @@ abstract class CrudController extends CI_Controller
         $data = array(
             'title'      => $this->title,
             'menu'       => $this->load->view('menu', NULL, TRUE),
-            'detail_url' => site_url(uri_string() . '/detail/{id}'),
-            'create_url' => site_url(uri_string() . '/create'),
-            'edit_url'   => site_url(uri_string() . '/edit/{id}'),
-            'delete_url' => site_url(uri_string() . '/delete/{id}'),
+            'detail_url' => !isset($this->view['detail']) || $this->view['detail'] !== FALSE ? site_url(uri_string() . '/detail/{id}') : NULL,
+            'create_url' => !isset($this->view['create']) || $this->view['create'] !== FALSE ? site_url(uri_string() . '/create') : NULL,
+            'edit_url'   => !isset($this->view['edit']) || $this->view['edit'] !== FALSE ? site_url(uri_string() . '/edit/{id}') : NULL,
+            'delete_url' => !isset($this->view['delete']) || $this->view['delete'] !== FALSE ? site_url(uri_string() . '/delete/{id}') : NULL,
             'fields'     => $this->processDynamicSource($this->fields, array(__FUNCTION__)),
         );
 

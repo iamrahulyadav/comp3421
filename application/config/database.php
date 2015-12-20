@@ -70,7 +70,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | The $query_builder variables lets you determine whether or not to load
 | the query builder class.
 */
-$active_group = 'local';
+$active_group = 'comp';
 $query_builder = TRUE;
 
 $db['default'] = array(
@@ -82,7 +82,7 @@ $db['default'] = array(
     'dbdriver'     => 'mysqli',
     'dbprefix'     => 'comp3421_',
     'pconnect'     => FALSE,
-    'db_debug'     => FALSE && (ENVIRONMENT !== 'production'),
+    'db_debug'     => FALSE,
     'cache_on'     => FALSE,
     'cachedir'     => '',
     'char_set'     => 'utf8',
@@ -92,7 +92,7 @@ $db['default'] = array(
     'compress'     => FALSE,
     'stricton'     => FALSE,
     'failover'     => array(),
-    'save_queries' => TRUE
+    'save_queries' => TRUE,
 );
 
 $db['local'] = array(
@@ -104,7 +104,7 @@ $db['local'] = array(
     'dbdriver'     => 'mysqli',
     'dbprefix'     => 'comp3421_',
     'pconnect'     => FALSE,
-    'db_debug'     =>  (ENVIRONMENT !== 'production'),
+    'db_debug'     => FALSE,
     'cache_on'     => FALSE,
     'cachedir'     => '',
     'char_set'     => 'utf8',
@@ -114,7 +114,7 @@ $db['local'] = array(
     'compress'     => FALSE,
     'stricton'     => FALSE,
     'failover'     => array(),
-    'save_queries' => TRUE
+    'save_queries' => TRUE,
 );
 
 $db['comp'] = array(
@@ -126,7 +126,7 @@ $db['comp'] = array(
     'dbdriver'     => 'mysqli',
     'dbprefix'     => 'comp3421_',
     'pconnect'     => FALSE,
-    'db_debug'     => (ENVIRONMENT !== 'production'),
+    'db_debug'     => FALSE,
     'cache_on'     => FALSE,
     'cachedir'     => '',
     'char_set'     => 'utf8',
@@ -136,5 +136,5 @@ $db['comp'] = array(
     'compress'     => FALSE,
     'stricton'     => FALSE,
     'failover'     => array(),
-    'save_queries' => TRUE
+    'save_queries' => TRUE,
 );

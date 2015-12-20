@@ -8,7 +8,7 @@
 <body>
 <?php echo isset($menu) ? $menu : '' ?>
 <h1><?php echo htmlspecialchars($title) ?></h1>
-<?php if ($this->auth->user()->is_admin) {
+<?php if ($this->auth->user()->is_admin && isset($create_url)) {
     echo "<a href=\"$create_url\"><button>Create</button></a>";
 } ?>
 <table border="1">
@@ -35,7 +35,7 @@
                 if (isset($f['type']) && $f['type'] == "checkbox")
                     echo empty($v[$dbcolumn]) ? 'False' : 'True';
                 else
-                    echo htmlspecialchars($v[$dbcolumn]);
+                    echo $v[$dbcolumn];
                 echo '</td>';
             }
         }

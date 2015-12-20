@@ -5,6 +5,7 @@
  * Date: 14/12/2015 17:07
  */
 ?>
+<link rel="stylesheet" type="text/css" href="../css/menu.css"/>
 <h1>Registration and Attendance Managing Application</h1>
 
 <p>Welcome<?php
@@ -14,11 +15,13 @@
         $urls['View Exhibitions'] = 'exhibition';
         $urls['View Forums'] = 'forum';
         $urls['View Announcements'] = 'announcements';
-        $urls['View Surveys'] = 'surveys';
         $urls['View Rewards'] = 'rewards';
         $urls['View Messages'] = 'messages';
+        $urls['Do Survey'] = 'doSurvey';
         if ($this->auth->user()->is_admin) {
+            $urls['Edit Surveys'] = 'surveys';
             $urls['Register Member'] = 'auth/register';
+            $urls['View Members'] = 'members';
         }
     } else {
     }
@@ -31,8 +34,10 @@
     } else {
         echo '! (<a href="' . site_url('auth/login') . '">Log in</a>)';
     } ?></p>
-<ul>
+<table>
+    <tr>
     <?php foreach ($urls as $title => $url) {
-        echo '<li><a href="' . site_url($url) . '" title="' . $title . '">' . $title . '</a ></li > ';
+        echo '<td><a href="' . site_url($url) . '" title="' . $title . '">' . $title . '</a ></td > ';
     } ?>
-</ul>
+    </tr>
+</table>
