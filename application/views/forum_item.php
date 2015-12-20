@@ -36,10 +36,10 @@
         <td><?php echo $data['time']; ?></td>
     </tr>
 </table>
-
 <br>
+
 <?php if ($this->auth->isLoggedIn() && isset($create_url)) {
-    echo "<a href=\"$create_url\"><button>Create</button></a>";
+    echo "<a href=\"$create_url\"><button>Post</button></a>";
 } ?>
 
 <?php

@@ -17,20 +17,20 @@ class Forum extends CrudController
         'edit'   => 'simple_form',
     );
     public $fields = array(
-        'id' => array('column' => 'No.'),
-        'topic' => array('label'=>'Topic','type'=>'textarea','column'=>'Topic'),
-        'time' => array('label' => 'Time', 'type' => 'datetime','column'=>'Time')
+        'id'    => array('column' => 'No.'),
+        'topic' => array('label' => 'Topic', 'type' => 'textarea', 'column' => 'Topic'),
+        'time'  => array('label' => 'Time',  'column' => 'Time'),
     );
 
     public $item_table = 'forum_article';
     public $item_fields = array(
-        'id' => array('label' => 'id'),
-        'forum_id' =>array('label' => 'forum_id'),
-        'title' => array('label'=>'Title','type'=>'textarea','column'=>'Title'),
-        'content' => array('label'=>'Content','type'=>'textarea','column'=>'Content'),
-        'writer' => array('label'=>'Writer','type'=>'textarea','column'=>'writer_id'),
-        'time' => array('label' => 'Time', 'type' => 'datetime','column'=>'Time'),
-        'reply' => array('label'=>'reply','type'=>'textarea','column'=>'reply_to'),
+        'id'       => array('label' => 'id','type' => 'textarea', 'column' => 'Id'),
+        'forum_id' => array('label' => 'forum_id','type' => 'textarea', 'column' => 'Forum id'),
+        'title'    => array('label' => 'Title', 'type' => 'textarea', 'column' => 'Title'),
+        'content'  => array('label' => 'Content', 'type' => 'textarea', 'column' => 'Content'),
+        'writer'   => array('label' => 'Writer', 'type' => 'textarea', 'column' => 'writer_id'),
+        'time'     => array('label' => 'Time',  'column' => 'Time'),
+        'reply'    => array('label' => 'reply', 'type' => 'textarea', 'column' => 'reply_to'),
     );
 
     public function detail($id)
@@ -40,15 +40,15 @@ class Forum extends CrudController
         $data = array(
             'title'      => $this->title . ' ',
             'menu'       => $this->load->view('menu', NULL, TRUE),
-            'create_url' => !isset($this->view['create']) || $this->view['create'] !== FALSE ? site_url(uri_string() . '/create') : NULL,
+            'create_url' => site_url(dirname(dirname(uri_string())) . '/create_article/' . $id),
             'edit_url'   => site_url(dirname(uri_string()) . '/edit/{id}'),
             'delete_url' => site_url(uri_string()),
             'fields'     => $this->processDynamicSource($this->fields, array(__FUNCTION__, $id)),
-            'item' => array(
+            'item'       => array(
                 'edit_url'   => site_url(dirname(uri_string()) . '/edit/{id}'),
                 'delete_url' => site_url(uri_string()),
                 'fields'     => $this->processDynamicSource($this->item_fields, array(__FUNCTION__, $id)),
-            )
+            ),
         );
 
         $r = $this->db->where('id', $id)->get($this->table);
@@ -66,7 +66,16 @@ class Forum extends CrudController
 
     public function create_article($id)
     {
-        check_access(TRUE, TRUE);
+//        $order_id = $this->db->select('max(' . $this->db->protect_identifiers('order') . ')+1', FALSE)
+//                             ->where('forum_id', $id)
+//                             ->get($this->item_table);
+//        var_dump($this->db->last_query());
+//        $order_id = $order_id->row_array();
+//        $order_id = reset($order_id);
+//        $this->fields['order']['attr']['value'] = isset($order_id) ? $order_id : 1;
+//        //parent::create();
+
+        //check_access(TRUE, TRUE);
 
         $data = array(
             'title'  => 'Create ' . 'Article',
@@ -78,7 +87,13 @@ class Forum extends CrudController
             ),
             'fields' => $this->processDynamicSource($this->item_fields, array(__FUNCTION__)),
         );
+        $this->load->view($this->view['create'], $data);
 
-        $this->load->view($this->view[__FUNCTION__], $data);
     }
+
+//    public function create_article_post($id)
+//    {
+//        $_POST['id'] = $id;
+//        parent::create_post();
+//    }
 }
