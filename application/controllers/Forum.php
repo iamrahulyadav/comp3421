@@ -25,9 +25,9 @@ class Forum extends CrudController
 
     public $item_table = 'forum_article';
     public $item_fields = array(
-        'id'       => array('label' => 'id','type' => 'textarea', 'column' => 'Id'),
-        'forum_id' => array('label' => 'forum_id','type' => 'textarea', 'column' => 'Forum id'),
-        'title'    => array('label' => 'Title', 'type' => 'textarea', 'column' => 'Title'),
+        'id'       => array('label' => 'id'),
+        'forum_id' => array('label' => 'forum_id'),
+        'title'    => array('label' => 'Title', 'type' => 'textarea', 'column' => 'title'),
         'content'  => array('label' => 'Content', 'type' => 'textarea', 'column' => 'Content'),
         'writer'   => array('label' => 'Writer', 'type' => 'textarea', 'column' => 'writer_id'),
         'time'     => array('label' => 'Time',  'column' => 'Time'),
@@ -88,13 +88,14 @@ class Forum extends CrudController
             ),
             'fields' => $this->processDynamicSource($this->item_fields, array(__FUNCTION__)),
         );
+        //echo site_url(uri_string());
         $this->load->view($this->view['create'], $data);
 
     }
 
-//    public function create_article_post($id)
-//    {
-//        $_POST['id'] = $id;
-//        parent::create_post();
-//    }
+    public function create_article_post($id)
+    {
+        $_POST['forum_id'] = $id;
+        parent::create_post();
+    }
 }
