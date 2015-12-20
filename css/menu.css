@@ -3,11 +3,9 @@
     background-repeat: no-repeat;
     alignment: center;
     table-layout : fixed;
-    width        : 500px;
 }
 
 td {
-    border   : 1px solid black;
     overflow : hidden;
-    width    : 50px;
+    width    : 100px;
 }
