@@ -66,8 +66,12 @@ class Forum extends CrudController
         $data['data'] = reset($r);
         $r = $this->db->where('forum_id', $id)->get($this->item_table);
         $data['data']['item'] = $r->result_array();
+
+        $temp = $this->fields;
+        $this->fields = $this->item_fields;
         foreach ($data['data']['item'] as &$v)
             $v = $this->processItemSource($v, __FUNCTION__);
+        $this->fields = $temp;
 
         $this->load->view($this->view[__FUNCTION__], $data);
     }
